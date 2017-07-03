@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703190853) do
+ActiveRecord::Schema.define(version: 20170703192811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.text "dm_feedback"
+    t.text "sp_feedback"
+    t.text "admin_feedback"
+    t.integer "dm_id"
+    t.integer "sp_id"
+    t.bigint "meeting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_feedbacks_on_meeting_id"
+  end
 
   create_table "general_availabilities", force: :cascade do |t|
     t.bigint "user_id"
