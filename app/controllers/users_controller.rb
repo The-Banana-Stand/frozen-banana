@@ -24,4 +24,3 @@ class UsersController < ApplicationController
   end
 
 end
-adfkjsdafl;kdjfl;sdkjfsakl
