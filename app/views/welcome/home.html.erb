@@ -56,7 +56,7 @@
         </div>
 
         <div class="col-md-3 col-md-offset-1 well text-center">
-          <%= image_tag 'profile_placeholder.jpg', size: '80x90' %>
+          <%= image_tag 'profile_placeholder.jpg', class: 'img-responsive', alt: 'Placeholder' %>
           <h6>John Doe</h6>
           <h6>CEO</h6>
           <h6>Some Company LLC.</h6>
@@ -70,8 +70,7 @@
 
 
     <div class="col-md-12 text-center">
-      <%= link_to 'Register Now!', new_users_path, class: 'btn btn-primary' %>
-      <!--<button class="btn btn-primary">Register Now!</button>-->
+      <%= link_to 'Register Now!', new_user_path, class: 'btn btn-primary' %>
     </div>
 
   </div>
