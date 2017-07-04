@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
+  get '/sign-up' => 'users#new', as: :new_user
+
+  resource :users
+
 end
