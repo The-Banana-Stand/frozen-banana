@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 
   end
 
+  def dashboard
+
+  end
+
   def new
     @user = User.new
   end

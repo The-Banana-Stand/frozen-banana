@@ -11,6 +11,8 @@ FactoryGirl.define do
     phone_number '4021234567'
     role 'dm'
     username 'JDoe'
+    email 'johndoe@google.com'
+    password 'foobar'
   end
 end
 
