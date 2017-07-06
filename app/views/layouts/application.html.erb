@@ -25,15 +25,28 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="#">Schedule Time</a></li>
-            <li><a href="#">My Dashboard</a></li>
-          </ul>
+          <%- if logged_in? %>
+            <ul class="nav navbar-nav">
+              <li><a href="#">Schedule Time</a></li>
+              <li><a href="#">My Dashboard</a></li>
+            </ul>
+          <% end %>
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Help & Contact</a></li>
-            <li><%= link_to 'Register', signup_path %></li>
-            <li><%= link_to 'Log In', login_path %></li>
+            <%- if logged_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Edit Info', edit_user_path(current_user) %></li>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to 'Log Out', logout_path,  method: 'delete' %></li>
+                </ul>
+              </li>
+            <% else %>
+                <li><%= link_to 'Register', signup_path %></li>
+                <li><%= link_to 'Log In', login_path %></li>
+            <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

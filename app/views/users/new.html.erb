@@ -1,110 +1,103 @@
-<div class="container">
 
-  <div class="col-md-6 col-md-offset-3">
+<div class="col-md-8 col-md-offset-2">
 
-    <div class="row">
-      <h1>Registration</h1>
-    </div>
-
-    <%= form_for @user, action: 'create', html: {class: 'form-horizontal'} do |f| %>
-
-        <div class="radio">
-          <label>
-            <%= f.radio_button 'role', 'dm' %>
-            I am a Decision Maker
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <%= f.radio_button 'role', 'sp' %>
-            I am a Sales Person
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <%= f.radio_button 'role', 'both' %>
-            I am both a Decision Maker and a Sales Person
-          </label>
-        </div>
-
-
-        <hr/>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.text_field :title, class: 'form-control', placeholder: 'Job Title' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.text_field :email, class: 'form-control', placeholder: 'Email Address' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.phone_field :phone_number, class: 'form-control', placeholder: 'Phone Number' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.text_field :company_name, class: 'form-control', placeholder: 'Company Name' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.text_field :company_address, class: 'form-control', placeholder: 'Company Address' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.text_field :city, class: 'form-control', placeholder: 'City' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-6">
-            <%= f.select :state, options_for_select(us_states), {prompt: 'State'}, {class: 'form-control'} %>
-          </div>
-          <div class="col-sm-6">
-            <%= f.text_field :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
-          </div>
-        </div>
-
-        <%= f.submit 'Complete Registration', class: 'btn btn-primary' %>
-
-    <% end %>
-
+  <div class="row">
+    <h1 class="text-center">Registration</h1>
   </div>
 
+  <%= simple_form_for @user, action: 'create', html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+      wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
 
+      <%= f.error_notification %>
+
+      <div class="col-md-offset-3">
+        <%= f.input :role, as: :radio_buttons, collection: [['Decision Maker', 'dm'] ,['Sales Person', 'sp'],
+                                                            ['Both Decision Maker and Sales Person', 'both']] %>
+      </div>
+
+
+      <hr/>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: 'First Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :username, class: 'form-control', placeholder: 'User Name', label: 'User Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :title, class: 'form-control', placeholder: 'Job Title' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :email, class: 'form-control', placeholder: 'Email Address' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :phone_number, class: 'form-control', placeholder: 'Phone Number' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :company_address, class: 'form-control', placeholder: 'Company Address' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :city, class: 'form-control', placeholder: 'City' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-6">
+          <%= f.input :state, collection: us_states, prompt: 'State', class: 'form-control' %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.input :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :password, class: 'form-control', placeholder: 'Password' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
+        </div>
+      </div>
+
+      <%= f.submit 'Complete Registration', class: 'btn btn-primary col-md-4 col-md-offset-4' %>
+
+  <% end %>
 
 </div>
+
+
+
