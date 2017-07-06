@@ -9,7 +9,12 @@ class User < ApplicationRecord
   has_many :sp_meetings, foreign_key: :sp_id, class_name: 'Meeting'
 
 
-  before_save {self.email = email.downcase}
+  before_save {self.email = email.downcase if email}
+
+  validates :first_name, :last_name, :title, :company_name, :company_address,
+            :city, :state, :zip_code, :phone_number, :role, presence: true
+
+  validates :username, presence: true, uniqueness: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Welcome to B2B Direct!'
       redirect_to '/'
     else
-      redirect_to '/signup'
+      render :new
     end
   end
 
