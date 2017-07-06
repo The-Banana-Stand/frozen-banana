@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'users#dashboard', as: :dashboard
 
+
   resources :users
 
 end

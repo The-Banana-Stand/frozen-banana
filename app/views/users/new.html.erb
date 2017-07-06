@@ -8,6 +8,8 @@
   <%= simple_form_for @user, action: 'create', html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
       wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
 
+      <%= f.error_notification %>
+
       <div class="col-md-offset-3">
         <%= f.input :role, as: :radio_buttons, collection: [['Decision Maker', 'dm'] ,['Sales Person', 'sp'],
                                                             ['Both Decision Maker and Sales Person', 'both']] %>
