@@ -36,9 +36,10 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = 'Info Updated'
+      redirect_to dashboard_path
+    else
+      render :edit
     end
-
-    redirect_to edit_user_path(@user)
   end
 
   private

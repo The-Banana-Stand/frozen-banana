@@ -1,15 +1,17 @@
 <div class="col-md-8 col-md-offset-2">
   <h1>Edit Information</h1>
+
+  <%= simple_form_for @user, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+                      wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
+
+      <%= f.error_notification %>
+
   <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a data-toggle="tab" href="#dm_sp_info">Evaluation/Sales Info</a></li>
     <li role="presentation"><a data-toggle="tab" href="#general">General</a></li>
     <li role="presentation"><a data-toggle="tab" href="#ar_info">Accounts Receivable</a></li>
   </ul>
 
-  <%= simple_form_for @user, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
-                      wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
-
-    <%= f.error_notification %>
 
     <div class="tab-content">
       <div id="general" class="tab-pane fade">
