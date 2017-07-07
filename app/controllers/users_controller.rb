@@ -27,7 +27,18 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
 
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      flash[:success] = 'Info Updated'
+    end
+
+    redirect_to edit_user_path(@user)
   end
 
   private

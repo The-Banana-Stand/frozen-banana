@@ -1,0 +1,18 @@
+
+<%- if current_user.role == 'dm' || current_user.role == 'both' %>
+
+  <div class="form-group">
+    <h3>What are you evaluating as a Decision Maker?</h3>
+    <%= f.input :dm_evaluating, placeholder: 'Example: Phone Systems, CRM, Tire Vendor, Uniform Vendor.......', label: false %>
+  </div>
+
+<% end %>
+
+<%- if current_user.role == 'sp' || current_user.role == 'both' %>
+
+  <div class="form-group">
+    <h3>Tell us about what you are selling.</h3>
+    <%= f.input :sp_product_service, placeholder: 'Tell us a bit about what you are selling.', label: false %>
+  </div>
+
+<% end %>
