@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
   has_many :general_availabilities
   has_many :dm_feedbacks, foreign_key: :dm_id, class_name: 'Feedback'
   has_many :sp_feedbacks, foreign_key: :sp_id, class_name: 'Feedback'
@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
 
   before_save {self.email = email.downcase if email}
+
+  before_create :create_activation_digest
 
   validates :first_name, :last_name, :title, :company_name, :company_address,
             :city, :state, :zip_code, :phone_number, :role, presence: true
@@ -45,9 +47,22 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  #combines First and Last name
+  def full_name
+    self.first_name.capitalize + ' ' + self.last_name.capitalize
+  end
+
+  private
+
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 
 end

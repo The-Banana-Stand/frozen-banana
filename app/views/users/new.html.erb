@@ -20,6 +20,30 @@
 
       <div class="form-group">
         <div class="col-sm-12">
+          <%= f.input :email, class: 'form-control', placeholder: 'Email Address' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :password, class: 'form-control', placeholder: 'Password' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :username, class: 'form-control', placeholder: 'User Name', label: 'User Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
           <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: 'First Name' %>
         </div>
       </div>
@@ -32,19 +56,7 @@
 
       <div class="form-group">
         <div class="col-sm-12">
-          <%= f.input :username, class: 'form-control', placeholder: 'User Name', label: 'User Name' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-12">
           <%= f.input :title, class: 'form-control', placeholder: 'Job Title' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-12">
-          <%= f.input :email, class: 'form-control', placeholder: 'Email Address' %>
         </div>
       </div>
 
@@ -78,18 +90,6 @@
         </div>
         <div class="col-sm-6">
           <%= f.input :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-12">
-          <%= f.input :password, class: 'form-control', placeholder: 'Password' %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-12">
-          <%= f.input :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
         </div>
       </div>
 

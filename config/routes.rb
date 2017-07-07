@@ -11,11 +11,10 @@ Rails.application.routes.draw do
   delete '/logout' =>'sessions#destroy'
 
   get '/signup' => 'users#new'
-  post '/signup' => 'users#create'
+  # post '/signup' => 'users#create'
 
   get '/dashboard' => 'users#dashboard', as: :dashboard
-
-
   resources :users
+  resources :account_activations, only: [:edit]
 
 end

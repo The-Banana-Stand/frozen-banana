@@ -13,6 +13,8 @@ FactoryGirl.define do
     username 'JDoe'
     email 'johndoe@google.com'
     password 'foobar'
+    activated true
+    activated_at Time.zone.now
   end
 end
 
