@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   # post '/signup' => 'users#create'
 
   get '/dashboard' => 'users#dashboard', as: :dashboard
+  get '/schedule_time' => 'users#schedule_time'
+  get '/edit_profile' => 'users#edit', as: :edit_profile
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

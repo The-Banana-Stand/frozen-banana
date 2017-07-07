@@ -1,0 +1,85 @@
+
+
+    <div class="col-md-offset-2">
+      <%= f.input :role, as: :radio_buttons, collection: [['Decision Maker', 'dm'] ,['Sales Person', 'sp'],
+                                                          ['Both Decision Maker and Sales Person', 'both']] %>
+    </div>
+
+
+    <hr/>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :email, class: 'form-control', placeholder: 'Email Address' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :password, class: 'form-control', placeholder: 'Password' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :username, class: 'form-control', placeholder: 'User Name', label: 'User Name' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: 'First Name' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :title, class: 'form-control', placeholder: 'Job Title' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :phone_number, class: 'form-control', placeholder: 'Phone Number' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :company_address, class: 'form-control', placeholder: 'Company Address' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :city, class: 'form-control', placeholder: 'City' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-6">
+        <%= f.input :state, collection: us_states, prompt: 'State', class: 'form-control' %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.input :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
+      </div>
+    </div>
+
