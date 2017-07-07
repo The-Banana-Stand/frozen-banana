@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       if user.activated?
         log_in user
         remember user
-        redirect_back_or dashboard_path
+        redirect_to dashboard_path
       else
         message  = 'Account not activated. '
         message += 'Check your email for the activation link.'
