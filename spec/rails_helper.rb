@@ -8,6 +8,8 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'database_cleaner'
 require 'capybara/rspec'
+require 'simplecov'
+SimpleCov.start 'rails'
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

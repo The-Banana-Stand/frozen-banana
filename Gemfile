@@ -55,6 +55,7 @@ end
 group :test do
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem 'chromedriver-helper'
+  gem 'simplecov'
 end
 
 group :development do
