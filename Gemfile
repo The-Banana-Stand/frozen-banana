@@ -56,6 +56,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'chromedriver-helper'
   gem 'simplecov'
+  gem 'rack_session_access'
 end
 
 group :development do

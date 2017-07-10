@@ -21,7 +21,6 @@ RSpec.describe User, type: :model do
   describe User, '#create_availabilities' do
     it 'creates associated records on creation' do
       user = FactoryGirl.create(:user)
-      # byebug
       expect(user.general_availabilities.last.block).to eq(5)
     end
 

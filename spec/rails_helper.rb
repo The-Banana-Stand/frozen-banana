@@ -9,6 +9,8 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'capybara/rspec'
 require 'simplecov'
+require 'helpers'
+require 'rack_session_access/capybara'
 SimpleCov.start 'rails'
 
 
@@ -50,6 +52,8 @@ Capybara.configure do |config|
 end
 
 RSpec.configure do |config|
+
+  config.include Helpers
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
