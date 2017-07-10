@@ -11,6 +11,10 @@ class UsersController < ApplicationController
 
   end
 
+  def schedule_time
+    
+  end
+
   def new
     @user = User.new
   end
