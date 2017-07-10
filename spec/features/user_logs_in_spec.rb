@@ -24,7 +24,7 @@ feature 'user logs in' do
 
     click_button 'Log In'
 
-    expect(page).to have_css '.alert-success'
+    expect(page.current_path).to eq(dashboard_path)
 
   end
 

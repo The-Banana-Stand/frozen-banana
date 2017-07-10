@@ -42,8 +42,8 @@ feature 'User signs up for site' do
     click_on 'Complete Registration'
 
 
-    expect(page).to have_content 'Welcome to B2B Direct!'
-    expect(page).to_not have_content 'Register Now!'
+    expect(page).to have_css '.alert-info'
+
   end
 
 end
