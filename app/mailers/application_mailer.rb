@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@b2bdirect.com'
+  default from: 'donotreply.frozenbanana@gmail.com' #TODO acquire new email
   layout 'mailer'
 end
