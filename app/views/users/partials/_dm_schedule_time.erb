@@ -14,8 +14,8 @@
         <%= f.association :general_availabilities do |ga| %>
 
             <div class="row">
-              <div class="col-sm-1">
-                Block: <%= ga.object.block %>
+              <div class="col-sm-2">
+                <label class="control-label">Block <%= ga.object.block %>:</label>
               </div>
 
               <div class="col-sm-3">
@@ -23,7 +23,7 @@
                                                               ['Friday', 5], ['Saturday', 6], ['Sunday', 7] ], include_blank: false %>
               </div>
 
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <div class="form-group">
                   <label class="control-label">Start:</label>
                   <%= ga.time_field :start_time, ampm: true, label: false, class: 'form-control' %>
@@ -32,7 +32,7 @@
 
 
 
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <div class="form-group">
                   <label class="control-label">End:</label>
                   <%= ga.time_field :end_time, ampm: true, class: 'form-control' %>
