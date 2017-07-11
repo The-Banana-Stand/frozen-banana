@@ -1,0 +1,51 @@
+<div class="col-md-8 col-md-offset-2 text-center">
+
+  <%= simple_form_for user, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+                      wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
+
+
+          <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
+
+
+
+      <h3 class="text-center">Blocks of Time Available</h3>
+
+      <div class="form-inline">
+        <%= f.association :general_availabilities do |ga| %>
+
+            <div class="row">
+              <div class="col-sm-1">
+                Block: <%= ga.object.block %>
+              </div>
+
+              <div class="col-sm-3">
+                <%= ga.input :day, as: :select, collection: [ ['Monday', 1], ['Tuesday', 2], ['Wednesday', 3], ['Thursday', 4],
+                                                              ['Friday', 5], ['Saturday', 6], ['Sunday', 7] ], include_blank: false %>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="control-label">Start:</label>
+                  <%= ga.time_field :start_time, ampm: true, label: false, class: 'form-control' %>
+                </div>
+              </div>
+
+
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="control-label">End:</label>
+                  <%= ga.time_field :end_time, ampm: true, class: 'form-control' %>
+                </div>
+              </div>
+
+            </div>
+            <hr/>
+        <% end %>
+      </div>
+
+      <%= f.submit 'Save Changes', class: 'btn btn-primary' %>
+
+  <% end %>
+
+</div>

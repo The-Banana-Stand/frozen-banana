@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'users#dashboard', as: :dashboard
   get '/schedule_time' => 'users#schedule_time'
+  patch '/update_ga' => 'users#update_ga'
   get '/edit_profile' => 'users#edit', as: :edit_profile
   resources :users
   resources :account_activations, only: [:edit]

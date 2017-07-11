@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   end
 
   def schedule_time
-    
+    @user = current_user
+    session[:return_to] ||= request.referer
   end
 
   def new
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    session[:return_to] ||= request.referer
 
   end
 
@@ -40,7 +42,18 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = 'Info Updated'
-      redirect_to dashboard_path
+      redirect_to session.delete(:return_to)
+    else
+      render :edit
+    end
+  end
+
+  def update_ga
+    @user = User.find(params[:id])
+    byebug
+    if @user.update(user_params)
+      flash[:success] = 'Time Updated'
+      redirect_to schedule_time
     else
       render :edit
     end
@@ -50,8 +63,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :title,
-                                 :company_name, :company_address, :city, :state, :zip_code, :role, :dm_evaluating, :sp_product_service,
-                                 :phone_number, :ar_first_name, :ar_last_name, :ar_phone_number, :ar_email, :ar_account_number, :wildcard
+                                 :company_name, :company_address, :city, :state, :zip_code, :role, :dm_evaluating,
+                                 :sp_product_service, :phone_number, :ar_first_name, :ar_last_name, :ar_phone_number,
+                                 :ar_email, :ar_account_number, :wildcard,
+                                 general_availabilities_attributes: [:id, :day, :start_time, :end_time]
     )
   end
 

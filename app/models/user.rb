@@ -89,6 +89,10 @@ class User < ApplicationRecord
     self.first_name.capitalize + ' ' + self.last_name.capitalize
   end
 
+  def multi_role?
+    self.role == 'both'
+  end
+
   private
 
   def create_activation_digest
