@@ -48,16 +48,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def update_ga
-    @user = User.find(params[:id])
-    byebug
-    if @user.update(user_params)
-      flash[:success] = 'Time Updated'
-      redirect_to schedule_time
-    else
-      render :edit
-    end
-  end
 
   private
 

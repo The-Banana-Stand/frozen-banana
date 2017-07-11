@@ -14,7 +14,7 @@
 
 
   <div id="decision_maker_tab" class="tab-pane fade in active">
-    <%= render partial: 'users/partials/dm_schedule_time', locals: {user: @user} %>
+    <%= render 'users/partials/dm_schedule_time', user: @user %>
   </div>
 
   <div id="sales_person_tab" class="tab-pane fade in fade">
@@ -42,7 +42,7 @@
 
 <%- elsif @user.role == 'dm' %>
 
-    <%= render partial: 'users/partials/dm_schedule_time' %>
+    <%= render 'users/partials/dm_schedule_time', user: @user %>
 
 <%- else %>
 
