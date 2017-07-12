@@ -1,0 +1,41 @@
+<h1 class="text-center">Search for Decision Makers</h1>
+<div class="row margin-bottom">
+  <div class="col-md-4 col-md-offset-4">
+    <%= search_form_for @query, url: schedule_time_path, remote: true, html: {method: 'get'} do |f| %>
+
+        <div class="form-group">
+
+          <%= f.search_field :full_name_or_company_name_cont, class: 'form-control', placeholder: 'Name or Company' %>
+        </div>
+
+        <%= f.submit class: 'btn btn-primary center-block' %>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="spinner">
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div id="search_results_container">
+    <%- unless @decision_makers.empty? %>
+        <%= render 'users/partials/search_results' %>
+    <% end %>
+  </div>
+</div>

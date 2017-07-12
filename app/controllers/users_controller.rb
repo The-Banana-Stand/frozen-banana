@@ -13,7 +13,17 @@ class UsersController < ApplicationController
 
   def schedule_time
     @user = current_user
-    session[:return_to] ||= request.referer
+
+    # If no search params, default to empty search
+    if params[:q] && params[:q].reject { |k, v| v.blank? }.present?
+      @query = User.includes(:active_blocks).activated.is_decision_maker.ransack(params[:q])
+      @decision_makers = @query.result
+    else
+      @query = User.ransack
+      @decision_makers = []
+    end
+
+    session[:return_to] = schedule_time_path
   end
 
   def new
@@ -33,8 +43,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    session[:return_to] ||= request.referer
-
+    session[:return_to] = edit_profile_path
   end
 
   def update

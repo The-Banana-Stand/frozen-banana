@@ -35,9 +35,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'jquery-rails'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'simple_form'
 gem 'figaro'
 gem 'money-rails'
+gem 'ransack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,0 +1,75 @@
+<table class="table" style="border-collapse:collapse;">
+
+  <thead>
+  <tr><th>&nbsp;</th>
+    <th><%= sort_link(@query, :full_name, 'Name', {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :title, {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :company_name, 'Company', {}, {remote: true, method: :get} ) %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <%- @decision_makers.each do |dm| %>
+
+  <tr data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button">
+    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+    <td><%= dm.full_name %></td>
+    <td><%= dm.title %></td>
+    <td><%= dm.company_name %></td>
+  </tr>
+
+  <tr>
+    <td colspan="12" class="hiddenRow">
+      <div class="accordian-body collapse col-md-9" id="dm<%= dm.id %>">
+          <table class="table">
+            <thead>
+            <tr>
+              <td>
+                <h4>Evaluating:</h4>
+                <p>
+                  <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
+                </p>
+              </td>
+            </tr>
+            <%- if dm.active_blocks.empty? %>
+            <tr>
+              <td>
+                <h3>Decision Maker has No Times Available</h3>
+              </td>
+            </tr>
+            <% else %>
+              <tr>
+                <th>Price/Hr</th>
+                <th>Day of Week</th>
+                <th>From</th>
+                <th>To</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <%- dm.active_blocks.each do |ga| %>
+                  <tr>
+
+                    <td><%= humanized_money_with_symbol dm.price %></td>
+                    <td><%= ga.display_day %></td>
+                    <td><%= ga.start_time %></td>
+                    <td><%= ga.end_time %></td>
+                    <td><a href="#" class="btn btn-success btn-sm">Buy This Time!</a>
+                    </td>
+
+                  </tr>
+              <% end %>
+                </tbody>
+            <% end %>
+
+          </table>
+
+      </div>
+    </td>
+  </tr>
+
+  <% end %>
+
+  </tbody>
+</table>
