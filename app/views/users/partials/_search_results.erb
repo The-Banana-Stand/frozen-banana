@@ -1,74 +1,75 @@
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Collapsible Group Item #1
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
+<table class="table" style="border-collapse:collapse;">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table id="search_results" class="table table-hover" >
   <thead>
-  <tr>
-    <th></th>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Company</th>
+  <tr><th>&nbsp;</th>
+    <th><%= sort_link(@query, :full_name, 'Name', {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :title, {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :company_name, 'Company', {}, {remote: true, method: :get} ) %></th>
   </tr>
   </thead>
 
   <tbody>
 
-<%- @decision_makers.each do |dm| %>
+  <%- @decision_makers.each do |dm| %>
 
-  <tr>
-    <td>More</td>
+  <tr data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button">
+    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
     <td><%= dm.full_name %></td>
-    <td><%= dm.title.capitalize %></td>
+    <td><%= dm.title %></td>
     <td><%= dm.company_name %></td>
   </tr>
 
   <tr>
+    <td colspan="12" class="hiddenRow">
+      <div class="accordian-body collapse col-md-9" id="dm<%= dm.id %>">
+          <table class="table">
+            <thead>
+            <tr>
+              <td>
+                <h4>Evaluating:</h4>
+                <p>
+                  <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
+                </p>
+              </td>
+            </tr>
+            <%- if dm.active_blocks.empty? %>
+            <tr>
+              <td>
+                <h3>Decision Maker has No Times Available</h3>
+              </td>
+            </tr>
+            <% else %>
+              <tr>
+                <th>Price/Hr</th>
+                <th>Day of Week</th>
+                <th>From</th>
+                <th>To</th>
+              </tr>
+              </thead>
 
+              <tbody>
+              <%- dm.active_blocks.each do |ga| %>
+                  <tr>
+
+                    <td><%= humanized_money_with_symbol dm.price %></td>
+                    <td><%= ga.display_day %></td>
+                    <td><%= ga.start_time %></td>
+                    <td><%= ga.end_time %></td>
+                    <td><a href="#" class="btn btn-success btn-sm">Buy This Time!</a>
+                    </td>
+
+                  </tr>
+              <% end %>
+                </tbody>
+            <% end %>
+
+          </table>
+
+      </div>
+    </td>
   </tr>
 
-<% end %>
+  <% end %>
 
   </tbody>
 </table>
-
-<script>
-
-//    $('#search_results').DataTable( {
-//      paging: false,
-//      search: false,
-//      bInfo: false,
-//      bFilter: false,
-//      language: {
-//        emptyTable: 'No Results Found.'
-//      }
-//    });
-
-</script>

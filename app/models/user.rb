@@ -4,7 +4,8 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
   # Associations
-  has_many :general_availabilities
+  has_many :general_availabilities, -> { order :block }
+  has_many :active_blocks, -> {where.not(start_time: nil, end_time: nil)}, class_name: "GeneralAvailability"
   accepts_nested_attributes_for :general_availabilities
   has_many :dm_feedbacks, foreign_key: :dm_id, class_name: 'Feedback'
   has_many :sp_feedbacks, foreign_key: :sp_id, class_name: 'Feedback'

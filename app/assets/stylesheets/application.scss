@@ -30,7 +30,10 @@
 @import "bootswatch/cosmo/bootswatch";
 
 // Whatever application styles you have go last
-//@import "base";
+@import "spinner";
+
+
+
 body { padding-bottom: 70px; }
 
 .margin-bottom { margin-bottom: 10px; }
