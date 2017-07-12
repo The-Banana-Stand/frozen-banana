@@ -13,6 +13,16 @@ class UsersController < ApplicationController
 
   def schedule_time
     @user = current_user
+
+    # If no search params, default to empty search
+    if params[:q] && params[:q].reject { |k, v| v.blank? }.present?
+      @query = User.activated.is_decision_maker.ransack(params[:q])
+      @decision_makers = @query.result
+    else
+      @query = User.ransack
+      @decision_makers = @query.result
+    end
+
     session[:return_to] ||= request.referer
   end
 

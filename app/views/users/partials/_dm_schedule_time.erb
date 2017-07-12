@@ -1,4 +1,4 @@
-<div class="col-md-8 col-md-offset-2 text-center">
+<div class="col-md-8 col-md-offset-2">
 
   <%= simple_form_for user, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
                       wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
@@ -10,7 +10,7 @@
 
       <h3 class="text-center">Blocks of Time Available</h3>
 
-      <div class="form-inline">
+      <div class="form-inline text-center">
         <%= f.association :general_availabilities do |ga| %>
 
             <div class="row">
@@ -42,9 +42,10 @@
             </div>
             <hr/>
         <% end %>
+        <%= f.submit 'Save Changes', class: 'btn btn-primary' %>
       </div>
 
-      <%= f.submit 'Save Changes', class: 'btn btn-primary' %>
+
 
   <% end %>
 

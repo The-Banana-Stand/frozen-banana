@@ -2,21 +2,21 @@ class User < ApplicationRecord
   has_secure_password
   monetize :price_cents
   attr_accessor :remember_token, :activation_token, :reset_token
+
+  # Associations
   has_many :general_availabilities
   accepts_nested_attributes_for :general_availabilities
   has_many :dm_feedbacks, foreign_key: :dm_id, class_name: 'Feedback'
   has_many :sp_feedbacks, foreign_key: :sp_id, class_name: 'Feedback'
-
   has_many :dm_meetings, foreign_key: :dm_id, class_name: 'Meeting'
   has_many :sp_meetings, foreign_key: :sp_id, class_name: 'Meeting'
 
-
+  # Callbacks
   before_save {self.email = email.downcase if email}
-
   before_create :create_activation_digest
-
   after_create :create_general_availabilities
 
+  # Validations
   validates :first_name, :last_name, :title, :company_name, :company_address,
             :city, :state, :zip_code, :phone_number, :role, presence: true
 
@@ -26,6 +26,11 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
+
+  #Scopes
+  scope :activated, ->(boolean = true) {where(activated: boolean)}
+  scope :is_decision_maker, -> {where(role: %w(dm both))}
+
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -88,6 +93,15 @@ class User < ApplicationRecord
   #combines First and Last name
   def full_name
     self.first_name.capitalize + ' ' + self.last_name.capitalize
+  end
+
+  ransacker :full_name do |parent|
+    Arel::Nodes::InfixOperation.new('||',
+      Arel::Nodes::InfixOperation.new('||',
+        parent.table[:first_name], Arel::Nodes.build_quoted(' ')
+      ),
+      parent.table[:last_name]
+    )
   end
 
   def multi_role?
