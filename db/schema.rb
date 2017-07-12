@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170708151715) do
+ActiveRecord::Schema.define(version: 20170712145105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 20170708151715) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.boolean "wildcard", default: true
+    t.integer "price_cents", default: 10426, null: false
+    t.string "price_currency", default: "USD", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

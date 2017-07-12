@@ -37,6 +37,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'figaro'
+gem 'money-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -50,6 +51,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'faker'
 end
 
 group :test do

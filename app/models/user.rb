@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  monetize :price_cents
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :general_availabilities
   accepts_nested_attributes_for :general_availabilities

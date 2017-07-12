@@ -41,3 +41,25 @@ User.create!(
     activated: true,
     activated_at: Time.zone.now
 )
+
+(1..50).each do |num|
+
+  User.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      username: Faker::DragonBall.unique.character,
+      email: Faker::Internet.email,
+      company_name: Faker::Company.name,
+      title: Faker::Company.profession,
+      company_address: Faker::Address.street_address,
+      city: Faker::Address.city,
+      state: Faker::Address.state_abbr,
+      zip_code: Faker::Address.zip,
+      role: 'both',
+      phone_number: Faker::PhoneNumber.cell_phone,
+      password: 'password',
+      activated: true,
+      activated_at: Time.zone.now
+  )
+
+end
