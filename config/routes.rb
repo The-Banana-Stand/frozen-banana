@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout' =>'sessions#destroy'
 
+
   get '/signup' => 'users#new'
   # post '/signup' => 'users#create'
 
@@ -17,6 +18,9 @@ Rails.application.routes.draw do
   get '/schedule_time' => 'users#schedule_time'
   patch '/update_ga' => 'users#update_ga'
   get '/edit_profile' => 'users#edit', as: :edit_profile
+
+  get '/meetings/new/:id' => 'meetings#new', as: :new_meeting
+
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
