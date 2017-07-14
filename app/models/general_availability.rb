@@ -1,5 +1,6 @@
 class GeneralAvailability < ApplicationRecord
   belongs_to :user, :inverse_of => :general_availabilities
+  has_many :meetings
 
   def display_day
     %w(Monday Tuesday Wednesday Thursday Friday Saturday Sunday)[self.day - 1]

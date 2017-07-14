@@ -8,7 +8,9 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-
+    @user = current_user
+    @meetings = @user.dm_meetings.includes(:dm, :sp).order(status: :desc) + @user.sp_meetings.includes(:dm, :sp, :desired_block).order(status: :desc)
+    @meetings
   end
 
   def schedule_time

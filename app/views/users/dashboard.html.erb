@@ -1,1 +1,76 @@
-<h1>My Dashboard</h1>
+<div class="row">
+  <div class="col-md-3">
+    <h1>My Dashboard</h1>
+  </div>
+
+  <%- if @user.multi_role? || @user.role == 'dm' %>
+  <div class="col-md-3 col-md-offset-6">
+    <%= link_to "Update what you're evaluating", edit_profile_path, class: 'btn btn-primary' %>
+  </div>
+  <% end %>
+</div>
+
+
+<table class="table" style="border-collapse:collapse;">
+
+  <thead>
+  <tr><th>&nbsp;</th>
+    <th>Your Role</th>
+    <th>Meeting ID</th>
+    <th><a id="status-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-title="Status Key"
+        data-content="<small><strong>Requested:</strong> Waiting for schedule confirmation. <br/> </br>
+        <strong>Scheduled:</strong> Booked meeting time/place, agreed to by both parties<br/> </br>
+        <strong>Completed:</strong> Meeting has taken place</small>">Status</a> </th>
+    <th>Meeting With</th>
+    <th>Company</th>
+    <th>Date</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Change/Cancel</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <%- @meetings.each do |meeting| %>
+  <%- meeting.set_display_attributes(@user.id) %>
+
+      <tr id="test" data-toggle="collapse" data-target="#meeting<%= meeting.id %>" class="accordion-toggle" role="button">
+        <td> <i class="glyphicon glyphicon-chevron-right"></i></td>
+        <td><%= meeting.role %></td>
+        <td><%= meeting.id %></td>
+        <td class="<%= meeting.row_shade %>"><%= meeting.status.capitalize %></td>
+        <td><%= meeting.second_party.full_name %></td>
+        <td><%= meeting.second_party.company_name %></td>
+        <td><%= meeting.show_date %></td>
+        <td><%= meeting.show_start_time %></td>
+        <td><%= meeting.show_end_time %></td>
+        <td><%= link_to 'Change', '#', class: 'btn btn-danger btn-sm' %></td>
+      </tr>
+
+      <tr>
+        <td colspan="12" class="hiddenRow">
+          <div class="accordian-body collapse col-md-9" id="meeting<%= meeting.id %>">
+            <h3>Meeting Details:</h3>
+            <%- if meeting.status == 'requested' %>
+              <p>Requested Time:
+                 <%= meeting.desired_block.display_day + ', between ' + meeting.desired_block.show_start_time + ' and ' + meeting.desired_block.show_end_time %>
+              </p>
+            <% end %>
+            <p>Type: <%= meeting.meeting_type.capitalize %></p>
+            <p>Location: <%= meeting.address || 'No Address Set' %></p>
+            <p>Instructions: <%= meeting.instructions || 'No Instructions' %></p>
+            <p>Decision Maker interested in: <%= meeting.dm.dm_evaluating || 'No Information' %></p>
+            <p>Salesperson products/services: <%= meeting.sp.sp_product_service || 'No Information' %></p>
+          </div>
+        </td>
+      </tr>
+
+  <% end %>
+
+  </tbody>
+</table>
+
+<script>
+  $('#status-popover').popover({delay: { "show": 500, "hide": 100 }, container: 'body', html: true });
+</script>

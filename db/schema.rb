@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714165529) do
+ActiveRecord::Schema.define(version: 20170714210641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20170714165529) do
   create_table "meetings", force: :cascade do |t|
     t.integer "dm_id"
     t.integer "sp_id"
-    t.string "status", default: "pending"
+    t.string "status", default: "requested"
     t.integer "price_cents"
     t.string "payment_status", default: "pending"
     t.string "dm_calendar_status", default: "pending"
@@ -67,6 +67,10 @@ ActiveRecord::Schema.define(version: 20170714165529) do
     t.string "price_currency", default: "USD", null: false
     t.string "address"
     t.text "admin_comments"
+    t.string "meeting_type", default: "in person"
+    t.text "instructions"
+    t.bigint "general_availability_id"
+    t.index ["general_availability_id"], name: "index_meetings_on_general_availability_id"
   end
 
   create_table "users", force: :cascade do |t|
