@@ -16,7 +16,7 @@ class MeetingsController < ApplicationController
     current_user.create_stripe_customer(params[:stripeToken])
 
     meeting = Meeting.create!(dm_id: @decision_maker.id, sp_id: current_user.id, price_cents: @decision_maker.price_cents,
-                    time_start: @desired_block.start_time, time_end: @desired_block.end_time)
+                    general_availability_id: @desired_block.id)
 
     redirect_to confirmation_path(meeting.id)
 

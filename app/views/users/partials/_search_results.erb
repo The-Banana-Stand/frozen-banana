@@ -13,7 +13,7 @@
   <%- @decision_makers.each do |dm| %>
 
   <tr data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button">
-    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+    <td><i class="glyphicon glyphicon-chevron-right"></i></td>
     <td><%= dm.full_name %></td>
     <td><%= dm.title %></td>
     <td><%= dm.company_name %></td>
