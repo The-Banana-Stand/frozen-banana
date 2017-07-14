@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get '/edit_profile' => 'users#edit', as: :edit_profile
 
   get '/meetings/new/:id' => 'meetings#new', as: :new_meeting
+  post '/meetings' => 'meetings#create'
+
+  get '/meetings/confirmation/:id' => 'meetings#confirmation', as: :confirmation
 
   resources :users
   resources :account_activations, only: [:edit]

@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712145105) do
+ActiveRecord::Schema.define(version: 20170714165529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "change_requests", force: :cascade do |t|
+    t.text "request", null: false
+    t.text "admin_comment"
+    t.bigint "user_id"
+    t.bigint "meeting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_change_requests_on_meeting_id"
+    t.index ["user_id"], name: "index_change_requests_on_user_id"
+  end
 
   create_table "feedbacks", force: :cascade do |t|
     t.text "dm_feedback"
@@ -24,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170712145105) do
     t.bigint "meeting_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "admin_comments"
     t.index ["meeting_id"], name: "index_feedbacks_on_meeting_id"
   end
 
@@ -35,22 +47,26 @@ ActiveRecord::Schema.define(version: 20170712145105) do
     t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "admin_comments"
     t.index ["user_id"], name: "index_general_availabilities_on_user_id"
   end
 
   create_table "meetings", force: :cascade do |t|
     t.integer "dm_id"
     t.integer "sp_id"
-    t.string "status"
-    t.integer "price"
-    t.string "payment_status"
-    t.string "dm_calendar_status"
-    t.string "sp_calendar_status"
+    t.string "status", default: "pending"
+    t.integer "price_cents"
+    t.string "payment_status", default: "pending"
+    t.string "dm_calendar_status", default: "pending"
+    t.string "sp_calendar_status", default: "pending"
     t.date "date"
     t.time "time_start"
     t.time "time_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "price_currency", default: "USD", null: false
+    t.string "address"
+    t.text "admin_comments"
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170712145105) do
     t.boolean "wildcard", default: true
     t.integer "price_cents", default: 10426, null: false
     t.string "price_currency", default: "USD", null: false
+    t.string "customer_token"
+    t.text "admin_comments"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

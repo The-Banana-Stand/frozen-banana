@@ -14,3 +14,27 @@
 <p>
   Your credit card will not be charged until a specific date and time has been agreed upon by both parties.
 </p>
+
+<%= form_tag meetings_path do %>
+    <%= hidden_field_tag :desired_block_id, @desired_block.id %>
+    <article>
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+      <label class="amount">
+        <span>Amount: <%= humanized_money_with_symbol(@decision_maker.price) %></span>
+      </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="Credit Card Info"
+            data-locale="auto"
+            data-label="Confirm Payment Information"
+            data-panel-label="Use this Card"
+            data-zip-code="true">
+
+    </script>
+<% end %>

@@ -113,6 +113,31 @@ class User < ApplicationRecord
     self.role == 'both'
   end
 
+  def create_stripe_customer(stripe_token)
+    if self.customer_token.present?
+      customer = Stripe::Customer.retrieve(self.customer_token)
+      customer.source = stripe_token
+      customer.save
+    else
+      customer = Stripe::Customer.create(
+          :email => self.email,
+          :source  => stripe_token,
+          :description => self.full_name
+      )
+      self.update_attribute(:customer_token, customer.id)
+    end
+  end
+
+  def capture_payment
+    #TODO update this once backend payment collection is put in
+    charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => @amount,
+        :description => 'Rails Stripe customer',
+        :currency    => 'usd'
+    )
+  end
+
   private
 
   def create_activation_digest
