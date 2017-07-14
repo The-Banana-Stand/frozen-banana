@@ -1,0 +1,40 @@
+<h1>Payment</h1>
+
+<h3>With: <%= @decision_maker.full_name %></h3>
+<h3>
+  On <%= @desired_block.display_day + ': ' + @desired_block.show_start_time + ' To ' + @desired_block.show_end_time %>
+</h3>
+
+<p>
+  You have selected to book the time above.  Once payment information is received,
+  the decision maker wil confirm calendar availability and you will recieve an email back with the exact
+  dates and times the decision maker is available for you to choose from.
+</p>
+
+<p>
+  Your credit card will not be charged until a specific date and time has been agreed upon by both parties.
+</p>
+
+<%= form_tag meetings_path do %>
+    <%= hidden_field_tag :desired_block_id, @desired_block.id %>
+    <article>
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+      <label class="amount">
+        <span>Amount: <%= humanized_money_with_symbol(@decision_maker.price) %></span>
+      </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="Credit Card Info"
+            data-locale="auto"
+            data-label="Confirm Payment Information"
+            data-panel-label="Use this Card"
+            data-zip-code="true">
+
+    </script>
+<% end %>

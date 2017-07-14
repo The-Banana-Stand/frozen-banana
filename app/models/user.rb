@@ -4,7 +4,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
   # Associations
-  has_many :general_availabilities, -> { order :block }
+  has_many :general_availabilities, -> { order :block }, inverse_of: :user
   has_many :active_blocks, -> {where.not(start_time: nil, end_time: nil)}, class_name: "GeneralAvailability"
   accepts_nested_attributes_for :general_availabilities
   has_many :dm_feedbacks, foreign_key: :dm_id, class_name: 'Feedback'
@@ -15,7 +15,6 @@ class User < ApplicationRecord
   # Callbacks
   before_save {self.email = email.downcase if email}
   before_create :create_activation_digest
-  after_create :create_general_availabilities
 
   # Validations
   validates :first_name, :last_name, :title, :company_name, :company_address,
@@ -69,6 +68,11 @@ class User < ApplicationRecord
     update_attribute(:activated_at, Time.zone.now)
   end
 
+  def account_setup
+    send_activation_email
+    create_general_availabilities
+  end
+
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
@@ -109,6 +113,31 @@ class User < ApplicationRecord
     self.role == 'both'
   end
 
+  def create_stripe_customer(stripe_token)
+    if self.customer_token.present?
+      customer = Stripe::Customer.retrieve(self.customer_token)
+      customer.source = stripe_token
+      customer.save
+    else
+      customer = Stripe::Customer.create(
+          :email => self.email,
+          :source  => stripe_token,
+          :description => self.full_name
+      )
+      self.update_attribute(:customer_token, customer.id)
+    end
+  end
+
+  def capture_payment
+    #TODO update this once backend payment collection is put in
+    charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => @amount,
+        :description => 'Rails Stripe customer',
+        :currency    => 'usd'
+    )
+  end
+
   private
 
   def create_activation_digest
@@ -122,7 +151,6 @@ class User < ApplicationRecord
       self.general_availabilities.create(block: num, day: num)
 
     end
-
   end
 
 end

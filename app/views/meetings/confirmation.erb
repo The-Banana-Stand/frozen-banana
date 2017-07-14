@@ -1,0 +1,29 @@
+<h1>Confirmation</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="well">
+      <h4>Decision Maker: <%= @meeting.dm.full_name %></h4>
+      <h4>Time: <%= @meeting.show_start_time %> to <%= @meeting.show_end_time %></h4>
+      <h4>Meeting ID: <%= @meeting.id %></h4>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <p>
+    Thank you for booking!  You will receive an email shortly with the exact date and times the decision maker can meet.
+    After you select the specific date and time, your credit card will be charged.
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-md-5 col-md-offset-2">
+    <%= link_to 'Search for more meetings', schedule_time_path(anchor: 'sales_person_tab'), class: 'btn btn-primary' %>
+  </div>
+
+  <div class="col-md-5">
+    <%= link_to 'Go to My Dashboard', dashboard_path, class: 'btn btn-primary' %>
+  </div>
+
+</div>

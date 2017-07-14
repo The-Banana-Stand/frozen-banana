@@ -40,6 +40,7 @@ gem 'simple_form'
 gem 'figaro'
 gem 'money-rails'
 gem 'ransack'
+gem 'stripe'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

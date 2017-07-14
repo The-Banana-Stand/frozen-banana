@@ -53,9 +53,10 @@
 
                     <td><%= humanized_money_with_symbol dm.price %></td>
                     <td><%= ga.display_day %></td>
-                    <td><%= ga.start_time %></td>
-                    <td><%= ga.end_time %></td>
-                    <td><a href="#" class="btn btn-success btn-sm">Buy This Time!</a>
+                    <td><%= ga.show_start_time %></td>
+                    <td><%= ga.show_end_time %></td>
+                    <td>
+                      <%= link_to 'Buy Time', new_meeting_path(ga.id), class: 'btn btn-success' %>
                     </td>
 
                   </tr>
