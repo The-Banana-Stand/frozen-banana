@@ -51,4 +51,20 @@ class Meeting < ApplicationRecord
     }[status]
   end
 
+  def capture_payment
+    puts 'HELLO FROM CAPTURE PAYMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    return if self.payment_status == 'captured'
+    customer = self.sp.stripe_customer
+    charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => price_cents,
+        :description => "Charge for Meeting ##{self.id}",
+        :currency    => 'usd'
+    )
+
+    if charge.status == 'succeeded'
+      self.update_attribute(:payment_status, 'captured')
+    end
+  end
+
 end

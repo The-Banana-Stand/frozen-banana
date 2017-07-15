@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+
+  admin:
+    actions:
+      payment_capture:
+        menu: 'Capture Payment'
+        title: 'Capturing Payment'
+        breadcrumb: 'Payment Capture'
