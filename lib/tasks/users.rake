@@ -24,7 +24,8 @@ namespace :users do
         phone_number: '4024900248',
         password: 'password',
         activated: true,
-        activated_at: Time.zone.now
+        activated_at: Time.zone.now,
+        admin: true
     )
 
     User.create!(
@@ -42,7 +43,8 @@ namespace :users do
         phone_number: '123456789',
         password: 'password',
         activated: true,
-        activated_at: Time.zone.now
+        activated_at: Time.zone.now,
+        admin: true
     )
 
     50.times do

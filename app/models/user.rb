@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_paper_trail ignore: [:remember_digest]
   monetize :price_cents
   attr_accessor :remember_token, :activation_token, :reset_token
 

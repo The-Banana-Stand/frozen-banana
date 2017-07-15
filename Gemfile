@@ -42,6 +42,7 @@ gem 'money-rails'
 gem 'ransack'
 gem 'stripe'
 gem 'rails_admin', '~> 1.2'
+gem 'paper_trail'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

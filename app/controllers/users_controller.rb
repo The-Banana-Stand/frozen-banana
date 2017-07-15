@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = 'Info Updated'
-      redirect_to session.delete(:return_to)
+      redirect_to schedule_time_path
     else
       render :edit
     end
