@@ -100,6 +100,10 @@ class User < ApplicationRecord
     self.first_name.capitalize + ' ' + self.last_name.capitalize
   end
 
+  def name
+    full_name
+  end
+
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
       Arel::Nodes::InfixOperation.new('||',

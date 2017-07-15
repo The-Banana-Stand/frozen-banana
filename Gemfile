@@ -41,6 +41,7 @@ gem 'figaro'
 gem 'money-rails'
 gem 'ransack'
 gem 'stripe'
+gem 'rails_admin', '~> 1.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
