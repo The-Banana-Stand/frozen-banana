@@ -5,6 +5,7 @@ class Meeting < ApplicationRecord
   belongs_to :general_availability
   belongs_to :desired_block, class_name: 'GeneralAvailability', foreign_key: 'general_availability_id'
   has_one :feedback
+  has_many :change_requests
 
   attr_accessor :role, :second_party
 

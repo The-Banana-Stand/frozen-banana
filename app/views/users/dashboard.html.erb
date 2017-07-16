@@ -34,7 +34,7 @@
   <%- @meetings.each do |meeting| %>
   <%- meeting.set_display_attributes(@user.id) %>
 
-      <tr id="test" data-toggle="collapse" data-target="#meeting<%= meeting.id %>" class="accordion-toggle" role="button">
+      <tr data-toggle="collapse" data-target="#meeting<%= meeting.id %>" class="accordion-toggle" role="button">
         <td> <i class="glyphicon glyphicon-chevron-right"></i></td>
         <td class="<%= meeting.row_shade %>"><%= meeting.status.capitalize.gsub(/_/, ' ') %></td>
         <td><%= meeting.role %></td>
@@ -43,7 +43,7 @@
         <td><%= meeting.show_date %></td>
         <td><%= meeting.show_start_time %></td>
         <td><%= meeting.show_end_time %></td>
-        <td><%= link_to 'Change', '#', class: 'btn btn-danger btn-sm' %></td>
+        <td><%= link_to 'Change', new_change_request_path(id: meeting.id), class: 'btn btn-danger btn-sm' %></td>
       </tr>
 
       <tr>

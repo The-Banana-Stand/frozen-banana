@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'change_requests/new'
+
+  get 'change_requests/create'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'sessions/new'
 
@@ -28,5 +32,6 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :change_requests,     only: [:new, :create]
 
 end
