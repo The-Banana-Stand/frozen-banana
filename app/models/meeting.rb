@@ -31,8 +31,12 @@ class Meeting < ApplicationRecord
   def sort_priority
     {
         'scheduled' => 1,
-        'requested' => 2,
-        'completed' => 3
+        'change_pending' => 2,
+        'requested' => 3,
+        'completed' => 4,
+        'cancelled' => 5,
+        'test' => 6
+
     }[self.status] || 99
   end
 
@@ -71,8 +75,7 @@ class Meeting < ApplicationRecord
 
   def row_shade
     {
-        'requested' => 'custom-warning',
-        'scheduled' => 'custom-success',
+        'scheduled' => 'custom-success'
     }[status]
   end
 

@@ -18,7 +18,7 @@
     <th><a id="status-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-title="Status Key"
            data-content="<small><strong>Requested:</strong> Waiting for schedule confirmation. <br/> </br>
         <strong>Scheduled:</strong> Booked meeting time/place, agreed to by both parties<br/> </br>
-        <strong>Completed:</strong> Meeting has taken place</small>">Status</a> </th>
+        <strong>Completed:</strong> Meeting has taken place</small>">Meeting Status</a> </th>
     <th>Your Role</th>
     <th>Meeting With</th>
     <th>Company</th>
@@ -43,7 +43,7 @@
         <td><%= meeting.show_date %></td>
         <td><%= meeting.show_start_time %></td>
         <td><%= meeting.show_end_time %></td>
-        <td><%= link_to 'Change', new_change_request_path(id: meeting.id), class: 'btn btn-danger btn-sm' %></td>
+        <td><%= link_to 'Change', new_change_request_path(id: meeting.id) %></td>
       </tr>
 
       <tr>

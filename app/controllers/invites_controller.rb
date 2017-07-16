@@ -9,7 +9,7 @@ class InvitesController < ApplicationController
 
     if @invite.save
       flash[:success] = 'Invite Sent'
-      redirect_to dashboard_path
+      redirect_to new_invite_path
     else
       render 'new'
     end
