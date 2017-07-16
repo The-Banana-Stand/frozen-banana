@@ -45,6 +45,7 @@ gem 'rails_admin', '~> 1.2'
 gem 'paper_trail'
 
 gem 'modernizr-rails'
+gem 'auto_strip_attributes'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,8 +1,8 @@
-<h1>Payment</h1>
+<h1>Confirm Meeting Request</h1>
 
 <h3>With: <%= @decision_maker.full_name %></h3>
 <h3>
-  On <%= @desired_block.display_day + ': ' + @desired_block.show_start_time + ' To ' + @desired_block.show_end_time %>
+  1 Hour between <%= @desired_block.show_start_time + ' and ' + @desired_block.show_end_time + ' on ' + @desired_block.display_day %>
 </h3>
 
 <p>
