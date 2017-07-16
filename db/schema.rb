@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170715223407) do
+ActiveRecord::Schema.define(version: 20170716194330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,24 @@ ActiveRecord::Schema.define(version: 20170715223407) do
     t.datetime "updated_at", null: false
     t.text "admin_comments"
     t.index ["user_id"], name: "index_general_availabilities_on_user_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "company_name", null: false
+    t.string "title"
+    t.string "company_address"
+    t.string "state"
+    t.string "zip_code"
+    t.string "phone_number"
+    t.string "email"
+    t.text "admin_comments"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "city"
+    t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
   create_table "meetings", force: :cascade do |t|

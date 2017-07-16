@@ -1,0 +1,70 @@
+<div class="text-center col-md-8 col-md-offset-2">
+
+  <h1>Send Invitation</h1>
+
+  <hr/>
+
+  <%= simple_form_for @invite, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f| %>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: 'First Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :title, class: 'form-control', placeholder: 'Job Title' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :email, class: 'form-control', placeholder: 'Email Address' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :phone_number, class: 'form-control', placeholder: 'Phone Number' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :company_address, class: 'form-control', placeholder: 'Company Address' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.input :city, class: 'form-control', placeholder: 'City' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-6">
+          <%= f.input :state, collection: us_states, prompt: 'State', class: 'form-control' %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.input :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
+        </div>
+      </div>
+
+      <%= f.submit 'Send Invite', class: 'btn btn-primary col-md-4 col-md-offset-4' %>
+
+  <% end %>
+
+</div>

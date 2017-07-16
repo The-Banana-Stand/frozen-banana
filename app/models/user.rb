@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :dm_meetings, foreign_key: :dm_id, class_name: 'Meeting'
   has_many :sp_meetings, foreign_key: :sp_id, class_name: 'Meeting'
   has_many :change_requests
+  has_many :invites
 
   # Callbacks
   before_save {self.email = email.downcase if email}

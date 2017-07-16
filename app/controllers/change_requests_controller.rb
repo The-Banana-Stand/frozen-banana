@@ -13,6 +13,7 @@ class ChangeRequestsController < ApplicationController
       flash[:info] = 'Change Requested'
       redirect_to dashboard_path
     else
+      @meeting = Meeting.find(params[:change_request][:meeting_id])
       render 'new'
     end
   end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :logged_in_user, except: [:new, :create]
+  skip_before_action :logged_in_user, only: [:new, :create]
 
 
   def show
