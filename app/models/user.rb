@@ -2,11 +2,12 @@ class User < ApplicationRecord
   has_secure_password
   has_paper_trail ignore: [:remember_digest]
   monetize :price_cents
+  auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service, :company_name, :company_address
   attr_accessor :remember_token, :activation_token, :reset_token
 
   # Associations
   has_many :general_availabilities, -> { order :block }, inverse_of: :user
-  has_many :active_blocks, -> {where.not(start_time: nil, end_time: nil)}, class_name: "GeneralAvailability"
+  has_many :active_blocks, -> {where.not(start_time: nil, end_time: nil)}, class_name: 'GeneralAvailability'
   accepts_nested_attributes_for :general_availabilities
   has_many :dm_feedbacks, foreign_key: :dm_id, class_name: 'Feedback'
   has_many :sp_feedbacks, foreign_key: :sp_id, class_name: 'Feedback'

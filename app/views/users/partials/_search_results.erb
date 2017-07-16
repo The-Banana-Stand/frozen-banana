@@ -5,6 +5,9 @@
     <th><%= sort_link(@query, :full_name, 'Name', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :title, {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :company_name, 'Company', {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :city, 'City', {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :state, 'State', {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :zip_code, 'Zip Code', {}, {remote: true, method: :get} ) %></th>
   </tr>
   </thead>
 
@@ -17,33 +20,32 @@
     <td><%= dm.full_name %></td>
     <td><%= dm.title %></td>
     <td><%= dm.company_name %></td>
+    <td><%= dm.city %></td>
+    <td><%= dm.state%></td>
+    <td><%= dm.zip_code%></td>
   </tr>
 
   <tr>
     <td colspan="12" class="hiddenRow">
-      <div class="accordian-body collapse col-md-9" id="dm<%= dm.id %>">
-          <table class="table">
-            <thead>
-            <tr>
-              <td>
-                <h4>Evaluating:</h4>
-                <p>
-                  <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
-                </p>
-              </td>
-            </tr>
-            <%- if dm.active_blocks.empty? %>
-            <tr>
-              <td>
-                <h3>Decision Maker has No Times Available</h3>
-              </td>
-            </tr>
-            <% else %>
+      <div class="accordian-body collapse" id="dm<%= dm.id %>">
+        <h4>Evaluating:</h4>
+        <p>
+          <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
+        </p>
+        <%- if dm.active_blocks.empty? %>
+              <h3>Decision Maker has No Times Available</h3>
+
+
+
+        <% else %>
+          <div class="col-md-5">
+            <table class="table">
+              <thead>
               <tr>
-                <th>Price/Hr</th>
                 <th>Day of Week</th>
                 <th>From</th>
                 <th>To</th>
+                <th>Price/Hr</th>
               </tr>
               </thead>
 
@@ -51,20 +53,22 @@
               <%- dm.active_blocks.each do |ga| %>
                   <tr>
 
-                    <td><%= humanized_money_with_symbol dm.price %></td>
                     <td><%= ga.display_day %></td>
                     <td><%= ga.show_start_time %></td>
                     <td><%= ga.show_end_time %></td>
+                    <td><%= humanized_money_with_symbol dm.price %></td>
                     <td>
-                      <%= link_to 'Buy Time', new_meeting_path(ga.id), class: 'btn btn-success' %>
+                      <%= link_to 'Buy 1 Hour', new_meeting_path(ga.id), class: 'btn btn-success' %>
                     </td>
 
                   </tr>
               <% end %>
-                </tbody>
+              </tbody>
+
             <% end %>
 
           </table>
+        </div>
 
       </div>
     </td>

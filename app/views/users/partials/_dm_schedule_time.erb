@@ -8,17 +8,14 @@
 
 
 
-      <h3 class="text-center">Blocks of Time Available</h3>
+      <h3 class="text-center">What times are you usually available?</h3>
 
       <div class="form-inline text-center">
         <%= f.association :general_availabilities do |ga| %>
 
             <div class="row">
-              <div class="col-sm-2">
-                <label class="control-label">Block <%= ga.object.block %>:</label>
-              </div>
 
-              <div class="col-sm-3">
+              <div class="col-sm-3 col-sm-offset-1">
                 <%= ga.input :day, as: :select, collection: [ ['Monday', 1], ['Tuesday', 2], ['Wednesday', 3], ['Thursday', 4],
                                                               ['Friday', 5], ['Saturday', 6], ['Sunday', 7] ], include_blank: false %>
               </div>

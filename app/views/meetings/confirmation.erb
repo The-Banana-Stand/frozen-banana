@@ -4,7 +4,7 @@
   <div class="col-md-6">
     <div class="well">
       <h4>Decision Maker: <%= @meeting.dm.full_name %></h4>
-      <h4>Time: <%= @meeting.show_start_time %> to <%= @meeting.show_end_time %></h4>
+      <h4>Time: <%= @meeting.desired_block.display_day %> between <%= @meeting.desired_block.show_start_time %> and <%= @meeting.desired_block.show_end_time %></h4>
       <h4>Meeting ID: <%= @meeting.id %></h4>
     </div>
   </div>

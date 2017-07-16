@@ -11,12 +11,28 @@ class Meeting < ApplicationRecord
   monetize :price_cents
 
 
+  def status_enum
+    %w(requested scheduled completed change_pending cancelled test)
+  end
+
+  def payment_status_enum
+    %w(pending captured refunded error)
+  end
+
+  def dm_calendar_status_enum
+    %w(uncontacted contacted open_response invite_pending invite_accepted )
+  end
+
+  def sp_calendar_status_enum
+    %w()
+  end
+
   def show_start_time
-    time_start ? time_start.strftime('%I:%M%p') : 'Pending'
+    time_start ? time_start.strftime('%l:%M%p') : 'Pending'
   end
 
   def show_end_time
-    time_end ? time_end.strftime('%I:%M%p') : 'Pending'
+    time_end ? time_end.strftime('%l:%M%p') : 'Pending'
   end
 
   def show_date
