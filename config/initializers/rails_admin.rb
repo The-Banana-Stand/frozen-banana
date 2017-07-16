@@ -1,3 +1,7 @@
+require Rails.root.join('lib', 'rails_admin', 'payment_capture.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::PaymentCapture)
+
+
 RailsAdmin.config do |config|
 
   ### Popular gems integration
@@ -62,6 +66,7 @@ RailsAdmin.config do |config|
     show
     edit
     delete
+    payment_capture
     # show_in_app
     ## With an audit adapter, you can add:
     # history_index

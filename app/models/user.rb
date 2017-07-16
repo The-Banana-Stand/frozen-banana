@@ -133,15 +133,10 @@ class User < ApplicationRecord
     end
   end
 
-  def capture_payment
-    #TODO update this once backend payment collection is put in
-    charge = Stripe::Charge.create(
-        :customer    => customer.id,
-        :amount      => @amount,
-        :description => 'Rails Stripe customer',
-        :currency    => 'usd'
-    )
+  def stripe_customer
+    Stripe::Customer.retrieve(self.customer_token)
   end
+
 
   private
 
