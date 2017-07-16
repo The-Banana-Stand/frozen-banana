@@ -28,6 +28,14 @@ class Meeting < ApplicationRecord
     %w()
   end
 
+  def sort_priority
+    {
+        'scheduled' => 1,
+        'requested' => 2,
+        'completed' => 3
+    }[self.status] || 99
+  end
+
   def show_start_time
     time_start ? time_start.strftime('%l:%M%p') : 'Pending'
   end

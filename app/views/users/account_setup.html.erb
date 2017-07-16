@@ -1,0 +1,23 @@
+<div class="page-header col-md-12 text-center">
+  <h1>Account Setup</h1>
+</div>
+
+
+
+<div class="col-md-6 col-md-offset-4">
+  <%= simple_form_for @user, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+                      wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
+
+      <%- if current_user.role == 'dm' || current_user.role == 'both' %>
+          <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
+      <% end %>
+
+      <%- if current_user.role == 'sp' || current_user.role == 'both' %>
+          <%= render partial: 'users/partials/sp_info_form', locals: {f: f}  %>
+      <% end %>
+
+      <%= f.submit 'Start Scheduling Meetings', class: 'btn btn-primary col-md-offset-2' %>
+
+  <% end %>
+</div>
+

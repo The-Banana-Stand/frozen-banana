@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   get '/meetings/new/:id' => 'meetings#new', as: :new_meeting
   post '/meetings' => 'meetings#create'
+  get '/account_setup' => 'users#account_setup', as: :account_setup
 
   get '/meetings/confirmation/:id' => 'meetings#confirmation', as: :confirmation
 

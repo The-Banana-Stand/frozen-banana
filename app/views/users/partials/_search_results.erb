@@ -8,6 +8,7 @@
     <th><%= sort_link(@query, :city, 'City', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :state, 'State', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :zip_code, 'Zip Code', {}, {remote: true, method: :get} ) %></th>
+    <th><a>Attention Score</a></th>
   </tr>
   </thead>
 
@@ -23,6 +24,15 @@
     <td><%= dm.city %></td>
     <td><%= dm.state%></td>
     <td><%= dm.zip_code%></td>
+    <td>
+      <span class="glyphicon glyphicon-star"></span>
+      <span class="glyphicon glyphicon-star"></span>
+      <span class="glyphicon glyphicon-star"></span>
+      <span class="glyphicon glyphicon-star"></span>
+      <span class="glyphicon glyphicon-star"></span>
+
+
+    </td>
   </tr>
 
   <tr>
