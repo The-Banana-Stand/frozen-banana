@@ -1,4 +1,5 @@
 class GeneralAvailability < ApplicationRecord
+  has_paper_trail
   belongs_to :user, :inverse_of => :general_availabilities
   has_many :meetings
 

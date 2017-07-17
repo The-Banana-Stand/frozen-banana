@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :logged_in_user, except: [:new, :create]
+  skip_before_action :logged_in_user, only: [:new, :create]
 
 
   def show
@@ -9,8 +9,8 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = current_user
-    @meetings = @user.dm_meetings.includes(:dm, :sp).order(status: :desc) + @user.sp_meetings.includes(:dm, :sp, :desired_block).order(status: :desc)
-    @meetings
+    @meetings = @user.dm_meetings.includes(:dm, :sp) + @user.sp_meetings.includes(:dm, :sp, :desired_block)
+    @meetings.sort! {|x, y| x.sort_priority <=> y.sort_priority}
   end
 
   def schedule_time
@@ -36,8 +36,14 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.account_setup
-      flash[:info] = 'Please check your email to activate your account.'
-      redirect_to root_url
+      if Rails.env == 'development' #TODO remove this once account setup process is complete
+        @user.activate
+        log_in @user
+        redirect_to account_setup_path
+      else
+        flash[:info] = 'Please check your email to activate your account.'
+        redirect_to root_url
+      end
     else
       render :new
     end
@@ -48,11 +54,15 @@ class UsersController < ApplicationController
     session[:return_to] = edit_profile_path
   end
 
+  def account_setup
+    @user = current_user
+  end
+
   def update
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:success] = 'Info Updated'
+      flash[:success] = 'Information Saved'
       redirect_to schedule_time_path
     else
       render :edit

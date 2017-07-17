@@ -5,6 +5,7 @@ class Meeting < ApplicationRecord
   belongs_to :general_availability
   belongs_to :desired_block, class_name: 'GeneralAvailability', foreign_key: 'general_availability_id'
   has_one :feedback
+  has_many :change_requests
 
   attr_accessor :role, :second_party
 
@@ -25,6 +26,18 @@ class Meeting < ApplicationRecord
 
   def sp_calendar_status_enum
     %w()
+  end
+
+  def sort_priority
+    {
+        'scheduled' => 1,
+        'change_pending' => 2,
+        'requested' => 3,
+        'completed' => 4,
+        'cancelled' => 5,
+        'test' => 6
+
+    }[self.status] || 99
   end
 
   def show_start_time
@@ -62,8 +75,7 @@ class Meeting < ApplicationRecord
 
   def row_shade
     {
-        'requested' => 'custom-warning',
-        'scheduled' => 'custom-success',
+        'scheduled' => 'custom-success'
     }[status]
   end
 
