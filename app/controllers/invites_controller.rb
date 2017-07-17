@@ -20,7 +20,7 @@ class InvitesController < ApplicationController
 
   def invite_params
     params.require(:invite).permit(:email, :first_name, :last_name, :title,
-                                 :company_name, :company_address, :city, :state, :zip_code, :phone_number
+                                 :company_name, :company_address, :city, :state, :zip_code, :phone_number, :attachment
     )
   end
 end
