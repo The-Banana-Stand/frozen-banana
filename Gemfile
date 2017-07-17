@@ -46,6 +46,7 @@ gem 'paper_trail'
 
 gem 'modernizr-rails'
 gem 'auto_strip_attributes'
+gem 'paperclip'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

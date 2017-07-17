@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170715223407) do
+ActiveRecord::Schema.define(version: 20170717150529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,24 @@ ActiveRecord::Schema.define(version: 20170715223407) do
     t.datetime "updated_at", null: false
     t.text "admin_comments"
     t.index ["user_id"], name: "index_general_availabilities_on_user_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "company_name", null: false
+    t.string "title"
+    t.string "company_address"
+    t.string "state"
+    t.string "zip_code"
+    t.string "phone_number"
+    t.string "email"
+    t.text "admin_comments"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "city"
+    t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -109,6 +127,14 @@ ActiveRecord::Schema.define(version: 20170715223407) do
     t.string "customer_token"
     t.text "admin_comments"
     t.boolean "admin", default: false
+    t.string "logo_file_name"
+    t.string "logo_content_type"
+    t.integer "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
