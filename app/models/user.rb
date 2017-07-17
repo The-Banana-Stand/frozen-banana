@@ -1,10 +1,12 @@
 class User < ApplicationRecord
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "70x50>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   has_secure_password
   has_paper_trail ignore: [:remember_digest]
   monetize :price_cents
-  auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service, :company_name, :company_address
+  auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service,
+                        :company_name, :company_address, :ar_comments
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   # Associations
@@ -43,6 +45,10 @@ class User < ApplicationRecord
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
         BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+  end
+
+  def all_meetings
+    Meeting.where(dm_id: id).or(Meeting.where(sp_id: id))
   end
 
   # Returns a random token.

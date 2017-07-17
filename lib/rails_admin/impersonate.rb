@@ -3,7 +3,7 @@
 module RailsAdmin
   module Config
     module Actions
-      class PaymentCapture < RailsAdmin::Config::Actions::Base
+      class Impersonate < RailsAdmin::Config::Actions::Base
         # This ensures the action only shows up for Users
 
         # We want the action on members, not the Users collection
@@ -12,12 +12,12 @@ module RailsAdmin
         end
 
         register_instance_option :visible? do
-          bindings[:object].class == Meeting && bindings[:object].payment_status != 'captured'
+          bindings[:object].class == User
 
         end
 
         register_instance_option :link_icon do
-          'icon-barcode'
+          'icon-eye-open'
         end
 
         register_instance_option :controller do
@@ -25,8 +25,7 @@ module RailsAdmin
             # Note: This is dummy code. The thing to note is that we aren't
             # rendering a view, just redirecting after taking an action on @object, which
             # will be the user instance in this case.
-            @object.capture_payment
-            flash[:success] = 'Payment Captured!'
+            log_in @object
             redirect_to back_or_index
           end
         end

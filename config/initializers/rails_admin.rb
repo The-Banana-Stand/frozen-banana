@@ -1,6 +1,9 @@
 require Rails.root.join('lib', 'rails_admin', 'payment_capture.rb')
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::PaymentCapture)
 
+require Rails.root.join('lib', 'rails_admin', 'impersonate.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Impersonate)
+
 
 RailsAdmin.config do |config|
 
@@ -31,7 +34,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
   config.authenticate_with do
     unless current_user.try(:admin)
-      flash[:danger] = 'Nice Try'
+      flash[:danger] = 'You are not supposed to go there.'
       redirect_to main_app.root_path
     end
   end
@@ -59,6 +62,87 @@ RailsAdmin.config do |config|
     object_label_method do
       :full_name
     end
+
+    show do
+      field :admin_comments
+      field :ar_comments
+      field :first_name
+      field :last_name
+      field :company_name
+      field :title
+      field :email
+      field :phone_number
+      field :company_address
+      field :city
+      field :state
+      field :zip_code
+      field :username
+      field :sp_product_service
+      field :dm_evaluating
+      field :active
+      field :role
+      field :activated
+      field :wildcard
+      field :price_cents
+      field :price_currency
+      field :customer_token
+      field :admin
+      field :created_at
+    end
+
+    list do
+      field :admin_comments
+      field :ar_comments
+      field :first_name
+      field :last_name
+      field :company_name
+      field :title
+      field :email
+      field :phone_number
+      field :company_address
+      field :city
+      field :state
+      field :zip_code
+      field :username
+      field :sp_product_service
+      field :dm_evaluating
+      field :active
+      field :role
+      field :activated
+      field :wildcard
+      field :price_cents
+      field :price_currency
+      field :customer_token
+      field :admin
+      field :created_at
+    end
+
+    edit do
+      field :admin_comments
+      field :ar_comments
+      field :first_name
+      field :last_name
+      field :company_name
+      field :title
+      field :email
+      field :phone_number
+      field :company_address
+      field :city
+      field :state
+      field :zip_code
+      field :username
+      field :sp_product_service
+      field :dm_evaluating
+      field :active
+      field :role
+      field :activated
+      field :wildcard
+      field :price_cents
+      field :price_currency
+      field :customer_token
+      field :admin
+      field :created_at
+    end
   end
 
   config.actions do
@@ -71,6 +155,7 @@ RailsAdmin.config do |config|
     edit
     delete
     payment_capture
+    impersonate
     # show_in_app
     ## With an audit adapter, you can add:
     # history_index

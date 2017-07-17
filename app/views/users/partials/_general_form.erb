@@ -22,7 +22,7 @@
 
     <div class="form-group">
       <div class="col-sm-12">
-        <%= f.input :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
+        <%= f.input :password_confirmation, class: 'form-control', placeholder: 'Confirm Password', label: 'Password Confirmation' %>
       </div>
     </div>
 
@@ -40,31 +40,31 @@
 
     <div class="form-group">
       <div class="col-sm-12">
-        <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name' %>
+        <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name', label: 'Last Name' %>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-12">
-        <%= f.input :title, class: 'form-control', placeholder: 'Job Title' %>
+        <%= f.input :title, class: 'form-control', placeholder: 'Job Title', label: 'Title' %>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-12">
-        <%= f.input :phone_number, class: 'form-control', placeholder: 'Phone Number' %>
+        <%= f.input :phone_number, class: 'form-control', placeholder: 'Phone Number', label: 'Phone Number' %>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-12">
-        <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name' %>
+        <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name', label: 'Company Name' %>
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-sm-12">
-        <%= f.input :company_address, class: 'form-control', placeholder: 'Company Address' %>
+        <%= f.input :company_address, class: 'form-control', placeholder: 'Company Address', label: 'Company Address' %>
       </div>
     </div>
 
@@ -75,17 +75,22 @@
     </div>
 
     <div class="form-group">
-      <div class="col-sm-6">
-        <%= f.input :state, collection: us_states, prompt: 'State', class: 'form-control' %>
+      <div class="col-sm-12 col-sm-offset-2">
+        <div class="col-sm-5">
+          <%= f.input :state, collection: us_states, prompt: 'State', class: 'form-control', wrapper_html: {style: 'display:inline-block'} %>
+        </div>
+        <div class="col-sm-4">
+          <%= f.input :zip_code, class: 'form-control', placeholder: 'Zip Code', label: 'Zip Code', wrapper_html: {style: 'display:inline-block'} %>
+        </div>
+
+
       </div>
-      <div class="col-sm-6">
-        <%= f.input :zip_code, class: 'form-control', placeholder: 'Zip Code' %>
-      </div>
+
     </div>
 
     <div class="form-group">
       <div class="col-sm-12">
-        <%= f.input :avatar, as: :file %>
+        <%= f.input :avatar, class: 'form-control', as: :file%>
       </div>
     </div>
 

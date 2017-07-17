@@ -11,6 +11,8 @@ class Meeting < ApplicationRecord
 
   monetize :price_cents
 
+  before_save :set_sort_priority
+
 
   def status_enum
     %w(requested scheduled completed change_pending cancelled test)
@@ -28,8 +30,8 @@ class Meeting < ApplicationRecord
     %w()
   end
 
-  def sort_priority
-    {
+  def set_sort_priority
+    self.sort_priority = {
         'scheduled' => 1,
         'change_pending' => 2,
         'requested' => 3,
@@ -49,7 +51,7 @@ class Meeting < ApplicationRecord
   end
 
   def show_date
-    self.date || 'Pending'
+    self.date&.strftime('%m/%d/%Y') || 'Pending'
   end
 
   def set_display_attributes(id)

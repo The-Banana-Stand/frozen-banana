@@ -9,8 +9,7 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = current_user
-    @meetings = @user.dm_meetings.includes(:dm, :sp) + @user.sp_meetings.includes(:dm, :sp, :desired_block)
-    @meetings.sort! {|x, y| x.sort_priority <=> y.sort_priority}
+    @meetings = @user.all_meetings.includes(:dm, :sp, :desired_block).order(:sort_priority, date: :asc, time_start: :asc)
   end
 
   def schedule_time
