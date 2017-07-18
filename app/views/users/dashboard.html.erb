@@ -16,7 +16,7 @@
   <thead>
   <tr><th>&nbsp;</th>
     <th><a id="status-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-title="Status Key"
-           data-content="<small><strong>Requested:</strong> Waiting for schedule confirmation. <br/> </br>
+           data-content="<small><strong>Requested:</strong> Waiting for schedule confirmation <br/> </br>
         <strong>Scheduled:</strong> Booked meeting time/place, agreed to by both parties<br/> </br>
         <strong>Completed:</strong> Meeting has taken place</small>">Meeting Status</a> </th>
     <th>Your Role</th>
@@ -60,7 +60,7 @@
             <p>Instructions: <%= meeting.instructions || 'No Instructions' %></p>
             <p>Decision Maker interested in: <%= meeting.dm.dm_evaluating || 'No Information' %></p>
             <p>Salesperson products/services: <%= meeting.sp.sp_product_service || 'No Information' %></p>
-            <p>Meeting ID: <%= meeting.id %></p>
+            <p>Meeting Confirmation #: <%= meeting.id %></p>
           </div>
         </td>
       </tr>
@@ -71,5 +71,5 @@
 </table>
 
 <script>
-  $('#status-popover').popover({delay: { "show": 500, "hide": 100 }, container: 'body', html: true });
+  $('#status-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
 </script>

@@ -4,29 +4,30 @@
 
   <hr/>
 
-  <%= simple_form_for @invite, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f| %>
+  <%= simple_form_for @invite, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+                      wrapper_mappings: { file: :horizontal_file_input} do |f| %>
 
       <div class="form-group">
         <div class="col-sm-12">
-          <%= f.input :attachment, class: 'form-control', as: :file%>
+          <%= f.input :attachment, class: 'form-control', as: :file, label: 'Upload Contact List'%>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-12">
-          <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: 'First Name' %>
+          <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: '*First Name' %>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-12">
-          <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name', label: 'Last Name' %>
+          <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name', label: '*Last Name' %>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-12">
-          <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name', label: 'Company Name' %>
+          <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name', label: '*Company Name' %>
         </div>
       </div>
 

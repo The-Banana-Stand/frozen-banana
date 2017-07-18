@@ -34,7 +34,7 @@
           <% end %>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Help & Contact</a></li>
+            <li><%= link_to 'Help & Contact', help_path %></li>
             <%- if logged_in? %>
                 <li><%= image_tag current_user.avatar.url(:thumb), class: 'img-circle' %></li>
               <li class="dropdown">

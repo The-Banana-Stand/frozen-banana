@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
+  get '/help' => 'static_pages#help', as: :help
+
 
   get '/login' => 'sessions#new'
   post '/login', to: 'sessions#create'

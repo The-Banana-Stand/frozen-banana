@@ -103,6 +103,7 @@ class Meeting < ApplicationRecord
   private
 
   def send_slack_notification
+    return if Rails.env == 'development'
     notification = {
         text: 'hello hello',
         username: "Awesom-O",
