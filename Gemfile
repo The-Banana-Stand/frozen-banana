@@ -46,7 +46,9 @@ gem 'paper_trail'
 
 gem 'modernizr-rails'
 gem 'auto_strip_attributes'
+gem 'aws-sdk'
 gem 'paperclip'
+gem 'slack-notifier'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

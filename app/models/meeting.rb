@@ -7,11 +7,14 @@ class Meeting < ApplicationRecord
   has_one :feedback
   has_many :change_requests
 
+  auto_strip_attributes :sp_requested_comments
+
   attr_accessor :role, :second_party
 
   monetize :price_cents
 
   before_save :set_sort_priority
+  after_create :send_slack_notification
 
 
   def status_enum
@@ -95,6 +98,31 @@ class Meeting < ApplicationRecord
     if charge.status == 'succeeded'
       self.update_attribute(:payment_status, 'captured')
     end
+  end
+
+  private
+
+  def send_slack_notification
+    notification = {
+        text: 'hello hello',
+        username: "Awesom-O",
+        icon_emoji: ":loudspeaker:",
+        fields: [
+            {
+                title: 'New Meeting',
+                value: "ID: #{self.id}"
+            },
+            {
+                title: 'Decision Maker',
+                value: "#{self.dm.full_name} (#{self.dm_id})"
+            },
+            {
+                title: 'Salesperson',
+                value: "#{self.sp.full_name} (#{self.sp_id})"
+            }
+        ]
+    }
+    SLACK.ping notification
   end
 
 end

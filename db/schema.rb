@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717214128) do
+ActiveRecord::Schema.define(version: 20170718154140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20170717214128) do
     t.text "instructions"
     t.bigint "general_availability_id"
     t.integer "sort_priority"
+    t.text "sp_requested_comments"
     t.index ["general_availability_id"], name: "index_meetings_on_general_availability_id"
   end
 
@@ -137,6 +138,9 @@ ActiveRecord::Schema.define(version: 20170717214128) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.text "ar_comments"
+    t.text "filter_comments"
+    t.text "validation_comments"
+    t.string "plat_validation_status", default: "new"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

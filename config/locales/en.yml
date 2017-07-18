@@ -39,7 +39,7 @@ en:
         title: 'Capturing Payment'
         breadcrumb: 'Payment Capture'
 
-      impersonate_user:
+      impersonate:
               menu: 'Impersonate'
               title: 'Impersonating user...'
               breadcrumb: 'Impersonation'

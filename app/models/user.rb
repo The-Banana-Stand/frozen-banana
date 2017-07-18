@@ -23,6 +23,7 @@ class User < ApplicationRecord
   # Callbacks
   before_save {self.email = email.downcase if email}
   before_create :create_activation_digest
+  after_create :send_slack_notification
 
   # Validations
   validates :first_name, :last_name, :title, :company_name, :company_address,
@@ -109,7 +110,7 @@ class User < ApplicationRecord
 
   #combines First and Last name
   def full_name
-    self.first_name.capitalize + ' ' + self.last_name.capitalize
+    self.first_name.capitalize + ' ' + self.last_name.capitalize if self.first_name && self.last_name
   end
 
   def name
@@ -148,6 +149,14 @@ class User < ApplicationRecord
     Stripe::Customer.retrieve(self.customer_token)
   end
 
+  def plat_validation_status_enum
+    %w(new validated rejected)
+  end
+
+
+
+
+
 
   private
 
@@ -163,5 +172,26 @@ class User < ApplicationRecord
 
     end
   end
+
+  def send_slack_notification
+    notification = {
+        text: 'hello hello',
+        username: "Awesom-O",
+        icon_emoji: ":loudspeaker:",
+        fields: [
+            {
+                title: 'New User',
+                value: "#{self.full_name}"
+            },
+            {
+                title: 'ID',
+                value: "#{self.id}"
+            }
+        ]
+    }
+    SLACK.ping notification
+  end
+
+
 
 end

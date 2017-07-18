@@ -66,6 +66,9 @@ RailsAdmin.config do |config|
     show do
       field :admin_comments
       field :ar_comments
+      field :filter_comments
+      field :validation_comments
+      field :plat_validation_status
       field :first_name
       field :last_name
       field :company_name
@@ -93,6 +96,9 @@ RailsAdmin.config do |config|
     list do
       field :admin_comments
       field :ar_comments
+      field :filter_comments
+      field :validation_comments
+      field :plat_validation_status
       field :first_name
       field :last_name
       field :company_name
@@ -117,9 +123,44 @@ RailsAdmin.config do |config|
       field :created_at
     end
 
+    create do
+      field :admin_comments
+      field :ar_comments
+      field :filter_comments
+      field :validation_comments
+      field :plat_validation_status
+      field :first_name
+      field :last_name
+      field :company_name
+      field :title
+      field :email
+      field :password
+      field :password_confirmation
+      field :phone_number
+      field :company_address
+      field :city
+      field :state
+      field :zip_code
+      field :username
+      field :sp_product_service
+      field :dm_evaluating
+      field :active
+      field :role
+      field :activated
+      field :wildcard
+      field :price_cents
+      field :price_currency
+      field :customer_token
+      field :admin
+      field :created_at
+    end
+
     edit do
       field :admin_comments
       field :ar_comments
+      field :filter_comments
+      field :validation_comments
+      field :plat_validation_status
       field :first_name
       field :last_name
       field :company_name
