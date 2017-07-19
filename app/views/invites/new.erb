@@ -4,7 +4,7 @@
 
   <hr/>
 
-  <%= simple_form_for @invite, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+  <%= simple_form_for @invite, html: {class: 'form-horizontal', multipart: true}, wrapper: :horizontal_form,
                       wrapper_mappings: { file: :horizontal_file_input} do |f| %>
 
       <div class="form-group">
@@ -12,6 +12,20 @@
           <%= f.input :attachment, class: 'form-control', as: :file, label: 'Upload Contact List'%>
         </div>
       </div>
+
+      <%= f.hidden_field :first_name, value: 'file' %>
+      <%= f.hidden_field :last_name, value: 'file' %>
+      <%= f.hidden_field :company_name, value: 'file' %>
+
+      <%= f.submit 'Upload File', class: 'btn btn-primary' %>
+
+  <% end %>
+
+  <hr/>
+  <h3 class="text-center">OR</h3>
+  <hr/>
+  <%= simple_form_for @invite, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+                      wrapper_mappings: { file: :horizontal_file_input} do |f| %>
 
       <div class="form-group">
         <div class="col-sm-12">
