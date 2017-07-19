@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+    raise 'foo'
     @user = current_user
     @meetings = @user.all_meetings.includes(:dm, :sp, :desired_block).order(:sort_priority, date: :asc, time_start: :asc, id: :desc)
   end

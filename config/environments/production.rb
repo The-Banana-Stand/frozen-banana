@@ -112,4 +112,13 @@ Rails.application.configure do
           secret_access_key: ENV["AWS_S3_SECRET_ACCESS_KEY"]
       }
   }
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+                                          :slack => {
+                                              :webhook_url => ENV['SLACK'],
+                                              :channel => "#exceptions",
+                                              :additional_parameters => {
+                                                  :mrkdwn => true
+                                              }
+                                          }
 end

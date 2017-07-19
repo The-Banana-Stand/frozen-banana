@@ -49,7 +49,7 @@ gem 'auto_strip_attributes'
 gem 'aws-sdk'
 gem 'paperclip'
 gem 'slack-notifier'
-
+gem 'exception_notification'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
