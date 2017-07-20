@@ -85,9 +85,18 @@ RailsAdmin.config do |config|
       field :active
       field :role
       field :activated
-      field :wildcard
       field :price_cents
       field :price_currency
+      field :dm_min_bottom_line_impact
+      field :sp_small_bottom_line_impact
+      field :sp_medium_bottom_line_impact
+      field :sp_large_bottom_line_impact
+      field :sp_small_impact_examples
+      field :sp_medium_impact_examples
+      field :sp_large_impact_examples
+      field :sp_sales_cycle
+      field :sp_close_percentage
+      field :sp_organization_close_percentage
       field :customer_token
       field :admin
       field :created_at
@@ -115,9 +124,9 @@ RailsAdmin.config do |config|
       field :active
       field :role
       field :activated
-      field :wildcard
       field :price_cents
       field :price_currency
+      field :dm_min_bottom_line_impact
       field :customer_token
       field :admin
       field :created_at
@@ -147,9 +156,18 @@ RailsAdmin.config do |config|
       field :active
       field :role
       field :activated
-      field :wildcard
       field :price_cents
       field :price_currency
+      field :dm_min_bottom_line_impact
+      field :sp_small_bottom_line_impact
+      field :sp_medium_bottom_line_impact
+      field :sp_large_bottom_line_impact
+      field :sp_small_impact_examples
+      field :sp_medium_impact_examples
+      field :sp_large_impact_examples
+      field :sp_sales_cycle
+      field :sp_close_percentage
+      field :sp_organization_close_percentage
       field :customer_token
       field :admin
       field :created_at
@@ -177,9 +195,18 @@ RailsAdmin.config do |config|
       field :active
       field :role
       field :activated
-      field :wildcard
       field :price_cents
       field :price_currency
+      field :dm_min_bottom_line_impact
+      field :sp_small_bottom_line_impact
+      field :sp_medium_bottom_line_impact
+      field :sp_large_bottom_line_impact
+      field :sp_small_impact_examples
+      field :sp_medium_impact_examples
+      field :sp_large_impact_examples
+      field :sp_sales_cycle
+      field :sp_close_percentage
+      field :sp_organization_close_percentage
       field :customer_token
       field :admin
       field :created_at

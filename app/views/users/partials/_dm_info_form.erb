@@ -4,6 +4,12 @@
                 label: false %>
 </div>
 
-<div class="form-group">
-  <%= f.input :wildcard, label: 'Bring me any quality meeting.' %>
+
+<div class="form-group col-md-offset-2">
+  <h3>Minimum Bottom Line Impact you want a salesperson's product or service to have in order to have a meeting with you.</h3>
+  <div class="col-md-8">
+    <%= f.input :dm_min_bottom_line_impact, label: 'Nothing Less than: ',
+                collection: User.dm_min_bottom_line_impacts.keys, include_blank: false %>
+  </div>
+
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720154326) do
+ActiveRecord::Schema.define(version: 20170720175400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,16 @@ ActiveRecord::Schema.define(version: 20170720154326) do
     t.text "filter_comments"
     t.text "validation_comments"
     t.string "plat_validation_status", default: "new"
+    t.integer "dm_min_bottom_line_impact", default: 0, null: false
+    t.integer "sp_small_bottom_line_impact", default: 0, null: false
+    t.integer "sp_medium_bottom_line_impact", default: 0, null: false
+    t.integer "sp_large_bottom_line_impact", default: 0, null: false
+    t.text "sp_small_impact_examples"
+    t.text "sp_medium_impact_examples"
+    t.text "sp_large_impact_examples"
+    t.integer "sp_sales_cycle", default: 0, null: false
+    t.integer "sp_close_percentage", default: 0, null: false
+    t.integer "sp_organization_close_percentage", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

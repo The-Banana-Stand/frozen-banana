@@ -6,9 +6,56 @@ class User < ApplicationRecord
   has_paper_trail ignore: [:remember_digest]
   monetize :price_cents
   auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service,
-                        :company_name, :company_address, :ar_comments
+                        :company_name, :company_address, :ar_comments, :sp_small_impact_examples,
+                        :sp_medium_impact_examples, :sp_large_impact_examples
 
   attr_accessor :remember_token, :activation_token, :reset_token
+
+  BOTTOM_LINE_ENUM_VALUES = {
+      '$500': 0,
+      '$1,000': 1,
+      '$3,000': 2,
+      '$5,000': 3,
+      '$10,000': 4,
+      '$15,000': 5,
+      '$30,000': 6,
+      '$50,000': 7,
+      '$75,000': 8,
+      '$100k': 9,
+      '$150k': 10,
+      '$200k': 11,
+      '$250k': 12,
+      '$300k': 13,
+      '$400k': 14,
+      '$500k': 15,
+      '$750k': 16,
+      '$1 mil': 17,
+      '$2 mil': 18,
+      '$3 mil': 19,
+      'greater than $3 mil': 20
+  }
+
+  enum dm_min_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
+  enum sp_small_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
+  enum sp_medium_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
+  enum sp_large_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
+  enum sp_sales_cycle: {
+      '1 month': 0, '2 months': 1, '3 months': 2, '4 months': 3, '5 months': 4, '6 months': 5, '7 months': 6,
+      '8 months': 7, '9 months': 8, '10 months': 9, '11 months': 10, '12 months': 11
+  }
+  CLOSE_PERCENTAGE_ENUM_VALUES = {
+      '10%': 0,
+      '20%': 1,
+      '30%': 2,
+      '40%': 3,
+      '50%': 4,
+      '60%': 5,
+      '70%': 6,
+      '80%': 7,
+      '90%': 8
+  }
+  enum sp_close_percentage: CLOSE_PERCENTAGE_ENUM_VALUES, _prefix: true
+  enum sp_organization_close_percentage: CLOSE_PERCENTAGE_ENUM_VALUES, _prefix: true
 
   # Associations
   has_many :general_availabilities, -> { order :block }, inverse_of: :user
@@ -28,7 +75,7 @@ class User < ApplicationRecord
 
   # Validations
   validates :first_name, :last_name, :title, :company_name, :company_address,
-            :city, :state, :zip_code, :phone_number, :role, presence: true
+            :city, :state, :zip_code, :phone_number, :role, :dm_min_bottom_line_impact, presence: true
 
   validates :username, presence: true, uniqueness: true
 
@@ -161,10 +208,6 @@ class User < ApplicationRecord
   def plat_validation_status_enum
     %w(new validated rejected)
   end
-
-
-
-
 
 
   private

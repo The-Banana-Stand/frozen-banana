@@ -80,7 +80,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :title,
                                  :company_name, :company_address, :city, :state, :zip_code, :role, :dm_evaluating, :avatar,
                                  :sp_product_service, :phone_number, :ar_first_name, :ar_last_name, :ar_phone_number,
-                                 :ar_email, :ar_account_number, :wildcard,
+                                 :ar_email, :ar_account_number, :dm_min_bottom_line_impact, :sp_small_bottom_line_impact,
+                                 :sp_medium_bottom_line_impact, :sp_large_bottom_line_impact, :sp_small_impact_examples,
+                                 :sp_medium_impact_examples, :sp_large_impact_examples, :sp_sales_cycle,
+                                 :sp_close_percentage, :sp_organization_close_percentage,
                                  general_availabilities_attributes: [:id, :day, :start_time, :end_time]
     )
   end
