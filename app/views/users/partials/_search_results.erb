@@ -39,10 +39,15 @@
   <tr>
     <td colspan="12" class="hiddenRow">
       <div class="accordian-body collapse" id="dm<%= dm.id %>">
-        <h4>Evaluating:</h4>
-        <p>
-          <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
-        </p>
+        <div class="row">
+          <div class="well col-md-6">
+            <h4>Evaluating:</h4>
+            <p>
+              <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
+            </p>
+          </div>
+        </div>
+
         <%- if dm.active_blocks.empty? %>
               <h3>Decision Maker has No Times Available</h3>
 

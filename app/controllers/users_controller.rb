@@ -62,7 +62,12 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = 'Information Saved'
-      redirect_to schedule_time_path
+      if URI(request.referer).path == edit_profile_path
+        redirect_to edit_profile_path
+      else
+        redirect_to schedule_time_path
+      end
+
     else
       render :edit
     end

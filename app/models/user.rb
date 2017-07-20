@@ -131,19 +131,27 @@ class User < ApplicationRecord
     self.role == 'both'
   end
 
-  def create_stripe_customer(stripe_token)
+  def process_payment_info(stripe_token)
     if self.customer_token.present?
       customer = Stripe::Customer.retrieve(self.customer_token)
-      customer.source = stripe_token
-      customer.save
+      if customer.deleted?
+        create_stripe_customer(stripe_token)
+      else
+        customer.source = stripe_token
+        customer.save
+      end
     else
-      customer = Stripe::Customer.create(
-          :email => self.email,
-          :source  => stripe_token,
-          :description => self.full_name
-      )
-      self.update_attribute(:customer_token, customer.id)
+      create_stripe_customer(stripe_token)
     end
+  end
+
+  def create_stripe_customer(stripe_token)
+    customer = Stripe::Customer.create(
+        :email => self.email,
+        :source  => stripe_token,
+        :description => "#{self.full_name} ID: #{self.id}"
+    )
+    self.update_attribute(:customer_token, customer.id)
   end
 
   def stripe_customer

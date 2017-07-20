@@ -7,13 +7,14 @@ class Meeting < ApplicationRecord
   has_one :feedback
   has_many :change_requests
 
-  auto_strip_attributes :sp_requested_comments
+  auto_strip_attributes :sp_requested_comments, :address, :instructions
 
   attr_accessor :role, :second_party
 
   monetize :price_cents
 
   before_save :set_sort_priority
+  before_create :set_confirmation_number
   after_create :send_slack_notification
 
 
@@ -124,6 +125,10 @@ class Meeting < ApplicationRecord
         ]
     }
     SLACK.ping notification
+  end
+
+  def set_confirmation_number
+    self.confirmation_number = Digest::SHA1.hexdigest("--#{Time.current.usec}--").slice(0..6)
   end
 
 end

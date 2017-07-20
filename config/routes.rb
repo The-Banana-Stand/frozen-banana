@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   get '/help' => 'static_pages#help', as: :help
 
-
   get '/login' => 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout' =>'sessions#destroy'

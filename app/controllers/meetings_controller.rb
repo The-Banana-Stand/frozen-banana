@@ -13,7 +13,7 @@ class MeetingsController < ApplicationController
     @desired_block = GeneralAvailability.find(params[:meeting][:general_availability_id])
     @decision_maker = @desired_block.user
 
-    current_user.create_stripe_customer(params[:meeting][:stripeToken])
+    current_user.process_payment_info(params[:stripeToken])
 
     meeting = Meeting.create!(dm_id: @decision_maker.id, sp_id: current_user.id, price_cents: @decision_maker.price_cents,
                     general_availability_id: @desired_block.id, sp_requested_comments: params[:meeting][:sp_requested_comments])

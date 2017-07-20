@@ -43,24 +43,25 @@
         <td><%= meeting.show_date %></td>
         <td><%= meeting.show_start_time %></td>
         <td><%= meeting.show_end_time %></td>
-        <td><%= link_to 'Change', new_change_request_path(id: meeting.id) %></td>
+        <td><%= link_to 'Change', new_change_request_path(id: meeting.id) unless %w(completed cancelled).include?(meeting.status) %></td>
       </tr>
 
       <tr>
         <td colspan="12" class="hiddenRow">
           <div class="accordian-body collapse col-md-9" id="meeting<%= meeting.id %>">
             <h3>Meeting Details:</h3>
+            <p><strong>Meeting Confirmation #:</strong> <%= meeting.confirmation_number %></p>
             <%- if meeting.status == 'requested' %>
-              <p>Requested Time:
+              <p><strong>Requested Time:</strong>
                  <%= meeting.desired_block.display_day + ', between ' + meeting.desired_block.show_start_time + ' and ' + meeting.desired_block.show_end_time %>
               </p>
             <% end %>
-            <p>Type: <%= meeting.meeting_type.capitalize %></p>
-            <p>Location: <%= meeting.address || 'No Address Set' %></p>
-            <p>Instructions: <%= meeting.instructions || 'No Instructions' %></p>
-            <p>Decision Maker interested in: <%= meeting.dm.dm_evaluating || 'No Information' %></p>
-            <p>Salesperson products/services: <%= meeting.sp.sp_product_service || 'No Information' %></p>
-            <p>Meeting Confirmation #: <%= meeting.id %></p>
+            <p><strong class="text-large">Type:</strong> <%= meeting.meeting_type.capitalize %></p>
+            <p><strong>Location:</strong> <%= meeting.address || 'No Address Set' %></p>
+            <p><strong>Instructions:</strong> <%= meeting.instructions || 'No Instructions' %></p>
+            <p><strong>Decision Maker interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
+            <p><strong>Salesperson products/services:</strong> <%= meeting.sp.sp_product_service || 'No Information' %></p>
+            <p><strong>Price/Hr:</strong> <%= humanized_money_with_symbol meeting.price%></p>
           </div>
         </td>
       </tr>
