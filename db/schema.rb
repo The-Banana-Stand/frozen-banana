@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720175400) do
+ActiveRecord::Schema.define(version: 20170721181048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 20170720175400) do
     t.integer "sort_priority"
     t.text "sp_requested_comments"
     t.string "confirmation_number"
+    t.text "topic", null: false
+    t.text "sp_lead_qualification", null: false
     t.index ["general_availability_id"], name: "index_meetings_on_general_availability_id"
   end
 

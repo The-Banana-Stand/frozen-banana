@@ -18,7 +18,15 @@
 <hr/>
 
 <%= simple_form_for @meeting do |f| %>
+
+    <%= f.error_notification %>
+
     <%= f.input :general_availability_id, as: :hidden %>
+    <%= f.hidden_field :dm_id, value: @desired_block.user.id %>
+    <%= f.hidden_field :sp_id, value: current_user.id %>
+    <%= f.hidden_field :price_cents, value: @desired_block.user.price_cents %>
+    <%= f.hidden_field :general_availability_id, value: @desired_block.id %>
+
     <h5>Additional Comments</h5>
     <div class="row">
       <div class="col-md-6">
@@ -26,25 +34,42 @@
       </div>
     </div>
 
+    <h5>What are you pitching to the Decision Maker?</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :topic, label: false, placeholder: 'No more than 255 characters.' %>
+      </div>
+    </div>
 
-    <article>
-      <% if flash[:error].present? %>
-          <div id="error_explanation">
-            <p><%= flash[:error] %></p>
-          </div>
-      <% end %>
-      <label class="amount">
-        <span>Amount: <%= humanized_money_with_symbol(@desired_block.user.price) %></span>
-      </label>
-    </article>
+    <h5>
+      How you have qualified this decision maker for your product/service?<br>
+      The decision maker will see if you did your homework to meet the minimum bottom line impact expectations
+    </h5>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :sp_lead_qualification, label: false, placeholder: 'No more than 255 characters.' %>
+      </div>
+    </div>
 
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description="Credit Card Info"
-            data-locale="auto"
-            data-label="Confirm Payment Information"
-            data-panel-label="Use this Card"
-            data-zip-code="true">
 
-    </script>
+
+
+    <div class="well">
+      <article>
+        <label class="amount">
+          <span>Amount: <%= humanized_money_with_symbol(@desired_block.user.price) %></span>
+        </label>
+      </article>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Credit Card Info"
+              data-locale="auto"
+              data-label="Confirm Payment Information"
+              data-panel-label="Use this Card"
+              data-zip-code="true">
+
+      </script>
+    </div>
+
 <% end %>

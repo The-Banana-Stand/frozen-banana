@@ -7,11 +7,13 @@ class Meeting < ApplicationRecord
   has_one :feedback
   has_many :change_requests
 
-  auto_strip_attributes :sp_requested_comments, :address, :instructions
+  auto_strip_attributes :sp_requested_comments, :address, :instructions, :topic, :sp_lead_qualification
 
   attr_accessor :role, :second_party
 
   monetize :price_cents
+
+  validates :topic, :sp_lead_qualification, presence: true, length: 0..255
 
   before_save :set_sort_priority
   before_create :set_confirmation_number
