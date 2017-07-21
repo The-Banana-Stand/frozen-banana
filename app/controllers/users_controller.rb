@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.account_setup
+      @user.send_activation_email
       if Rails.env == 'development' #TODO remove this once account setup process is complete
         @user.activate
         log_in @user

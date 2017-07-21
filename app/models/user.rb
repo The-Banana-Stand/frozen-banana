@@ -71,7 +71,7 @@ class User < ApplicationRecord
   # Callbacks
   before_save {self.email = email.downcase if email}
   before_create :create_activation_digest
-  after_create :send_slack_notification
+  after_create :send_slack_notification, :create_general_availabilities
 
   # Validations
   validates :first_name, :last_name, :title, :company_name, :company_address,
@@ -129,10 +129,7 @@ class User < ApplicationRecord
     update_attribute(:activated_at, Time.zone.now)
   end
 
-  def account_setup
-    send_activation_email
-    create_general_availabilities
-  end
+
 
   # Sends activation email.
   def send_activation_email
