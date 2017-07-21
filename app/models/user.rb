@@ -210,6 +210,16 @@ class User < ApplicationRecord
   end
 
 
+  def dm_cut_price_cents
+
+    Money.new( self.price_cents ) - platform_cut_price_cents
+  end
+
+  def platform_cut_price_cents
+    Money.new( (self.price_cents * 0.1621).ceil )
+  end
+
+
   private
 
   def create_activation_digest

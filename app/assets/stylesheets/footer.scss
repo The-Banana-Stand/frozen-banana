@@ -1,0 +1,22 @@
+$height-footer: 60px;
+
+html {
+  min-height: 100%;
+  position: relative;
+  body {
+    margin-bottom: $height-footer;
+    padding-bottom: 100px;
+  }
+
+  #footer {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    height: $height-footer;
+    background-color: #222222;
+    color: #ffffff;
+    .footer-block {
+      margin: 20px 0 0 0;
+    }
+  }
+}

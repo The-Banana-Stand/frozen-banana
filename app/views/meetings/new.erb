@@ -1,9 +1,13 @@
 <h1>Confirm Meeting Request</h1>
 
-<h3>With: <%= @desired_block.user.full_name %></h3>
 <h3>
   1 Hour between <%= @desired_block.show_start_time + ' and ' + @desired_block.show_end_time + ' on ' + @desired_block.display_day %>
 </h3>
+
+<h3>With: <%= @desired_block.user.full_name %></h3>
+
+<h3>Desired Bottom Line Impact: <%= @desired_block.user.dm_min_bottom_line_impact %></h3>
+
 
 <p>
   You have selected to book the time above.  Once payment information is received,
@@ -27,7 +31,7 @@
     <%= f.hidden_field :price_cents, value: @desired_block.user.price_cents %>
     <%= f.hidden_field :general_availability_id, value: @desired_block.id %>
 
-    <h5>Additional Comments</h5>
+    <h5>Additional comments about meeting time or your availability</h5>
     <div class="row">
       <div class="col-md-6">
         <%= f.input :sp_requested_comments, label: false, placeholder: 'Add any additional information/requests here.' %>
@@ -57,7 +61,9 @@
     <div class="well">
       <article>
         <label class="amount">
-          <span>Amount: <%= humanized_money_with_symbol(@desired_block.user.price) %></span>
+          <span>DM Price: <%= humanized_money_with_symbol(@desired_block.user.dm_cut_price_cents) %></span> <br>
+          <span>Platform Fee: <%= humanized_money_with_symbol(@desired_block.user.platform_cut_price_cents) %></span> <br>
+          <span>Total: <%= humanized_money_with_symbol(@desired_block.user.price) %></span>
         </label>
       </article>
 

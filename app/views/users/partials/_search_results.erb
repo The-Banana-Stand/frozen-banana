@@ -8,8 +8,12 @@
     <th><%= sort_link(@query, :city, 'City', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :state, 'State', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :zip_code, 'Zip Code', {}, {remote: true, method: :get} ) %></th>
-    <th><a id="status-popover" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Attention Score"
-           data-content="A rating of the Decision Maker's attentiveness">Attention Score</a></th>
+    <th>
+      <a id="attention-score-popover" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Attention Score"
+           data-content="A rating of the Decision Maker's attentiveness">
+        Attention Score<span class="glyphicon glyphicon-search small"></span>
+      </a>
+    </th>
   </tr>
   </thead>
 
@@ -39,12 +43,34 @@
   <tr>
     <td colspan="12" class="hiddenRow">
       <div class="accordian-body collapse" id="dm<%= dm.id %>">
-        <div class="row">
-          <div class="well col-md-6">
-            <h4>Evaluating:</h4>
+        <div class="row well match-my-cols">
+          <div class="col-md-4">
+            <h4>
+              <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
+                    data-content="Its okay if your product or service doesn’t match what the decision maker is currently evaluating.
+                 This information is only here to help you with the timing of the buy.
+                  However, make sure your idea meets the minimum bottom line criteria.
+                   If you don’t, your sales score will be impacted negatively.">
+
+                Evaluating<span class="glyphicon glyphicon-search small"></span>:
+              </span>
+
+
+            </h4>
             <p>
               <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
             </p>
+          </div>
+          <div class="col-md-4">
+            <h4>
+              <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
+              data-content="This Decision maker is only interested in ideas that can impact their organizations
+               bottom line by <%= dm.dm_min_bottom_line_impact %>. If you don’t meet the criteria and still schedule a meeting,
+                there is a chance you will be reviewed negatively">
+                Minimum Bottom Line Impact<span class="glyphicon glyphicon-search small"></span>: <%= dm.dm_min_bottom_line_impact %>
+              </span>
+
+            </h4>
           </div>
         </div>
 
@@ -96,5 +122,7 @@
 </table>
 
 <script>
-  $('#status-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
+  $('#attention-score-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
+
+  $('.evaluation-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
 </script>
