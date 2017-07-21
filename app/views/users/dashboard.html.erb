@@ -53,20 +53,45 @@
 
       <tr>
         <td colspan="12" class="hiddenRow">
-          <div class="accordian-body collapse col-md-9" id="meeting<%= meeting.id %>">
-            <h3>Meeting Details:</h3>
-            <p><strong>Meeting Confirmation #:</strong> <%= meeting.confirmation_number %></p>
-            <%- if meeting.status == 'requested' %>
-              <p><strong>Requested Time:</strong>
-                 <%= meeting.desired_block.display_day + ', between ' + meeting.desired_block.show_start_time + ' and ' + meeting.desired_block.show_end_time %>
-              </p>
-            <% end %>
-            <p><strong class="text-large">Type:</strong> <%= meeting.meeting_type.capitalize %></p>
-            <p><strong>Location:</strong> <%= meeting.address || 'No Address Set' %></p>
-            <p><strong>Instructions:</strong> <%= meeting.instructions || 'No Instructions' %></p>
-            <p><strong>Decision Maker interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
-            <p><strong>Salesperson products/services:</strong> <%= meeting.sp.sp_product_service || 'No Information' %></p>
-            <p><strong>Price/Hr:</strong> <%= humanized_money_with_symbol meeting.price%></p>
+          <div class="accordian-body collapse col-md-12" id="meeting<%= meeting.id %>">
+            <div class="row match-my-cols">
+
+              <div class="col-md-6 well">
+                <h3>Meeting Details:</h3>
+                <p><strong>Meeting Confirmation #:</strong> <%= meeting.confirmation_number %></p>
+                <p><strong>Price/Hr:</strong> <%= humanized_money_with_symbol meeting.price%></p>
+
+                <%- if meeting.status == 'requested' %>
+                    <p><strong>Requested Time:</strong>
+                      <%= meeting.desired_block.display_day + ', between ' + meeting.desired_block.show_start_time + ' and ' + meeting.desired_block.show_end_time %>
+                    </p>
+                <% end %>
+
+                <p><strong class="text-large">Type:</strong> <%= meeting.meeting_type.capitalize %></p>
+                <p><strong>Location:</strong> <%= meeting.address || 'No Address Set' %></p>
+                <hr>
+                <p><strong>Instructions:</strong> <br>
+                  <%= meeting.instructions || 'No Instructions' %></p>
+              </div>
+
+              <div class="col-md-6 well">
+                <h3>Decision Maker:</h3>
+                <p><strong>Minimum Bottom Line Impact: </strong> <strong><span style="color:red; font-size:20px" ><%= meeting.dm.dm_min_bottom_line_impact %> </span></strong></p>
+                <p><strong>Decision Maker interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
+
+                <h3>Sales Person:</h3>
+                <p><strong>Sales Person products/services:</strong> <%= meeting.sp.sp_product_service || 'No Information' %></p>
+                <p><strong>Pitching:</strong></p>
+                <p><%= meeting.topic %></p>
+                <p><strong>Qualification:</strong></p>
+                <p><%= meeting.sp_lead_qualification %></p>
+
+              </div>
+
+
+            </div>
+
+
           </div>
         </td>
       </tr>

@@ -1,23 +1,13 @@
 <h1>Confirm Meeting Request</h1>
 
 <h3>
-  1 Hour between <%= @desired_block.show_start_time + ' and ' + @desired_block.show_end_time + ' on ' + @desired_block.display_day %>
+  1 Hour between <%= @desired_block.show_start_time + ' and ' + @desired_block.show_end_time + ' on ' + @desired_block.display_day %> <br>
+  With: <%= @desired_block.user.full_name %> <br>
+  Expected Bottom Line Impact: <%= @desired_block.user.dm_min_bottom_line_impact %>
 </h3>
 
-<h3>With: <%= @desired_block.user.full_name %></h3>
-
-<h3>Desired Bottom Line Impact: <%= @desired_block.user.dm_min_bottom_line_impact %></h3>
 
 
-<p>
-  You have selected to book the time above.  Once payment information is received,
-  the decision maker wil confirm calendar availability and you will recieve an email back with the exact
-  dates and times the decision maker is available for you to choose from.
-</p>
-
-<p>
-  Your credit card will not be charged until a specific date and time has been agreed upon by both parties.
-</p>
 
 <hr/>
 
@@ -38,7 +28,10 @@
       </div>
     </div>
 
-    <h5>What are you pitching to the Decision Maker?</h5>
+    <h5>
+      What are you pitching to the Decision Maker? <br>
+      <small>The Decision Maker will see this</small>
+    </h5>
     <div class="row">
       <div class="col-md-6">
         <%= f.input :topic, label: false, placeholder: 'No more than 255 characters.' %>
@@ -46,8 +39,8 @@
     </div>
 
     <h5>
-      How you have qualified this decision maker for your product/service?<br>
-      The decision maker will see if you did your homework to meet the minimum bottom line impact expectations
+      How have you qualified this Decision Maker for your pitch?<br>
+      <small>The Decision Maker will see if you did your homework to meet the minimum bottom line impact expectations.</small>
     </h5>
     <div class="row">
       <div class="col-md-6">
@@ -58,10 +51,21 @@
 
 
 
-    <div class="well">
+    <div class="well col-sm-6">
+      <p>
+        Once payment information is received, the decision maker will confirm calendar availability.
+      </p>
+      <p>
+        You will receive an email from MeetingSlice with the exact dates and times the Decision Maker is available for you to choose from.
+      </p>
+
+      <p>
+        Your credit card <strong>will not</strong> be charged until a specific date and time has been agreed upon by both parties.
+      </p>
+
       <article>
         <label class="amount">
-          <span>DM Price: <%= humanized_money_with_symbol(@desired_block.user.dm_cut_price_cents) %></span> <br>
+          <span>Paid to Decision Maker: <%= humanized_money_with_symbol(@desired_block.user.dm_cut_price_cents) %></span> <br>
           <span>Platform Fee: <%= humanized_money_with_symbol(@desired_block.user.platform_cut_price_cents) %></span> <br>
           <span>Total: <%= humanized_money_with_symbol(@desired_block.user.price) %></span>
         </label>
@@ -71,7 +75,7 @@
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
               data-description="Credit Card Info"
               data-locale="auto"
-              data-label="Confirm Payment Information"
+              data-label="Submit Payment Information"
               data-panel-label="Use this Card"
               data-zip-code="true">
 

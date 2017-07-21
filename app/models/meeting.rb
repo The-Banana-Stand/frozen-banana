@@ -69,7 +69,7 @@ class Meeting < ApplicationRecord
     if id == dm_id
       'Decision Maker'
     else
-      'Salesperson'
+      'Sales Person'
     end
   end
 
@@ -130,7 +130,7 @@ class Meeting < ApplicationRecord
   end
 
   def set_confirmation_number
-    self.confirmation_number = Digest::SHA1.hexdigest("--#{Time.current.usec}--").slice(0..6)
+    self.confirmation_number = Digest::SHA1.hexdigest("--#{Time.current.usec}--").slice(0..6).upcase!
   end
 
 end
