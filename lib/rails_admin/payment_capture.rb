@@ -12,7 +12,7 @@ module RailsAdmin
         end
 
         register_instance_option :visible? do
-          bindings[:object].class == Meeting && bindings[:object].payment_status != 'captured'
+          bindings[:object].class == Meeting && bindings[:object].payment_status != 'succeeded'
 
         end
 
@@ -26,7 +26,7 @@ module RailsAdmin
             # rendering a view, just redirecting after taking an action on @object, which
             # will be the user instance in this case.
             @object.capture_payment
-            flash[:success] = 'Payment Captured!'
+            flash[:success] = "Payment Status: #{@object.payment_status}"
             redirect_to back_or_index
           end
         end

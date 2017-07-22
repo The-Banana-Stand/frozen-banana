@@ -90,8 +90,9 @@ class Meeting < ApplicationRecord
 
   def capture_payment
     puts 'HELLO FROM CAPTURE PAYMENT!'
-    return if self.payment_status == 'captured'
+    return if self.payment_status == 'succeeded'
     customer = self.sp.stripe_customer
+
     charge = Stripe::Charge.create(
         :customer    => customer.id,
         :amount      => price_cents,
@@ -99,25 +100,25 @@ class Meeting < ApplicationRecord
         :currency    => 'usd'
     )
 
-    if charge.status == 'succeeded'
-      self.update_attribute(:payment_status, 'captured')
-      transaction = self.build_stripe_transaction({
-                                                      amount: charge.amount,
-                                                      dm_cut: self.dm.dm_cut_price.fractional,
-                                                      platform_cut: self.dm.platform_cut_price.fractional,
-                                                      amount_refunded: charge.amount_refunded,
-                                                      stripe_id: charge.id,
-                                                      description: charge.description,
-                                                      failure_code: charge.failure_code,
-                                                      failure_message: charge.failure_message,
-                                                      paid: charge.paid,
-                                                      refunded: charge.refunded,
-                                                      captured: charge.captured,
-                                                      payer_id: self.sp_id,
-                                                      payee_id: self.dm_id
-                                                  })
-      transaction.save
-    end
+
+    self.update_attribute(:payment_status, charge.status)
+
+    transaction = self.build_stripe_transaction({
+                                                    amount: charge.amount,
+                                                    dm_cut: self.dm.dm_cut_price.fractional,
+                                                    platform_cut: self.dm.platform_cut_price.fractional,
+                                                    amount_refunded: charge.amount_refunded,
+                                                    stripe_id: charge.id,
+                                                    description: charge.description,
+                                                    failure_code: charge.failure_code,
+                                                    failure_message: charge.failure_message,
+                                                    paid: charge.paid,
+                                                    refunded: charge.refunded,
+                                                    captured: charge.captured,
+                                                    payer_id: self.sp_id,
+                                                    payee_id: self.dm_id
+                                                })
+    transaction.save
   end
 
   private
