@@ -3,7 +3,7 @@
 <h3>
   1 Hour between <%= @desired_block.show_start_time + ' and ' + @desired_block.show_end_time + ' on ' + @desired_block.display_day %> <br>
   With: <%= @desired_block.user.full_name %> <br>
-  Expected Bottom Line Impact: <%= @desired_block.user.dm_min_bottom_line_impact %>
+  Expected Bottom Line Impact: <span class="impact-number"><%= @desired_block.user.dm_min_bottom_line_impact %></span>
 </h3>
 
 

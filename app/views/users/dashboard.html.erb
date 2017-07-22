@@ -22,7 +22,7 @@
         <strong>Cancelled:</strong>  Meeting has been canceled. <br> <br>
         <strong>Change Pending:</strong> One party has submitted a change request.
         </small>">
-      Meeting Status<span class="glyphicon glyphicon-search small"></span>
+      Meeting Status<span class="glyphicon glyphicon-search mag-icon small"></span>
     </th>
     <th>Your Role</th>
     <th>Meeting With</th>
@@ -76,7 +76,7 @@
 
               <div class="col-md-6 well">
                 <h3>Decision Maker:</h3>
-                <p><strong>Minimum Bottom Line Impact: </strong> <strong><span style="color:red; font-size:20px" ><%= meeting.dm.dm_min_bottom_line_impact %> </span></strong></p>
+                <p><strong>Minimum Bottom Line Impact: </strong> <strong><span class="impact-number" ><%= meeting.dm.dm_min_bottom_line_impact %> </span></strong></p>
                 <p><strong>Decision Maker interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
 
                 <h3>Sales Person:</h3>

@@ -11,7 +11,7 @@
     <th>
       <a id="attention-score-popover" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Attention Score"
            data-content="A rating of the Decision Maker's attentiveness">
-        Attention Score<span class="glyphicon glyphicon-search small"></span>
+        Attention Score <span class="glyphicon glyphicon-search mag-icon"></span>
       </a>
     </th>
   </tr>
@@ -52,7 +52,7 @@
                   However, make sure your idea meets the minimum bottom line criteria.
                    If you don’t, your sales score will be impacted negatively.">
 
-                Evaluating<span class="glyphicon glyphicon-search small"></span>:
+                Evaluating <span class="glyphicon glyphicon-search mag-icon"></span>:
               </span>
 
 
@@ -67,7 +67,8 @@
               data-content="<%= dm.first_name %> is only interested in ideas that can impact their organization's
                bottom line by <%= dm.dm_min_bottom_line_impact %>. If you clearly don’t meet the criteria and still schedule a meeting,
                 there is a chance you will be reviewed negatively">
-                Minimum Bottom Line Impact<span class="glyphicon glyphicon-search small"></span>:  <%= dm.dm_min_bottom_line_impact %>
+                Minimum Bottom Line Impact <span class="glyphicon glyphicon-search mag-icon"></span>:
+                <span class="impact-number"><%= dm.dm_min_bottom_line_impact %></span>
               </span>
 
             </h4>
