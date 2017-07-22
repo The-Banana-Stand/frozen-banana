@@ -58,16 +58,17 @@ class User < ApplicationRecord
   enum sp_organization_close_percentage: CLOSE_PERCENTAGE_ENUM_VALUES, _prefix: true
 
   # Associations
-  has_many :general_availabilities, -> { order :block }, inverse_of: :user
+  has_many :general_availabilities, -> { order :block }, inverse_of: :user, dependent: :destroy
   has_many :active_blocks, -> {where.not(start_time: nil, end_time: nil)}, class_name: 'GeneralAvailability'
   accepts_nested_attributes_for :general_availabilities
   has_many :dm_feedbacks, foreign_key: :dm_id, class_name: 'Feedback'
   has_many :sp_feedbacks, foreign_key: :sp_id, class_name: 'Feedback'
-  has_many :dm_meetings, foreign_key: :dm_id, class_name: 'Meeting'
-  has_many :sp_meetings, foreign_key: :sp_id, class_name: 'Meeting'
+  has_many :dm_meetings, foreign_key: :dm_id, class_name: 'Meeting', dependent: :destroy
+  has_many :sp_meetings, foreign_key: :sp_id, class_name: 'Meeting', dependent: :destroy
   has_many :change_requests
   has_many :invites
-
+  has_many :payer_transactions, foreign_key: :payer_id, class_name: 'StripeTransaction'
+  has_many :payee_transactions, foreign_key: :payee_id, class_name: 'StripeTransaction'
   # Callbacks
   before_save {self.email = email.downcase if email}
   before_create :create_activation_digest
@@ -207,12 +208,11 @@ class User < ApplicationRecord
   end
 
 
-  def dm_cut_price_cents
-
-    Money.new( self.price_cents ) - platform_cut_price_cents
+  def dm_cut_price
+    Money.new( self.price_cents ) - platform_cut_price
   end
 
-  def platform_cut_price_cents
+  def platform_cut_price
     Money.new( (self.price_cents * 0.1621).ceil )
   end
 

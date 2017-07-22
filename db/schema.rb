@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721181048) do
+ActiveRecord::Schema.define(version: 20170722145713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,25 @@ ActiveRecord::Schema.define(version: 20170721181048) do
     t.text "topic", null: false
     t.text "sp_lead_qualification", null: false
     t.index ["general_availability_id"], name: "index_meetings_on_general_availability_id"
+  end
+
+  create_table "stripe_transactions", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "dm_cut"
+    t.integer "platform_cut"
+    t.integer "amount_refunded"
+    t.text "status"
+    t.text "stripe_id"
+    t.text "description"
+    t.text "failure_code"
+    t.text "failure_message"
+    t.boolean "paid"
+    t.boolean "refunded"
+    t.boolean "captured"
+    t.bigint "meeting_id"
+    t.integer "payer_id"
+    t.integer "payee_id"
+    t.index ["meeting_id"], name: "index_stripe_transactions_on_meeting_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -5,7 +5,8 @@ class Meeting < ApplicationRecord
   belongs_to :general_availability
   belongs_to :desired_block, class_name: 'GeneralAvailability', foreign_key: 'general_availability_id'
   has_one :feedback
-  has_many :change_requests
+  has_one :stripe_transaction
+  has_many :change_requests, dependent: :destroy
 
   auto_strip_attributes :sp_requested_comments, :address, :instructions, :topic, :sp_lead_qualification
 
@@ -88,18 +89,34 @@ class Meeting < ApplicationRecord
   end
 
   def capture_payment
-    puts 'HELLO FROM CAPTURE PAYMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    puts 'HELLO FROM CAPTURE PAYMENT!'
     return if self.payment_status == 'captured'
     customer = self.sp.stripe_customer
     charge = Stripe::Charge.create(
         :customer    => customer.id,
         :amount      => price_cents,
-        :description => "Charge for Meeting ##{self.id}",
+        :description => "Charge for Meeting #{self.confirmation_number}",
         :currency    => 'usd'
     )
 
     if charge.status == 'succeeded'
       self.update_attribute(:payment_status, 'captured')
+      transaction = self.build_stripe_transaction({
+                                                      amount: charge.amount,
+                                                      dm_cut: self.dm.dm_cut_price.fractional,
+                                                      platform_cut: self.dm.platform_cut_price.fractional,
+                                                      amount_refunded: charge.amount_refunded,
+                                                      stripe_id: charge.id,
+                                                      description: charge.description,
+                                                      failure_code: charge.failure_code,
+                                                      failure_message: charge.failure_message,
+                                                      paid: charge.paid,
+                                                      refunded: charge.refunded,
+                                                      captured: charge.captured,
+                                                      payer_id: self.sp_id,
+                                                      payee_id: self.dm_id
+                                                  })
+      transaction.save
     end
   end
 

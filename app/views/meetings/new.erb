@@ -65,8 +65,8 @@
 
       <article>
         <label class="amount">
-          <span>Paid to Decision Maker: <%= humanized_money_with_symbol(@desired_block.user.dm_cut_price_cents) %></span> <br>
-          <span>Platform Fee: <%= humanized_money_with_symbol(@desired_block.user.platform_cut_price_cents) %></span> <br>
+          <span>Paid to Decision Maker: <%= humanized_money_with_symbol(@desired_block.user.dm_cut_price) %></span> <br>
+          <span>Platform Fee: <%= humanized_money_with_symbol(@desired_block.user.platform_cut_price) %></span> <br>
           <span>Total: <%= humanized_money_with_symbol(@desired_block.user.price) %></span>
         </label>
       </article>
