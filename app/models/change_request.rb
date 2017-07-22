@@ -12,7 +12,7 @@ class ChangeRequest < ApplicationRecord
   private
 
   def send_slack_notification
-    return if Rails.env == 'development'
+    return if Rails.env == 'development' || Rails.env == 'test'
     notification = {
         text: 'hello hello',
         username: "Awesom-O",
