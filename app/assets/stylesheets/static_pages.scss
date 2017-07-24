@@ -2,10 +2,73 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.half-rule {
-  margin-top:1px;
-  margin-bottom:1px;
-  height:1px;
+.brand-icon {
+  padding-left:10px;
+  font-size:large;
+}
+
+.container-fluid {
+  padding:initial;
+}
+
+.promo {
+  background-image:url('Darth-Vader_6bda9114.jpg');
+  background-size:cover;
+  background-position:50%;
   width:100%;
-  border-top:1px solid gray;
+  background-repeat:no-repeat;
+  margin-top: -21px;
+}
+
+.promo .jumbotron {
+  background-color:rgba(255,255,255, 0.6);
+  padding-bottom:10em;
+  margin-bottom:0px;
+}
+
+.process-icons {
+  font-size:4em;
+}
+
+.dm-highlight {
+  margin-left:5em;
+}
+
+#row-container-1 {
+  background-color:rgb(238,233,233);
+}
+
+.row-container .row {
+  max-width:90%;
+  margin:0 auto;
+}
+
+.row-content {
+  position:relative;
+  height:175px;
+}
+
+#row-container-1 .section-picture{
+  background-image: url('Darth-Vader_6bda9114.jpg');
+}
+
+#row-container-2 .section-picture{
+  background-image: url('Darth-Vader_6bda9114.jpg');
+}
+
+.section-picture {
+  min-height:500px;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:50% bottom;
+}
+
+.floating-text {
+  position:absolute;
+  top:33%;
+  font-size:large;
+}
+
+.row-container .col-md-6 {
+  min-height:500px;
 }
