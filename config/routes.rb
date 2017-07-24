@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  get 'change_requests/new'
-
-  get 'change_requests/create'
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'sessions/new'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'static_pages#home'
+  get '/terms-of-service' => 'static_pages#terms_of_service', as: :terms_of_service
+  get '/privacy-policy' => 'static_pages#privacy_policy', as: :privacy_policy
 
   get '/help' => 'static_pages#help', as: :help
 
