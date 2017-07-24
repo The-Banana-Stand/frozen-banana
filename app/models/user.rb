@@ -6,8 +6,8 @@ class User < ApplicationRecord
   has_paper_trail ignore: [:remember_digest]
   monetize :price_cents
   auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service,
-                        :company_name, :company_address, :ar_comments, :sp_small_impact_examples,
-                        :sp_medium_impact_examples, :sp_large_impact_examples
+                        :company_name, :company_address, :ar_comments, :sp_small_revenue_examples,
+                        :sp_medium_revenue_examples, :sp_large_revenue_examples
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -36,9 +36,9 @@ class User < ApplicationRecord
   }
 
   enum dm_min_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
-  enum sp_small_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
-  enum sp_medium_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
-  enum sp_large_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
+  enum sp_small_revenue: BOTTOM_LINE_ENUM_VALUES, _prefix: true
+  enum sp_medium_revenue: BOTTOM_LINE_ENUM_VALUES, _prefix: true
+  enum sp_large_revenue: BOTTOM_LINE_ENUM_VALUES, _prefix: true
   enum sp_sales_cycle: {
       '1 month': 0, '2 months': 1, '3 months': 2, '4 months': 3, '5 months': 4, '6 months': 5, '7 months': 6,
       '8 months': 7, '9 months': 8, '10 months': 9, '11 months': 10, '12 months': 11
@@ -208,12 +208,12 @@ class User < ApplicationRecord
   end
 
 
-  def dm_cut_price
-    Money.new( self.price_cents ) - platform_cut_price
+  def platform_cut_price
+    Money.new( (self.price_cents * 0.1621).round(0) )
   end
 
-  def platform_cut_price
-    Money.new( (self.price_cents * 0.1621).ceil )
+  def total_price
+    Money.new( self.price + self.platform_cut_price )
   end
 
 

@@ -4,30 +4,82 @@
 </div>
 
 <h3>
-  Every product or service you are selling has an expected lifetime impact to a decision makers bottom line.
-  However you define a small medium and large customer in your world and what type of bottom line impact should
-  a decision maker expect from your product or service?
+  In your world, how would you define the following customer types in terms of Annual Sales?
 </h3>
-<div class="form-group col-md-offset-2">
-  <h3>Small</h3>
-  <%= f.input :sp_small_bottom_line_impact, label: false,
-              collection: User.sp_small_bottom_line_impacts.keys, include_blank: false %>
-  <%= f.input :sp_small_impact_examples, placeholder: 'Examples..', label: false %>
+<hr>
+
+<div class="row">
+  <div class="col-md-3 col-md-offset-2">
+    <h3>Annual Sales</h3>
+  </div>
+
+  <div class="col-md-3">
+    <h3>Example Companies</h3>
+  </div>
 </div>
 
-<div class="form-group col-md-offset-2">
-  <h3>Medium</h3>
-  <%= f.input :sp_medium_bottom_line_impact, label: false,
-              collection: User.sp_medium_bottom_line_impacts.keys, include_blank: false %>
-  <%= f.input :sp_medium_impact_examples, placeholder: 'Examples..', label: false %>
+<div class="row">
+  <div class="form-group col-md-offset-2">
+
+    <div class="col-sm-2">
+      <h3 class="revenue-label">Small</h3>
+    </div>
+
+    <div class="col-sm-3">
+      <%= f.input :sp_small_revenue, label: false,
+                  collection: User.sp_small_revenues.keys, include_blank: false %>
+    </div>
+
+    <div class="col-sm-6">
+      <%= f.input :sp_small_revenue_examples, placeholder: 'Examples..', label: false %>
+    </div>
+
+
+  </div>
 </div>
 
-<div class="form-group col-md-offset-2">
-  <h3>Large</h3>
-  <%= f.input :sp_large_bottom_line_impact, label: false,
-              collection: User.sp_large_bottom_line_impacts.keys, include_blank: false %>
-  <%= f.input :sp_large_impact_examples, placeholder: 'Examples..', label: false %>
+<div class="row">
+  <div class="form-group col-md-offset-2">
+
+    <div class="col-sm-2">
+      <h3 class="revenue-label">Medium</h3>
+    </div>
+
+    <div class="col-sm-3">
+      <%= f.input :sp_medium_revenue, label: false,
+                  collection: User.sp_medium_revenues.keys, include_blank: false %>
+    </div>
+
+    <div class="col-sm-6">
+      <%= f.input :sp_medium_revenue_examples, placeholder: 'Examples..', label: false %>
+    </div>
+
+
+  </div>
 </div>
+
+<div class="row">
+  <div class="form-group col-md-offset-2">
+
+    <div class="col-sm-2">
+      <h3 class="revenue-label">Large</h3>
+    </div>
+
+    <div class="col-sm-3">
+      <%= f.input :sp_large_revenue, label: false,
+                  collection: User.sp_large_revenues.keys, include_blank: false %>
+    </div>
+
+    <div class="col-sm-6">
+      <%= f.input :sp_large_revenue_examples, placeholder: 'Examples..', label: false %>
+    </div>
+
+
+  </div>
+</div>
+
+
+
 
 <div class="form-group col-md-offset-2">
   <h3>How long is your Sales Cycle?</h3>
@@ -36,7 +88,7 @@
 </div>
 
 <div class="form-group col-md-offset-2">
-  <h3>Once you get a meeting with a decision maker, what is your close percentage for your current sales role?</h3>
+  <h3>Once you get a meeting with a qualified Decision Maker, what is your closing percentage for your current sales role?</h3>
   <%= f.input :sp_close_percentage, label: false,
               collection: User.sp_close_percentages.keys, include_blank: false %>
 </div>

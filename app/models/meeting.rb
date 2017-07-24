@@ -14,7 +14,7 @@ class Meeting < ApplicationRecord
 
   monetize :price_cents
 
-  validates :topic, :sp_lead_qualification, presence: true, length: 0..255
+  # validates :topic, :sp_lead_qualification, presence: true, length: 0..255
 
   before_save :set_sort_priority
   before_create :set_confirmation_number
@@ -105,7 +105,7 @@ class Meeting < ApplicationRecord
 
     transaction = self.build_stripe_transaction({
                                                     amount: charge.amount,
-                                                    dm_cut: self.dm.dm_cut_price.fractional,
+                                                    dm_cut: self.dm.price_cents,
                                                     platform_cut: self.dm.platform_cut_price.fractional,
                                                     amount_refunded: charge.amount_refunded,
                                                     stripe_id: charge.id,

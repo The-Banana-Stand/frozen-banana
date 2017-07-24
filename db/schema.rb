@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722145713) do
+ActiveRecord::Schema.define(version: 20170724150658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 20170722145713) do
     t.integer "sort_priority"
     t.text "sp_requested_comments"
     t.string "confirmation_number"
-    t.text "topic", null: false
-    t.text "sp_lead_qualification", null: false
+    t.text "topic"
+    t.text "sp_lead_qualification"
     t.index ["general_availability_id"], name: "index_meetings_on_general_availability_id"
   end
 
@@ -164,12 +164,12 @@ ActiveRecord::Schema.define(version: 20170722145713) do
     t.text "validation_comments"
     t.string "plat_validation_status", default: "new"
     t.integer "dm_min_bottom_line_impact", default: 0, null: false
-    t.integer "sp_small_bottom_line_impact", default: 0, null: false
-    t.integer "sp_medium_bottom_line_impact", default: 0, null: false
-    t.integer "sp_large_bottom_line_impact", default: 0, null: false
-    t.text "sp_small_impact_examples"
-    t.text "sp_medium_impact_examples"
-    t.text "sp_large_impact_examples"
+    t.integer "sp_small_revenue", default: 0, null: false
+    t.integer "sp_medium_revenue", default: 0, null: false
+    t.integer "sp_large_revenue", default: 0, null: false
+    t.text "sp_small_revenue_examples"
+    t.text "sp_medium_revenue_examples"
+    t.text "sp_large_revenue_examples"
     t.integer "sp_sales_cycle", default: 0, null: false
     t.integer "sp_close_percentage", default: 0, null: false
     t.integer "sp_organization_close_percentage", default: 0, null: false

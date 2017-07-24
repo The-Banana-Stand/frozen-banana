@@ -3,7 +3,6 @@
 <h3>
   1 Hour between <%= @desired_block.show_start_time + ' and ' + @desired_block.show_end_time + ' on ' + @desired_block.display_day %> <br>
   With: <%= @desired_block.user.full_name %> <br>
-  Expected Bottom Line Impact: <span class="impact-number"><%= @desired_block.user.dm_min_bottom_line_impact %></span>
 </h3>
 
 
@@ -18,7 +17,7 @@
     <%= f.input :general_availability_id, as: :hidden %>
     <%= f.hidden_field :dm_id, value: @desired_block.user.id %>
     <%= f.hidden_field :sp_id, value: current_user.id %>
-    <%= f.hidden_field :price_cents, value: @desired_block.user.price_cents %>
+    <%= f.hidden_field :price_cents, value: @desired_block.user.total_price.fractional %>
     <%= f.hidden_field :general_availability_id, value: @desired_block.id %>
 
     <h5>Additional comments about meeting time or your availability</h5>
@@ -27,29 +26,6 @@
         <%= f.input :sp_requested_comments, label: false, placeholder: 'Add any additional information/requests here.' %>
       </div>
     </div>
-
-    <h5>
-      What are you pitching to the Decision Maker? <br>
-      <small>The Decision Maker will see this</small>
-    </h5>
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :topic, label: false, placeholder: 'No more than 255 characters.' %>
-      </div>
-    </div>
-
-    <h5>
-      How have you qualified this Decision Maker for your pitch?<br>
-      <small>The Decision Maker will see if you did your homework to meet the minimum bottom line impact expectations.</small>
-    </h5>
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :sp_lead_qualification, label: false, placeholder: 'No more than 255 characters.' %>
-      </div>
-    </div>
-
-
-
 
     <div class="well col-sm-6">
       <p>
@@ -65,15 +41,15 @@
 
       <article>
         <label class="amount">
-          <span>Paid to Decision Maker: <%= humanized_money_with_symbol(@desired_block.user.dm_cut_price) %></span> <br>
-          <span>Platform Fee: <%= humanized_money_with_symbol(@desired_block.user.platform_cut_price) %></span> <br>
-          <span>Total: <%= humanized_money_with_symbol(@desired_block.user.price) %></span>
+          <span>Paid to Decision Maker's Organization: <%= humanized_money_with_symbol(@desired_block.user.price) %></span> <br>
+          <span>Platform Fee: 16.21%</span>
         </label>
       </article>
 
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
               data-description="Credit Card Info"
+              data-amount="<%= @desired_block.user.total_price.fractional %>"
               data-locale="auto"
               data-label="Submit Payment Information"
               data-panel-label="Use this Card"
