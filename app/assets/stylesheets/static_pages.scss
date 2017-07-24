@@ -11,6 +11,10 @@
   padding:initial;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
 .promo {
   background-image:url('Darth-Vader_6bda9114.jpg');
   background-size:cover;
@@ -32,6 +36,22 @@
 
 .dm-highlight {
   margin-left:5em;
+  border-radius: 10px;
+}
+
+.dm-image {
+  //border-radius: 10px;
+  max-height: 150px;
+  margin:auto;
+}
+
+.step-container .col-md-12 {
+  padding:0
+}
+.step-image {
+  height: 50px;
+  width: auto;
+  margin: 7px 0;
 }
 
 #row-container-1 {
@@ -49,7 +69,7 @@
 }
 
 #row-container-1 .section-picture{
-  background-image: url('Darth-Vader_6bda9114.jpg');
+  background-image: url('filter.png');
 }
 
 #row-container-2 .section-picture{
@@ -68,6 +88,7 @@
   top:33%;
   font-size:large;
 }
+
 
 .row-container .col-md-6 {
   min-height:500px;

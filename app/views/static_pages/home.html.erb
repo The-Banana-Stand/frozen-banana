@@ -1,65 +1,101 @@
-<div class="container-fluid text-center">
+<div class="text-center">
 
   <div class="promo">
     <div class="jumbotron">
-      <h1>Attention is the new currency.</h1>
+      <h1>Meetings</h1>
+      <h2>All Sales People Pay For Them, One Way Or Another</h2>
       <div class="row">
-        <div class="col-md-3 col-md-offset-0 well dm-highlight"><%= image_tag('Darth-Vader_6bda9114.jpg', class: 'img-thumbnail img-responsive') %>
+        <div class="col-md-3 col-md-offset-0 well dm-highlight"><%= image_tag('Darth-Vader_6bda9114.jpg', class: 'img-responsive dm-image') %>
           <h4><strong>Darth Vader</strong></h4>
           <h4><strong>Sith Lord</strong></h4>
-          <h4><strong>The Empire</strong></h4></div>
-        <div class="col-md-3 well dm-highlight"><%= image_tag('Darth-Vader_6bda9114.jpg', class: 'img-thumbnail img-responsive') %>
+          <h4><strong>The Empire</strong></h4>
+          <h4><strong>Price/Hr: <%= link_to('Register', new_user_path, class: 'btn btn-default btn-sm text-bold') %></strong></h4>
+        </div>
+        <div class="col-md-3 well dm-highlight"><%= image_tag('Darth-Vader_6bda9114.jpg', class: 'img-responsive dm-image') %>
           <h4><strong>Darth Vader</strong></h4>
           <h4><strong>Sith Lord</strong></h4>
-          <h4><strong>The Empire</strong></h4></div>
-        <div class="col-md-3 well dm-highlight"><%= image_tag('Darth-Vader_6bda9114.jpg', class: 'img-thumbnail img-responsive') %>
+          <h4><strong>The Empire</strong></h4>
+          <h4><strong>Price/Hr: <%= link_to('Register', new_user_path, class: 'btn btn-default btn-sm text-bold') %></strong></h4>
+        </div>
+        <div class="col-md-3 well dm-highlight"><%= image_tag('kyle.jpg', class: 'img-circle img-responsive dm-image') %>
           <h4><strong>Darth Vader</strong></h4>
           <h4><strong>Sith Lord</strong></h4>
-          <h4><strong>The Empire</strong></h4></div>
+          <h4><strong>The Empire</strong></h4>
+          <h4><strong>Price/Hr: <%= link_to('Register', new_user_path, class: 'btn btn-default btn-sm text-bold') %></strong></h4>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
+  <!--promo-->
+
+  <div class="row step-container">
     <div class="col-md-12">
-      <h3><strong>How It Works</strong></h3></div>
-    <div class="col-md-2 col-md-offset-3"><i class="glyphicon glyphicon-alert process-icons"></i>
+      <h3><strong>How It Works</strong></h3>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+      <%= image_tag('search.png', class: 'step-image') %>
       <h3> <strong>Step 1:</strong></h3>
-      <p>Steal Underpants</p>
+      <p>Find business decision makers from your target list.</p>
     </div>
-    <div class="col-md-2 col-md-offset-0"><i class="glyphicon glyphicon-alert process-icons"></i>
+    <div class="col-md-2">
+      <%= image_tag('book_now.png', class: 'step-image') %>
       <h3> <strong>Step 2:</strong></h3>
-      <p>????????? </p>
+      <p>Buy one hour of a decision makers time for your to pitch.</p>
     </div>
-    <div class="col-md-2 col-md-offset-0"><i class="glyphicon glyphicon-alert process-icons"></i>
+    <div class="col-md-2">
+      <%= image_tag('dollar-sign.png', class: 'step-image') %>
+      <p>The money goes to the business decision makers organization.</p>
+    </div>
+    <div class="col-md-2">
+      <%= image_tag('meet.png', class: 'step-image') %>
       <h3> <strong>Step 3:</strong></h3>
-      <p>PROFIT! </p>
+      <p>Get the highest quality attention in your meeting.</p>
+    </div>
+    <div class="col-md-2">
+      <%= image_tag('rate.png', class: 'step-image') %>
+      <h3> <strong>Step 4:</strong></h3>
+      <p>Give the decision maker a score on their attention.</p>
     </div>
   </div>
+  <!--step-container-->
+
   <div id="row-container-1" class="row-container">
     <div class="row">
       <div class="col-md-6 row-content">
         <div class="floating-text">
-          <h1><strong>Buy his time!</strong></h1>
-          <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumLorem IpsumBollorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum.</p>
+          <h1><strong>It’s the signal.</strong></h1>
+          <p>
+            Businesses know salespeople with the best products and services are willing to pay for meetings with their decision makers.<br>
+            Otherwise, its all just noise.
+          </p>
         </div>
       </div>
       <div class="col-md-6 section-picture"></div>
     </div>
   </div>
+  <!--container-1-->
+
   <div id="row-container-2" class="row-container">
     <div class="row">
       <div class="col-md-6 section-picture"></div>
       <div class="col-md-6 row-content">
         <div class="floating-text">
-          <h1><strong>Buy his time!</strong></h1>
-          <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumLorem IpsumBollorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum.</p>
+          <h1><strong>Stop Cold Calling. Start Meeting</strong></h1>
+          <div class="col-md-6 col-md-offset-3">
+            <ul>
+              <li>Sell more, Faster</li>
+              <li>Higher Quality Attention</li>
+              <li>Predictable Meetings</li>
+              <li>Get to the right person</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-
 
 </div>
+
+
+
+
