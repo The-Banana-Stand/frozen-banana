@@ -1,8 +1,9 @@
-<h1>B2B Direct</h1>
+<h1>MeetingSlice</h1>
 
 <p>Hi <%= @user.full_name %>,</p>
 
 <p>
-  Welcome to B2B Direct. Click on the link below to activate your account:
+  Welcome to MeetingSlice. Click on the link below to activate your account:
 </p>
 
+<%= link_to 'Activate', edit_account_activation_url(@user.activation_token, email: @user.email) %>
