@@ -64,14 +64,15 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' } #TODO change to real host, or more likely use mailing service
-  config.action_mailer.default_url_options = {host: 'http://frozen-banana-staging.habw9cmwy8.us-east-1.elasticbeanstalk.com'}
+  config.action_mailer.default_url_options = {host: 'https://staging.meetingslice.com'}
   # SMTP settings for Amazon SES
   config.action_mailer.smtp_settings = {
-      :address              => "email-smtp.us-east-1.amazonaws.com",
-      :port                 => 25,
-      :user_name            => ENV['SES_SMTP_USERNAME'],
-      :password             => ENV['SES_SMTP_PASSWORD'],
-      :authentication       => "login",
+      :address        => 'smtp.office365.com',
+      :port           => '587',
+      :authentication => :login,
+      :user_name      => ENV['SMTP_USERNAME'],
+      :password       => ENV['SMTP_PASSWORD'],
+      :domain         => 'staging.meetingslice.com',
       :enable_starttls_auto => true
   }
 

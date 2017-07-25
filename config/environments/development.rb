@@ -27,10 +27,19 @@ Rails.application.configure do
   end
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :test
-  host = 'localhost:3000'
-  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
+
+  config.action_mailer.delivery_method = :smtp
+
+  # SMTP settings for Amazon SES
+  config.action_mailer.smtp_settings = {
+      :address        => 'smtp.office365.com',
+      :port           => '587',
+      :authentication => :login,
+      :user_name      => ENV['SMTP_USERNAME'],
+      :password       => ENV['SMTP_PASSWORD'],
+      :enable_starttls_auto => true
+  }
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
