@@ -63,14 +63,15 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' } #TODO change to real host, or more likely use mailing service
-  # SMTP settings for gmail
+  config.action_mailer.default_url_options = {host: 'https://meetingslice.com'}
+  # SMTP settings for Amazon SES
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :user_name            => ENV['GMAIL_USERNAME'],
-      :password             => ENV['GMAIL_PASSWORD'],
-      :authentication       => "plain",
+      :address        => 'smtp.office365.com',
+      :port           => '587',
+      :authentication => :login,
+      :user_name      => ENV['SMTP_USERNAME'],
+      :password       => ENV['SMTP_PASSWORD'],
+      :domain         => 'meetingslice.com',
       :enable_starttls_auto => true
   }
 
