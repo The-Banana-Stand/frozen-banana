@@ -50,6 +50,7 @@ gem 'aws-sdk'
 gem 'paperclip'
 gem 'slack-notifier'
 gem 'exception_notification'
+gem 'sprockets-image_compressor'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
