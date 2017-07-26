@@ -124,7 +124,7 @@ class Meeting < ApplicationRecord
   private
 
   def send_slack_notification
-    if Rails.env.production?
+    if Rails.env.development?
 
 
       notification = {
@@ -139,6 +139,10 @@ class Meeting < ApplicationRecord
               {
                   title: 'Decision Maker',
                   value: "#{self.dm.full_name} (#{self.dm_id}) - #{self.dm.email} - #{self.dm.phone_number} - #{self.dm.company_name}"
+              },
+              {
+                  title: 'Decision Maker Address',
+                  value: "#{self.dm.full_address}"
               },
               {
                   title: 'Salesperson',

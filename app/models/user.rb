@@ -163,6 +163,10 @@ class User < ApplicationRecord
     full_name
   end
 
+  def full_address
+    self.company_address +  ' ' + self.city + ', ' + self.state + ' ' + self.zip_code
+  end
+
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
       Arel::Nodes::InfixOperation.new('||',
