@@ -16,7 +16,7 @@
 }
 
 .promo {
-  background-image:image-url('jumbo_background.png');
+  background-image:image-url('jumbo_background_2.png');
   background-size:cover;
   background-position:50%;
   width:100%;
@@ -53,7 +53,11 @@
   margin: 7px 0;
 }
 
-#row-container-1 {
+.step-container h1{
+  font-size: 50px;
+}
+
+#row-container-2 {
   background-color:rgb(238,233,233);
 }
 
@@ -68,7 +72,7 @@
 }
 
 #row-container-1 .section-picture{
-  background-image: image-url('filter.png');
+  background-image: image-url('signal.png');
 }
 
 #row-container-2 .section-picture{
