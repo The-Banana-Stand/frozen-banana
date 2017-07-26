@@ -134,15 +134,23 @@ class Meeting < ApplicationRecord
           fields: [
               {
                   title: 'New Meeting',
-                  value: "ID: #{self.id}"
+                  value: "ID: #{self.id}, CONFIRMATION: #{self.confirmation_number}"
               },
               {
                   title: 'Decision Maker',
-                  value: "#{self.dm.full_name} (#{self.dm_id})"
+                  value: "#{self.dm.full_name} (#{self.dm_id}) - #{self.dm.email} - #{self.dm.phone_number} - #{self.dm.company_name}"
               },
               {
                   title: 'Salesperson',
-                  value: "#{self.sp.full_name} (#{self.sp_id})"
+                  value: "#{self.sp.full_name} (#{self.sp_id}) - #{self.sp.email} - #{self.sp.phone_number} - #{self.sp.company_name}"
+              },
+              {
+                  title: 'Desired Time',
+                  value: "#{self.desired_block.display_day}, between #{self.desired_block.show_start_time} to #{self.desired_block.show_end_time}"
+              },
+              {
+                  title: 'Comments from Salesperson',
+                  value: "#{self.sp_requested_comments}"
               }
           ]
       }

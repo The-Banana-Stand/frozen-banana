@@ -247,6 +247,18 @@ class User < ApplicationRecord
               {
                   title: 'ID',
                   value: "#{self.id}"
+              },
+              {
+                  title: 'Email',
+                  value: "#{self.email}"
+              },
+              {
+                  title: 'Company',
+                  value: "#{self.company_name}"
+              },
+              {
+                  title: 'Phone Number',
+                  value: "#{self.phone_number}"
               }
           ]
       }
