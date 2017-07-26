@@ -17,7 +17,8 @@
     <%= f.input :general_availability_id, as: :hidden %>
     <%= f.hidden_field :dm_id, value: @desired_block.user.id %>
     <%= f.hidden_field :sp_id, value: current_user.id %>
-    <%= f.hidden_field :price_cents, value: @desired_block.user.total_price.fractional %>
+    <%= f.hidden_field :price_cents, value: @desired_block.user.price_cents %>
+    <%= f.hidden_field :platform_fee_cents, value: @desired_block.user.platform_cut_price.fractional %>
     <%= f.hidden_field :general_availability_id, value: @desired_block.id %>
 
     <h5>Additional comments about meeting time or your availability</h5>

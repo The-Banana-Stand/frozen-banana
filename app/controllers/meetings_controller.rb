@@ -33,7 +33,7 @@ class MeetingsController < ApplicationController
 
   def meeting_params
     params.require(:meeting).permit(:dm_id, :sp_id, :price_cents, :general_availability_id, :sp_requested_comments,
-                                    :topic, :sp_lead_qualification)
+                                    :topic, :sp_lead_qualification, :platform_fee_cents)
   end
 
 

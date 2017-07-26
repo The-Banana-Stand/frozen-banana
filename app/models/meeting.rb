@@ -5,14 +5,14 @@ class Meeting < ApplicationRecord
   belongs_to :general_availability
   belongs_to :desired_block, class_name: 'GeneralAvailability', foreign_key: 'general_availability_id'
   has_one :feedback
-  has_one :stripe_transaction
+  has_many :stripe_transactions
   has_many :change_requests, dependent: :destroy
 
   auto_strip_attributes :sp_requested_comments, :address, :instructions, :topic, :sp_lead_qualification
 
   attr_accessor :role, :second_party
 
-  monetize :price_cents
+  monetize :price_cents, :platform_fee_cents
 
   # validates :topic, :sp_lead_qualification, presence: true, length: 0..255
 
@@ -88,6 +88,14 @@ class Meeting < ApplicationRecord
     }[status]
   end
 
+  def total_price
+    price + platform_fee
+  end
+
+  def total_price_cents
+    total_price.fractional
+  end
+
   def capture_payment
     puts 'HELLO FROM CAPTURE PAYMENT!'
     return if self.payment_status == 'succeeded'
@@ -95,7 +103,7 @@ class Meeting < ApplicationRecord
 
     charge = Stripe::Charge.create(
         :customer    => customer.id,
-        :amount      => price_cents,
+        :amount      => self.total_price_cents,
         :description => "Charge for Meeting #{self.confirmation_number}",
         :currency    => 'usd'
     )
@@ -103,10 +111,10 @@ class Meeting < ApplicationRecord
 
     self.update_attribute(:payment_status, charge.status)
 
-    transaction = self.build_stripe_transaction({
+    transaction = self.stripe_transactions.build({
                                                     amount: charge.amount,
-                                                    dm_cut: self.dm.price_cents,
-                                                    platform_cut: self.dm.platform_cut_price.fractional,
+                                                    dm_cut: self.price_cents,
+                                                    platform_cut: self.platform_fee_cents,
                                                     amount_refunded: charge.amount_refunded,
                                                     stripe_id: charge.id,
                                                     description: charge.description,
@@ -124,7 +132,7 @@ class Meeting < ApplicationRecord
   private
 
   def send_slack_notification
-    if Rails.env.development?
+    if Rails.env.production?
 
 
       notification = {
@@ -151,6 +159,10 @@ class Meeting < ApplicationRecord
               {
                   title: 'Desired Time',
                   value: "#{self.desired_block.display_day}, between #{self.desired_block.show_start_time} to #{self.desired_block.show_end_time}"
+              },
+              {
+                  title: 'Price/Hr',
+                  value: "#{self.dm_price_cents.format}"
               },
               {
                   title: 'Comments from Salesperson',
