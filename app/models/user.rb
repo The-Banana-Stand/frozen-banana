@@ -233,23 +233,26 @@ class User < ApplicationRecord
   end
 
   def send_slack_notification
-    return if Rails.env == 'development'
-    notification = {
-        text: 'hello hello',
-        username: "Awesom-O",
-        icon_emoji: ":loudspeaker:",
-        fields: [
-            {
-                title: 'New User',
-                value: "#{self.full_name}"
-            },
-            {
-                title: 'ID',
-                value: "#{self.id}"
-            }
-        ]
-    }
-    SLACK.ping notification
+    if Rails.env.production?
+
+      notification = {
+          text: 'New User',
+          username: "Awesom-O",
+          icon_emoji: ":loudspeaker:",
+          fields: [
+              {
+                  title: 'New User',
+                  value: "#{self.full_name}"
+              },
+              {
+                  title: 'ID',
+                  value: "#{self.id}"
+              }
+          ]
+      }
+      SLACK.ping notification
+
+    end
   end
 
 
