@@ -16,7 +16,7 @@
 }
 
 .promo {
-  background-image:image-url('jumbo_background_2.png');
+  background-image:image-url('splash_page/jumbo_background.png');
   background-size:cover;
   background-position:50%;
   width:100%;
@@ -38,12 +38,13 @@
   border-radius: 10px;
   background-color: #1c2324;
   color: whitesmoke;
+  min-height: 353.5px;
 }
 
 .dm-image {
-  //border-radius: 10px;
   max-height: 150px;
   margin:auto;
+  border-radius: 15px;
 }
 
 
@@ -72,11 +73,11 @@
 }
 
 #row-container-1 .section-picture{
-  background-image: image-url('signal.png');
+  background-image: image-url('splash_page/signal.png');
 }
 
 #row-container-2 .section-picture{
-  background-image: image-url('Darth-Vader_6bda9114.jpg');
+  background-image: image-url('splash_page/stop-cold-call.png');
 }
 
 .section-picture {
