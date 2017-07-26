@@ -162,7 +162,7 @@ class Meeting < ApplicationRecord
               },
               {
                   title: 'Price/Hr',
-                  value: "#{self.dm_price_cents.format}"
+                  value: "#{self.price.format} (total: #{self.total_price.format}"
               },
               {
                   title: 'Comments from Salesperson',
