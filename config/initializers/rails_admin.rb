@@ -88,12 +88,12 @@ RailsAdmin.config do |config|
       field :price_cents
       field :price_currency
       field :dm_min_bottom_line_impact
-      field :sp_small_bottom_line_impact
-      field :sp_medium_bottom_line_impact
-      field :sp_large_bottom_line_impact
-      field :sp_small_impact_examples
-      field :sp_medium_impact_examples
-      field :sp_large_impact_examples
+      field :sp_small_revenue
+      field :sp_medium_revenue
+      field :sp_large_revenue
+      field :sp_small_revenue_examples
+      field :sp_medium_revenue_examples
+      field :sp_large_revenue_examples
       field :sp_sales_cycle
       field :sp_close_percentage
       field :sp_organization_close_percentage
@@ -159,12 +159,12 @@ RailsAdmin.config do |config|
       field :price_cents
       field :price_currency
       field :dm_min_bottom_line_impact
-      field :sp_small_bottom_line_impact
-      field :sp_medium_bottom_line_impact
-      field :sp_large_bottom_line_impact
-      field :sp_small_impact_examples
-      field :sp_medium_impact_examples
-      field :sp_large_impact_examples
+      field :sp_small_revenue
+      field :sp_medium_revenue
+      field :sp_large_revenue
+      field :sp_small_revenue_examples
+      field :sp_medium_revenue_examples
+      field :sp_large_revenue_examples
       field :sp_sales_cycle
       field :sp_close_percentage
       field :sp_organization_close_percentage
@@ -198,12 +198,12 @@ RailsAdmin.config do |config|
       field :price_cents
       field :price_currency
       field :dm_min_bottom_line_impact
-      field :sp_small_bottom_line_impact
-      field :sp_medium_bottom_line_impact
-      field :sp_large_bottom_line_impact
-      field :sp_small_impact_examples
-      field :sp_medium_impact_examples
-      field :sp_large_impact_examples
+      field :sp_small_revenue
+      field :sp_medium_revenue
+      field :sp_large_revenue
+      field :sp_small_revenue_examples
+      field :sp_medium_revenue_examples
+      field :sp_large_revenue_examples
       field :sp_sales_cycle
       field :sp_close_percentage
       field :sp_organization_close_percentage
