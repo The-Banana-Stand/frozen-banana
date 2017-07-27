@@ -1,3 +1,4 @@
+<%= render 'partials/terms_of_service' %>
 <h1>Confirm Meeting Request</h1>
 
 <h3>
@@ -62,7 +63,10 @@
           <p>
             <span class="small">For beta, use Credit Card #: 4242 4242 4242 4242</span>
           </p>
-          <span class="small">Review <%= link_to 'Terms of Service', terms_of_service_path %></span>
+          <!-- Button trigger modal -->
+          <a type="button" class="clickable" data-toggle="modal" data-target="#myModal">
+            Review Terms of Service
+          </a>
         </div>
 
       </div>
