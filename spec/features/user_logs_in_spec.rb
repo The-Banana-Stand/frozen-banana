@@ -1,31 +1,37 @@
 require 'rails_helper'
 
-feature 'user logs in' do
+RSpec.feature 'user logs in' do
 
-  scenario 'user uses incorrect login info' do
-    visit login_path
+  context 'user signs in correctly' do
+    scenario 'user is logged in' do
+      user = FactoryGirl.create(:user)
 
-    fill_in 'Email', with: ''
-    fill_in 'Password', with: ''
+      visit login_path
 
-    click_button 'Log In'
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
 
-    expect(page).to have_css '.alert-danger'
+      click_button 'Log In'
 
+      expect(page).to have_content user.full_name
+      expect(page.current_path).to eq(dashboard_path)
+    end
   end
 
-  scenario 'user signs in correctly' do
-    user = FactoryGirl.create(:user)
 
-    visit login_path
+  context 'user uses incorrect login info' do
+    scenario 'user sees an error message' do
+      visit login_path
 
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+      fill_in 'Email', with: ''
+      fill_in 'Password', with: ''
 
-    click_button 'Log In'
+      click_button 'Log In'
 
-    expect(page.current_path).to eq(dashboard_path)
+      expect(page).to have_css '.alert-danger'
+      expect(page).to have_content 'Invalid email/password combination'
 
+    end
   end
 
 end
