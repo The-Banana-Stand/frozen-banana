@@ -1,15 +1,16 @@
 class User < ApplicationRecord
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
-  validates_attachment_size :avatar, :in => 0.megabytes..4.megabytes
-  has_secure_password
-  has_paper_trail ignore: [:remember_digest]
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  has_paper_trail ignore: [:remember_token]
   monetize :price_cents
   auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service,
                         :company_name, :company_address, :ar_comments, :sp_small_revenue_examples,
                         :sp_medium_revenue_examples, :sp_large_revenue_examples
 
-  attr_accessor :remember_token, :activation_token, :reset_token
 
   BOTTOM_LINE_ENUM_VALUES = {
       '$500': 0,
@@ -69,12 +70,16 @@ class User < ApplicationRecord
   has_many :invites
   has_many :payer_transactions, foreign_key: :payer_id, class_name: 'StripeTransaction'
   has_many :payee_transactions, foreign_key: :payee_id, class_name: 'StripeTransaction'
+
   # Callbacks
   before_save {self.email = email.downcase if email}
-  before_create :create_activation_digest
   after_create :send_slack_notification, :create_general_availabilities
 
   # Validations
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_size :avatar, :in => 0.megabytes..4.megabytes
+
   validates :first_name, :last_name, :title, :company_name, :company_address,
             :city, :state, :zip_code, :phone_number, :role, :dm_min_bottom_line_impact, presence: true
 
@@ -86,73 +91,14 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   #Scopes
-  scope :activated, ->(boolean = true) {where(activated: boolean)}
+  scope :confirmed, -> {where('confirmed_at IS NOT NULL')}
   scope :is_decision_maker, -> {where(role: %w(dm both))}
 
-
-  # Returns the hash digest of the given string.
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-        BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
 
   def all_meetings
     Meeting.where(dm_id: id).or(Meeting.where(sp_id: id))
   end
 
-  # Returns a random token.
-  def User.new_token
-    SecureRandom.urlsafe_base64
-  end
-
-  # Remembers a user in the database for use in persistent sessions.
-  def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
-  end
-
-  # Forgets a user.
-  def forget
-    update_attribute(:remember_digest, nil)
-  end
-
-  # Returns true if the given token matches the digest.
-  def authenticated?(attribute, token)
-    digest = send("#{attribute}_digest")
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
-  end
-
-  # Activates an account.
-  def activate
-    update_attribute(:activated,    true)
-    update_attribute(:activated_at, Time.zone.now)
-  end
-
-
-
-  # Sends activation email.
-  def send_activation_email
-    UserMailer.account_activation(self).deliver_now
-  end
-
-  # Sets the password reset attributes.
-  def create_reset_digest
-    self.reset_token = User.new_token
-    update_attribute(:reset_digest,  User.digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
-  end
-
-  # Sends password reset email.
-  def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
-  end
-
-  # Returns true if a password reset has expired.
-  def password_reset_expired?
-    self.reset_sent_at < 2.hours.ago
-  end
 
   #combines First and Last name
   def full_name
@@ -223,11 +169,6 @@ class User < ApplicationRecord
 
   private
 
-  def create_activation_digest
-    self.activation_token  = User.new_token
-    self.activation_digest = User.digest(activation_token)
-  end
-
   def create_general_availabilities
     (1..5).each do |num|
 
@@ -270,7 +211,5 @@ class User < ApplicationRecord
 
     end
   end
-
-
 
 end

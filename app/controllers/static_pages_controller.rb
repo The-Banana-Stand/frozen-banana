@@ -1,9 +1,9 @@
 class StaticPagesController < ApplicationController
 
-  skip_before_action :logged_in_user
+  skip_before_action :authenticate_user!
 
   def home
-    if logged_in? && !params[:no_redirect]
+    if user_signed_in? && !params[:no_redirect]
       redirect_to dashboard_path
     end
   end

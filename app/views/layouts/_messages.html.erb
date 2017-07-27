@@ -1,0 +1,22 @@
+<% if notice %>
+    <div id="flash" class='alert alert-success'>
+      <%= notice %>
+    </div>
+
+<% elsif alert %>
+    <div id="flash" class='alert alert-danger'>
+      <%= alert %>
+    </div>
+
+<% else %>
+
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>" id="flash">
+          <%= value %>
+        </div>
+    <% end %>
+
+<% end %>
+
+
+

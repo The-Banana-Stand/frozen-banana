@@ -22,5 +22,5 @@
 $(document).on('turbolinks:load', function() {
     setTimeout(function() {
         $('#flash').slideUp();
-    }, 3000);
+    }, 5000);
 });

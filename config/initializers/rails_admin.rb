@@ -34,7 +34,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
   config.authenticate_with do
     unless current_user.try(:admin)
-      flash[:danger] = 'You are not supposed to go there.'
+      flash[:danger] = 'That area is for administrators only.'
       redirect_to main_app.root_path
     end
   end
@@ -84,7 +84,6 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :activated
       field :price_cents
       field :price_currency
       field :dm_min_bottom_line_impact
@@ -100,6 +99,7 @@ RailsAdmin.config do |config|
       field :customer_token
       field :admin
       field :created_at
+      field :confirmed_at
     end
 
     list do
@@ -123,7 +123,6 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :activated
       field :price_cents
       field :price_currency
       field :dm_min_bottom_line_impact
@@ -155,7 +154,6 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :activated
       field :price_cents
       field :price_currency
       field :dm_min_bottom_line_impact
@@ -194,7 +192,6 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :activated
       field :price_cents
       field :price_currency
       field :dm_min_bottom_line_impact
