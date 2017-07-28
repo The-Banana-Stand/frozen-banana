@@ -28,14 +28,14 @@ RSpec.feature 'User signs up for site' do
       click_on 'Complete Registration'
 
 
-      expect(page).to have_css '.alert-info'
-      expect(page).to have_content 'Please check your email to activate your account.'
+      expect(page).to have_css '.alert-success'
+
     end
   end
 
   context 'user does not fill out all fields' do
     scenario 'user sees errors' do
-      visit signup_path
+      visit new_user_registration_path
 
       click_on 'Complete Registration'
 

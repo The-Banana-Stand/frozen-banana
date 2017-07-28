@@ -5,8 +5,8 @@ RSpec.feature 'user logs in' do
   context 'user signs in correctly' do
     scenario 'user is logged in' do
       user = FactoryGirl.create(:user)
-
-      visit login_path
+      user.confirm
+      visit new_user_session_path
 
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
@@ -21,7 +21,7 @@ RSpec.feature 'user logs in' do
 
   context 'user uses incorrect login info' do
     scenario 'user sees an error message' do
-      visit login_path
+      visit new_user_session_path
 
       fill_in 'Email', with: ''
       fill_in 'Password', with: ''
@@ -29,7 +29,7 @@ RSpec.feature 'user logs in' do
       click_button 'Log In'
 
       expect(page).to have_css '.alert-danger'
-      expect(page).to have_content 'Invalid email/password combination'
+      expect(page).to have_content 'Invalid Email or password.'
 
     end
   end

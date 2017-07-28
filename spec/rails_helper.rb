@@ -9,7 +9,6 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'capybara/rspec'
 require 'simplecov'
-require 'helpers'
 require 'rack_session_access/capybara'
 SimpleCov.start 'rails'
 
@@ -53,7 +52,9 @@ end
 
 RSpec.configure do |config|
 
-  config.include Helpers
+  config.include DeviseSpecHelper, type: :request
+  config.include DeviseSpecHelper, type: :feature
+
 
 
 

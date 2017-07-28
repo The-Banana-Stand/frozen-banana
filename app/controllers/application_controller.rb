@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    if resource.sign_in_count == 1
+      account_setup_path
+    else
+      root_path
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
       user_params.permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :title,

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'users#dashboard', as: :dashboard
   get '/schedule_time' => 'users#schedule_time'
-  get '/edit_profile' => 'users#edit', as: :edit_profile
+  get '/edit_profile' => 'users#edit', as: :edit_profile  #for non-sensitive editing (not email/password)
 
   get '/meetings/new/:id' => 'meetings#new', as: :new_meeting
   post '/meetings' => 'meetings#create'

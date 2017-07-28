@@ -13,16 +13,12 @@ FactoryGirl.define do
     username {Faker::Name.unique.first_name}
     email {Faker::Internet.unique.email}
     password 'foobar'
-    activated true
-    activated_at Time.zone.now
+    confirmed_at Time.zone.now
+    sign_in_count 1
 
-    # factory :dm do
-    #   role 'dm'
-    # end
-    #
-    # factory :sp do
-    #   role 'sp'
-    # end
+    factory :new_user do
+      sign_in_count 0
+    end
 
   end
 end
