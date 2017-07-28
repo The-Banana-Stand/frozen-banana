@@ -1,6 +1,6 @@
 require 'slack-notifier'
-
+channel = Rails.env.production? ? '#notifications' : '#dev_notifications'
 SLACK = Slack::Notifier.new ENV['SLACK'] do
-  defaults channel: '#notifications',
+  defaults channel: channel,
            username: 'notifier'
 end

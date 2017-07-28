@@ -115,6 +115,7 @@ class Meeting < ApplicationRecord
                                                     amount: charge.amount,
                                                     dm_cut: self.price_cents,
                                                     platform_cut: self.platform_fee_cents,
+                                                    status: charge.status,
                                                     amount_refunded: charge.amount_refunded,
                                                     stripe_id: charge.id,
                                                     description: charge.description,
