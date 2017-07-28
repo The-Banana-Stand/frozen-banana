@@ -48,6 +48,10 @@ class ChangeRequest < ApplicationRecord
                   value: "#{meeting.desired_block.display_day}, between #{meeting.desired_block.show_start_time} to #{meeting.desired_block.show_end_time}"
               },
               {
+                title: 'Scheduled Time',
+                value: "#{meeting.show_date}, from #{meeting.show_start_time} to #{meeting.show_end_time}"
+              },
+              {
                   title: 'Price/Hr',
                   value: "#{meeting.price.format} (total: #{meeting.total_price.format}"
               },
