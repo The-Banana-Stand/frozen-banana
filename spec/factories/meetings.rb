@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :meeting do
 
+    status 'requested'
     association :dm, factory: :user, strategy: :build
     association :sp, factory: :user, strategy: :build
     association :general_availability
