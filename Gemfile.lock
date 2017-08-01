@@ -1,6 +1,5 @@
-GIT
-  remote: git@github.com:rebelidealist/stripe-ruby-mock.git
-  revision: a83eca52f7ff4025d9d5235cd4ab8f849da3fa6c
+PATH
+  remote: vendor/gems/stripe-ruby-mock
   specs:
     stripe-ruby-mock (2.4.1)
       dante (>= 0.2.0)
@@ -389,7 +388,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe
-  stripe-ruby-mock (~> 2.4.1)!
+  stripe-ruby-mock!
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
