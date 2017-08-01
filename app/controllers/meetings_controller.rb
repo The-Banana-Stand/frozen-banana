@@ -21,7 +21,7 @@ class MeetingsController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_meeting_path
+    render :new
   end
 
 

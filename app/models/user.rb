@@ -127,6 +127,7 @@ class User < ApplicationRecord
   end
 
   def process_payment_info(stripe_token)
+    stripe_token = set_stripe_token(stripe_token)
     if self.customer_token.present?
       customer = Stripe::Customer.retrieve(self.customer_token)
       if customer.deleted?
@@ -138,6 +139,10 @@ class User < ApplicationRecord
     else
       create_stripe_customer(stripe_token)
     end
+  end
+
+  def set_stripe_token(token)
+    Rails.env.test? ? StripeMock.create_test_helper.generate_card_token : token
   end
 
   def create_stripe_customer(stripe_token)

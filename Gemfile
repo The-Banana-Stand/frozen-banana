@@ -74,6 +74,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'simplecov'
   gem 'rack_session_access'
+  gem 'stripe-ruby-mock', '~> 2.4.1', :require => 'stripe_mock', git: 'git@github.com:rebelidealist/stripe-ruby-mock.git'
 end
 
 group :development do
