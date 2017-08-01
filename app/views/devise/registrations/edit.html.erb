@@ -7,16 +7,16 @@
       <%= f.error_notification %>
 
       <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a data-toggle="tab" href="#dm_sp_info">Evaluation/Sales Info</a></li>
+        <li role="presentation" class="<%= 'active' unless @devise_active %>"><a data-toggle="tab" href="#dm_sp_info">Evaluation/Sales Info</a></li>
         <li role="presentation"><a data-toggle="tab" href="#general">General</a></li>
         <li role="presentation"><a data-toggle="tab" href="#ar_info">Accounts Receivable</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#account_info">Email/Password</a></li>
+        <li role="presentation" class="<%= 'active' if @devise_active %>"><a data-toggle="tab" href="#account_info">Email/Password</a></li>
       </ul>
 
 
       <div class="tab-content">
 
-        <div id="dm_sp_info" class="tab-pane fade in active">
+        <div id="dm_sp_info" class="tab-pane fade <%= 'in active' unless @devise_active %>">
           <div class="col-md-offset-2">
             <%- if current_user.role == 'dm' || current_user.role == 'both' %>
                 <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
@@ -47,8 +47,8 @@
 
   <% end %>
 
-        <div id="account_info" class="tab-pane fade">
-          <h2>Edit <%= resource_name.to_s.humanize %></h2>
+        <div id="account_info" class="tab-pane fade <%= 'in active' if @devise_active %>">
+          <h2>Edit Account Info</h2>
 
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
@@ -65,7 +65,7 @@
               </div>
 
               <div class="form-actions">
-                <%= f.button :submit, "Update" %>
+                <%= f.button :submit, "Update", class: 'btn btn-primary' %>
               </div>
           <% end %>
 

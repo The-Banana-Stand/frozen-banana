@@ -1,5 +1,10 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  def update
+    @devise_active = true
+    super
+  end
+
   protected
 
   def after_update_path_for(resource)
