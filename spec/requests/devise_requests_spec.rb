@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'devise routing', type: :request do
+RSpec.describe 'devise requests', type: :request do
   context 'on first login' do
     it 'redirects to account setup path' do
       new_user = FactoryGirl.create(:new_user)

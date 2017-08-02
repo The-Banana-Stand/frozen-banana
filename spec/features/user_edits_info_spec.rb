@@ -10,9 +10,11 @@ RSpec.feature 'user edits personal info' do
 
   scenario 'user changes his password' do
 
-    visit edit_user_registration_path
+    visit dashboard_path
 
-    click_on 'Email/Password'
+    click_on @user.full_name
+
+    click_on 'Edit Email/Password'
 
     fill_in 'Password', with: 'new_password'
 
@@ -28,7 +30,11 @@ RSpec.feature 'user edits personal info' do
   end
 
   scenario 'user changes his name' do
-    visit edit_user_registration_path
+    visit dashboard_path
+
+    click_on @user.full_name
+
+    click_on 'Edit Info'
 
     click_on 'General'
 
@@ -41,6 +47,22 @@ RSpec.feature 'user edits personal info' do
 
     expect(page).to have_content('Newname')
     expect(page).to have_css('.alert-success')
+  end
+
+
+  scenario 'user submits invalid info' do
+    visit edit_profile_path
+
+    click_on 'General'
+
+    fill_in 'First Name', with: ''
+
+    within('#general') do
+      click_on 'Save Changes'
+    end
+
+
+    expect(page).to have_css('.alert-danger')
   end
 
 end

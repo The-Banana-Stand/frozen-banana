@@ -32,4 +32,12 @@ RSpec.feature 'user views his dashboard' do
 
   end
 
+  scenario 'and makes an invalid change request' do
+    sign_in meeting.dm
+    visit new_change_request_path(id: meeting.id)
+    click_on 'Create Change Request'
+
+    expect(page).to have_content "can't be blank"
+  end
+
 end

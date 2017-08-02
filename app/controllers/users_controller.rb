@@ -26,11 +26,11 @@ class UsersController < ApplicationController
 
   end
 
-  def edit
+  def account_setup
     @user = current_user
   end
 
-  def account_setup
+  def edit
     @user = current_user
   end
 
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = 'Information Saved'
-      if URI(request.referer).path == edit_user_registration_path || URI(request.referer).path == user_registration_path
-        redirect_to edit_user_registration_path
+      if URI(request.referer).path == edit_profile_path
+        redirect_to edit_profile_path
       else
         redirect_to schedule_time_path
       end

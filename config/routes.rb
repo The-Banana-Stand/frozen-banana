@@ -15,7 +15,9 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'users#dashboard', as: :dashboard
   get '/schedule_time' => 'users#schedule_time'
+
   get '/edit_profile' => 'users#edit', as: :edit_profile  #for non-sensitive editing (not email/password)
+  patch '/user' => 'users#update', as: :user
 
   get '/meetings/new/:id' => 'meetings#new', as: :new_meeting
   post '/meetings' => 'meetings#create'
@@ -23,9 +25,6 @@ Rails.application.routes.draw do
 
   get '/meetings/confirm_meeting/:id' => 'meetings#confirm_meeting', as: :confirm_meeting
 
-  resources :users
-  # resources :account_activations, only: [:edit]
-  # resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :change_requests,     only: [:new, :create]
   resources :invites,             only: [:new, :create]
 
