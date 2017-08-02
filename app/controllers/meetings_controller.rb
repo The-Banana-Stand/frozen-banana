@@ -4,7 +4,7 @@ class MeetingsController < ApplicationController
 
   def new
     @desired_block = GeneralAvailability.includes(:user).find(params[:id])
-    @meeting = @desired_block.meetings.build(dm_id: @desired_block.user_id)
+    @meeting = Meeting.new(dm_id: @desired_block.user_id)
   end
 
 
@@ -15,7 +15,7 @@ class MeetingsController < ApplicationController
     current_user.process_payment_info(params[:stripeToken])
     redirect_to confirm_meeting_path(@meeting.id)
     else
-      @desired_block = GeneralAvailability.includes(:user).find(@meeting.general_availability_id)
+      @desired_block = GeneralAvailability.includes(:user).find(params[:meeting][:desired_block_id])
       render :new
     end
 
@@ -32,8 +32,9 @@ class MeetingsController < ApplicationController
   private
 
   def meeting_params
-    params.require(:meeting).permit(:dm_id, :sp_id, :price_cents, :general_availability_id, :sp_requested_comments,
-                                    :topic, :sp_lead_qualification, :platform_fee_cents)
+    params.require(:meeting).permit(:dm_id, :sp_id, :price_cents, :sp_requested_comments,
+                                    :topic, :sp_lead_qualification, :platform_fee_cents,
+                                    :desired_start_time, :desired_end_time, :desired_day)
   end
 
 

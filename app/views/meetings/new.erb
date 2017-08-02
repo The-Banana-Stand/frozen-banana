@@ -15,12 +15,14 @@
 
     <%= f.error_notification %>
 
-    <%= f.input :general_availability_id, as: :hidden %>
+    <%= f.hidden_field :desire_block_id, value: @desired_block.id %>
     <%= f.hidden_field :dm_id, value: @desired_block.user.id %>
     <%= f.hidden_field :sp_id, value: current_user.id %>
     <%= f.hidden_field :price_cents, value: @desired_block.user.price_cents %>
     <%= f.hidden_field :platform_fee_cents, value: @desired_block.user.platform_cut_price.fractional %>
-    <%= f.hidden_field :general_availability_id, value: @desired_block.id %>
+    <%= f.hidden_field :desired_day, value: @desired_block.day %>
+    <%= f.hidden_field :desired_start_time, value: @desired_block.start_time %>
+    <%= f.hidden_field :desired_end_time, value: @desired_block.end_time %>
 
     <h5>Additional comments about meeting time or your availability</h5>
     <div class="row">

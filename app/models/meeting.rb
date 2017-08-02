@@ -2,8 +2,6 @@ class Meeting < ApplicationRecord
   has_paper_trail
   belongs_to :dm, class_name: 'User'
   belongs_to :sp, class_name: 'User'
-  belongs_to :general_availability
-  belongs_to :desired_block, class_name: 'GeneralAvailability', foreign_key: 'general_availability_id'
   has_one :feedback
   has_many :stripe_transactions
   has_many :change_requests, dependent: :destroy
@@ -59,6 +57,18 @@ class Meeting < ApplicationRecord
 
   def show_date
     self.date&.strftime('%m/%d/%Y') || 'Pending'
+  end
+
+  def display_desired_day
+    %w(Monday Tuesday Wednesday Thursday Friday Saturday Sunday)[self.desired_day - 1]
+  end
+
+  def show_desired_start_time
+    desired_start_time.strftime('%l:%M%p')
+  end
+
+  def show_desired_end_time
+    desired_end_time.strftime('%l:%M%p')
   end
 
   def set_display_attributes(id)
@@ -159,7 +169,7 @@ class Meeting < ApplicationRecord
               },
               {
                   title: 'Desired Time',
-                  value: "#{self.desired_block.display_day}, between #{self.desired_block.show_start_time} to #{self.desired_block.show_end_time}"
+                  value: "#{self.display_desired_day}, between #{self.show_desired_start_time} to #{self.show_desired_end_time}"
               },
               {
                   title: 'Price/Hr',
@@ -176,7 +186,9 @@ class Meeting < ApplicationRecord
   end
 
   def set_confirmation_number
-    self.confirmation_number = Digest::SHA1.hexdigest("--#{Time.current.usec}--").slice(0..6).upcase!
+    while self.confirmation_number.blank?
+      self.confirmation_number = Digest::SHA1.hexdigest("--#{Time.current.usec}--").slice(0..6).upcase!
+    end
   end
 
 end

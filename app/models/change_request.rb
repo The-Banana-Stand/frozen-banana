@@ -45,7 +45,7 @@ class ChangeRequest < ApplicationRecord
               },
               {
                   title: 'Desired Time',
-                  value: "#{meeting.desired_block.display_day}, between #{meeting.desired_block.show_start_time} to #{meeting.desired_block.show_end_time}"
+                  value: "#{meeting.display_desired_day}, between #{meeting.show_desired_start_time} to #{meeting.show_desired_end_time}"
               },
               {
                 title: 'Scheduled Time',
