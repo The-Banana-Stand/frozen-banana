@@ -61,7 +61,7 @@
                 <p><strong>Meeting Confirmation #:</strong> <%= meeting.confirmation_number %></p>
                 <p><strong>Price/Hr:</strong> <%= humanized_money_with_symbol meeting.price%></p>
 
-                <%- if meeting.status == 'requested' %>
+                <%- if meeting.date.nil? %>
                     <p><strong>Requested Time:</strong>
                       <%= meeting.display_desired_day + ', between ' + meeting.show_desired_start_time + ' and ' + meeting.show_desired_end_time %>
                     </p>
