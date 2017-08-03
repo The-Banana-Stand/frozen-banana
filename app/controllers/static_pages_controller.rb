@@ -16,5 +16,9 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def error
+    raise 'Here, have an error.'
+  end
+
 
 end

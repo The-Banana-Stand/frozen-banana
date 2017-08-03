@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   resources :change_requests,     only: [:new, :create]
   resources :invites,             only: [:new, :create]
 
+  get '/error' => 'static_pages#error'
+
 end
