@@ -4,6 +4,8 @@ branch-defaults:
     group_suffix: null
   master:
     environment: frozen-banana-production
+  splash-2:
+    environment: frozen-banana-production
   staging:
     environment: frozen-banana-staging
 global:
