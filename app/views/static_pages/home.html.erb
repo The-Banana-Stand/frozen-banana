@@ -3,27 +3,38 @@
   <div class="row">
     <div class="promo">
       <div class="jumbotron">
-        <div class="col-md-7">
-          <div class="row">
-            <div class="col-md-6">
-              <%= image_tag 'http://via.placeholder.com/300x350', class: 'img img-responsive' %>
-            </div>
-            <div class="col-md-6">
-              <%= image_tag 'http://via.placeholder.com/300x350', class: 'img img-responsive' %>
+
+        <div class="col-md-8">
+          <!--<div class="row">-->
+            <!--<div class="col-md-5 col-md-offset-1">-->
+              <!--<%= image_tag 'http://via.placeholder.com/400x450', class: 'img img-responsive' %>-->
+            <!--</div>-->
+            <!--<div class="col-md-5">-->
+              <!--<%= image_tag 'http://via.placeholder.com/400x450', class: 'img img-responsive' %>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <div class="row floating-text-container">
+            <div class="floating-text">
+              <div class="col-md-12">
+                <h1>
+                  <strong>The b2b Meeting Marketplace.</strong>
+                </h1>
+              </div>
+              <div class="col-md-8 col-md-offset-2">
+                <h3>
+                  <strong>
+                    It's noisy out there. <br>
+                    The right Sales Reps will pay for your attention on MeetingSlice.
+                  </strong>
+                </h3>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <h3>
-              <strong>MeetingSlice is a b2b Meeting Marketplace.</strong>
-            </h3>
-            <p>
-              <strong>Help us stop over-communication and over-promising by b2b sales representatives and their Marketing
-              departments to get a meeting with you.</strong>
-            </p>
-          </div>
+
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
           <div class="well signup-well">
 
             <h2>Registration</h2>
@@ -34,7 +45,7 @@
             <h4>OR</h4>
             <hr/>
             <div class="col-md-11">
-              <%= simple_form_for @user, url: new_user_registration_path, html: {class: 'form-horizontal'},
+              <%= simple_form_for @user, url: user_registration_path, html: {class: 'form-horizontal'},
                                   wrapper: :horizontal_form do |f| %>
 
                   <div class="form-group form-group-sm">
@@ -61,87 +72,129 @@
   <!--promo-->
 
 
+  <div class="row seen-in-row">
+    <h4>Companies that use MeetingSlice</h4>
+
+    <%= image_tag 'splash_page/google-logo.png'%>
+
+
+    <%= image_tag 'splash_page/facebook-logo.png' %>
+
+
+    <%= image_tag 'splash_page/github-logo.png' %>
+
+    <%= image_tag 'splash_page/featured-fast.png' %>
+
+    <%= image_tag 'splash_page/featured-geekwire.png' %>
+
+  </div>
+
+
 
   <div id="row-container-1" class="row-container">
-    <h1><strong>Why MeetingSlice?</strong></h1>
+    <h1><strong>What's Your Role?</strong></h1>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 text-left">
 
-        <h2><strong>Decision Maker</strong></h2>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="text-center"><strong>Decision Maker</strong></h2>
+          </div>
+          <div class="panel-body">
+            <div class="text-container">
+              <h3><strong>Filter The Noise</strong></h3>
+              <p class="lead">
+                Hear only the best ideas to impact your organization
+              </p>
+            </div>
 
-        <div class="box">
-          <h3><strong>Filter The Noise</strong></h3>
-          <p class="lead">
-            Hear only the best ideas to impact your organization
-          </p>
+            <div class="box">
+              <h3><strong>One place for all Solicitors</strong></h3>
+              <p class="lead">
+                It's easy.  Send all meeting requests to us.  Sales Reps will pay if they have done their homework.
+              </p>
+            </div>
+
+            <div class="box">
+              <h3><strong>Get paid for your time</strong></h3>
+              <p class="lead">
+                Your company is now paid when you meet with Sales Reps.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div class="box">
-          <h3><strong>One place for all Solicitors</strong></h3>
-          <p class="lead">
-            It's easy.  Send all meeting requests to us.  Sales Reps will pay if they have done their homework.
-          </p>
-        </div>
 
-        <div class="box">
-          <h3><strong>Get paid for your time</strong></h3>
-          <p class="lead">
-            Your company is now paid when you meet with Sales Reps.
-          </p>
-        </div>
+
+
 
       </div>
 
-      <div class="col-md-4">
-        <h2><strong>Sales Representative</strong></h2>
+      <div class="col-md-4 text-left">
 
-        <div class="box">
-          <h3><strong>Stop Cold Calling</strong></h3>
-          <p class="lead">
-            Get to the right person, immediately.  More Meetings, more money.
-          </p>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="text-center"><strong>Sales Representative</strong></h2>
+          </div>
+          <div class="panel-body">
+            <div class="text-container">
+              <h3><strong>Stop Cold Calling</strong></h3>
+              <p class="lead">
+                Get to the right person, immediately.  More Meetings, more money.
+              </p>
+            </div>
+
+            <div class="box">
+              <h3><strong>Quality and Predictable Attention</strong></h3>
+              <p class="lead">
+                You paid for it.  Get a guaranteed meeting start time and the expected amount of time.
+              </p>
+            </div>
+
+            <div class="box">
+              <h3><strong>Money Signals Seriousness</strong></h3>
+              <p class="lead">
+                You've done your homework.  Separate yourself from the pack.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div class="box">
-          <h3><strong>Quality and Predictable Attention</strong></h3>
-          <p class="lead">
-            You paid for it.  Get a guaranteed meeting start time and the expected amount of time.
-          </p>
-        </div>
 
-        <div class="box">
-          <h3><strong>Money Signals that You're Serious</strong></h3>
-          <p class="lead">
-            You've done your homework.  Separate yourself from the pack.
-          </p>
-        </div>
+
+
 
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-4 text-left">
 
-        <h2><strong>Sales Management</strong></h2>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="text-center"><strong>Sales Management</strong></h2>
+          </div>
+          <div class="panel-body">
+            <div class="text-container">
+              <h3><strong>Grow Faster</strong></h3>
+              <p class="lead">
+                Have your best sales rep in the company meet with 3x more decision makers.
+              </p>
+            </div>
 
-        <div class="box">
-          <h3><strong>Grow Faster</strong></h3>
-          <p class="lead">
-            Have your best sales rep in the company meet with 3x more decision makers.
-          </p>
-        </div>
+            <div class="box">
+              <h3><strong>Lower your Meeting Acquisition Cost</strong></h3>
+              <p class="lead">
+                Why pay sales people to cold call and email prospects when you can buy a meeting with the prospect at a lower cost?
+              </p>
 
-        <div class="box">
-          <h3><strong>Lower your Meeting Acquisition Cost</strong></h3>
-          <p class="lead">
-            Why pay sales people to cold call and email prospects when you can buy a meeting with the prospect at a lower cost?
-          </p>
+            </div>
 
-        </div>
-
-        <div class="box">
-          <h3><strong>Cut Overhead</strong></h3>
-          <p class="lead">
-            With access to all decision makers you can cut down on your marketing and sales management costs.
-          </p>
+            <div class="box">
+              <h3><strong>Cut Overhead</strong></h3>
+              <p class="lead">
+                With access to all decision makers you can cut down on your marketing and sales management costs.
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>

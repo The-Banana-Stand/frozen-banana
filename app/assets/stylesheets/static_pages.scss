@@ -61,12 +61,26 @@
   margin: 7px 0;
 }
 
+.seen-in-row{
+  background-color: #f3f3f3;
+  padding: 13px 15px 30px;
+}
+.seen-in-row img{
+  height: 60px;
+  width: 190px;
+  margin: 5px 20px;
+}
+
 .step-container h1{
   font-size: 50px;
 }
 
 .shaded-column {
   background-color:rgb(238,233,233);
+}
+
+.text-container {
+  height: 125px;
 }
 
 .row-container .row {
@@ -98,6 +112,10 @@
   position:absolute;
   top:33%;
   font-size:large;
+}
+
+.floating-text-container {
+  min-height: 250px;
 }
 
 
