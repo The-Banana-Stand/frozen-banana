@@ -1,107 +1,158 @@
 <div class="text-center">
 
-  <div class="promo">
-    <div class="jumbotron">
+  <div class="row">
+    <div class="promo">
+      <div class="jumbotron">
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-6">
+              <%= image_tag 'http://via.placeholder.com/300x350', class: 'img img-responsive' %>
+            </div>
+            <div class="col-md-6">
+              <%= image_tag 'http://via.placeholder.com/300x350', class: 'img img-responsive' %>
+            </div>
+          </div>
+          <div class="row">
+            <h3>
+              <strong>MeetingSlice is a b2b Meeting Marketplace.</strong>
+            </h3>
+            <p>
+              <strong>Help us stop over-communication and over-promising by b2b sales representatives and their Marketing
+              departments to get a meeting with you.</strong>
+            </p>
+          </div>
+        </div>
 
-      <h1>Finally, B2B Meetings have a price.</h1>
-      <div class="row">
-        <div class="col-xs-2 col-md-offset-2 col-xs-offset-3 well dm-highlight">
-          <%= image_tag('splash_page/profile-1.png', class: 'img-responsive dm-image') %>
-          <h4><strong>Heath Davidson</strong></h4>
-          <h4><strong>CEO</strong></h4>
-          <h4><strong>Davidson Manufacturing</strong></h4>
-          <h4><strong>Price/Hr: <%= link_to('Register', new_user_registration_path, class: 'btn btn-primary btn-sm text-bold') %></strong></h4>
+        <div class="col-md-5">
+          <div class="well signup-well">
+
+            <h2>Registration</h2>
+            <span class="text-center">
+              <%= link_to image_tag('splash_page/facebook.png', class: 'img img-responsive media-icon'), '#' %>
+              <%= link_to image_tag('splash_page/linked-in.png', class: 'img img-responsive media-icon'), '#' %>
+            </span>
+            <h4>OR</h4>
+            <hr/>
+            <div class="col-md-11">
+              <%= simple_form_for @user, url: new_user_registration_path, html: {class: 'form-horizontal'},
+                                  wrapper: :horizontal_form do |f| %>
+
+                  <div class="form-group form-group-sm">
+                    <%= f.input :email, class: 'form-control' %>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <%= f.input :password, class: 'form-control' %>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <%= f.input :password_confirmation, class: 'form-control', label: 'Confirm Password' %>
+                  </div>
+
+                  <%= f.submit 'Register Now', class: 'btn btn-primary' %>
+
+              <% end %>
+            </div>
+            <div class="clearfix"></div>
+          </div>
         </div>
-        <div class="col-xs-2 col-md-offset-1 well dm-highlight">
-          <%= image_tag('splash_page/profile-2.png', class: 'img-responsive dm-image') %>
-          <h4><strong>Ryan Barber</strong></h4>
-          <h4><strong>Operations Manager</strong></h4>
-          <h4><strong>Freetown Distribution</strong></h4>
-          <h4><strong>Price/Hr: <%= link_to('Register', new_user_registration_path, class: 'btn btn-primary btn-sm text-bold') %></strong></h4>
-        </div>
-        <div class="col-xs-2 col-md-offset-1 well dm-highlight">
-          <%= image_tag('splash_page/profile-3.png', class: 'img-responsive dm-image') %>
-          <h4><strong>Brian Schwimer</strong></h4>
-          <h4><strong>CFO</strong></h4>
-          <h4><strong>New Wave<br> Software</strong></h4>
-          <h4><strong>Price/Hr: <%= link_to('Register', new_user_registration_path, class: 'btn btn-primary btn-sm text-bold') %></strong></h4>
-        </div>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>
   <!--promo-->
 
 
-  <div class="row-container">
-    <div class="row step-container">
-      <h1 class="steps-heading"><strong>How It Works</strong></h1>
-      <div class="col-md-2 col-md-offset-1">
-        <%= image_tag('splash_page/search.png', class: 'step-image') %>
-        <h3> <strong>Step 1:</strong></h3>
-        <p>Search for Decision Makers</p>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/book_now.png', class: 'step-image') %>
-        <h3> <strong>Step 2:</strong></h3>
-        <p>Purchase an hour-long meeting</p>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/dollar-sign.png', class: 'step-image') %>
-        <h3><span class="glyphicon glyphicon-arrow-right"></span></h3>
-        <p>Meeting price is paid to the business</p>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/meet.png', class: 'step-image') %>
-        <h3> <strong>Step 3:</strong></h3>
-        <p>Introduce your product to a fully attentive audience</p>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/rate.png', class: 'step-image') %>
-        <h3> <strong>Step 4:</strong></h3>
-        <p>Rate the quality of the meeting</p>
-      </div>
-    </div>
-    <!--step-container-->
-  </div>
-
-
-  <div id="row-container-2" class="row-container">
-    <div class="row">
-      <div class="col-md-6 section-picture"></div>
-      <div class="col-md-6 row-content">
-        <div class="floating-text">
-          <h1><strong>Stop Cold Calling. Meet Now.</strong></h1>
-          <ul class="list-unstyled">
-            <li>Sell more, faster</li>
-            <li>Higher quality attention</li>
-            <li>Predictable meeting length</li>
-            <li>Guaranteed meeting start time</li>
-            <li>Get to the right person</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
   <div id="row-container-1" class="row-container">
+    <h1><strong>Why MeetingSlice?</strong></h1>
     <div class="row">
-      <div class="col-md-6 row-content">
-        <div class="floating-text">
-          <h1><strong>The Clearest Signal.</strong></h1>
-          <p>
-            The meeting cost is your skin in the game.  Businesses know the best salespeople are so confident in their product's performance that they are willing to pay
-            to get in front of the correct Decision Maker RIGHT NOW!
+      <div class="col-md-4">
+
+        <h2><strong>Decision Maker</strong></h2>
+
+        <div class="box">
+          <h3><strong>Filter The Noise</strong></h3>
+          <p class="lead">
+            Hear only the best ideas to impact your organization
           </p>
         </div>
+
+        <div class="box">
+          <h3><strong>One place for all Solicitors</strong></h3>
+          <p class="lead">
+            It's easy.  Send all meeting requests to us.  Sales Reps will pay if they have done their homework.
+          </p>
+        </div>
+
+        <div class="box">
+          <h3><strong>Get paid for your time</strong></h3>
+          <p class="lead">
+            Your company is now paid when you meet with Sales Reps.
+          </p>
+        </div>
+
       </div>
-      <div class="col-md-6 section-picture"></div>
+
+      <div class="col-md-4">
+        <h2><strong>Sales Representative</strong></h2>
+
+        <div class="box">
+          <h3><strong>Stop Cold Calling</strong></h3>
+          <p class="lead">
+            Get to the right person, immediately.  More Meetings, more money.
+          </p>
+        </div>
+
+        <div class="box">
+          <h3><strong>Quality and Predictable Attention</strong></h3>
+          <p class="lead">
+            You paid for it.  Get a guaranteed meeting start time and the expected amount of time.
+          </p>
+        </div>
+
+        <div class="box">
+          <h3><strong>Money Signals that You're Serious</strong></h3>
+          <p class="lead">
+            You've done your homework.  Separate yourself from the pack.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="col-md-4">
+
+        <h2><strong>Sales Management</strong></h2>
+
+        <div class="box">
+          <h3><strong>Grow Faster</strong></h3>
+          <p class="lead">
+            Have your best sales rep in the company meet with 3x more decision makers.
+          </p>
+        </div>
+
+        <div class="box">
+          <h3><strong>Lower your Meeting Acquisition Cost</strong></h3>
+          <p class="lead">
+            Why pay sales people to cold call and email prospects when you can buy a meeting with the prospect at a lower cost?
+          </p>
+
+        </div>
+
+        <div class="box">
+          <h3><strong>Cut Overhead</strong></h3>
+          <p class="lead">
+            With access to all decision makers you can cut down on your marketing and sales management costs.
+          </p>
+        </div>
+
+      </div>
+
     </div>
   </div>
   <!--container-1-->
+
   <div class="row padding-top">
-    <div class="col-md-12">
-      <%= link_to 'Register Now', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+    <div class="col-md-6 col-md-offset-3">
+      <%= button_to 'Register Now', new_user_registration_path, method: :get, class: 'btn btn-primary btn-lg btn-block' %>
     </div>
   </div>
 
@@ -109,6 +160,10 @@
 
 
 </div>
+
+<script>
+  $('.box').matchHeight({byRow: false});
+</script>
 
 
 
