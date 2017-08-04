@@ -22,12 +22,26 @@
                 </h1>
               </div>
               <div class="col-md-8 col-md-offset-2">
-                <h3>
+                <p>
                   <strong>
-                    It's noisy out there. <br>
-                    The right Sales Reps will pay for your attention on MeetingSlice.
+                    What meetings should you take when all companies promise the same “amazing” results?
                   </strong>
-                </h3>
+                </p>
+                <p>
+                  <strong>
+                    Raise the stakes for a meeting with you.
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    People with the best ideas will pay top dollar for your immediate attention.
+                  </strong>
+                </p>
+                <!--<p>-->
+                  <!--<strong>-->
+                    <!--Let potential vendors self-select on MeetingSlice.-->
+                  <!--</strong>-->
+                <!--</p>-->
               </div>
             </div>
           </div>
@@ -37,9 +51,11 @@
         <div class="col-md-4">
           <div class="well signup-well">
 
-            <h2>Registration</h2>
+            <h2>
+              <strong>Registration</strong>
+            </h2>
             <span class="text-center">
-              <%= link_to image_tag('splash_page/facebook.png', class: 'img img-responsive media-icon'), '#' %>
+              <!--<%= link_to image_tag('splash_page/facebook.png', class: 'img img-responsive media-icon'), '#' %>-->
               <%= link_to image_tag('splash_page/linked-in.png', class: 'img img-responsive media-icon'), '#' %>
             </span>
             <h4>OR</h4>
@@ -52,11 +68,23 @@
                     <%= f.input :email, class: 'form-control' %>
                   </div>
                   <div class="form-group form-group-sm">
-                    <%= f.input :password, class: 'form-control' %>
+                    <%= f.input :first_name, class: 'form-control' %>
                   </div>
                   <div class="form-group form-group-sm">
-                    <%= f.input :password_confirmation, class: 'form-control', label: 'Confirm Password' %>
+                    <%= f.input :last_name, class: 'form-control' %>
                   </div>
+                  <div class="form-group form-group-sm">
+                    <%= f.input :title, class: 'form-control' %>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <%= f.input :company_name, class: 'form-control', label: 'Company' %>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <%= f.input :password, class: 'form-control' %>
+                  </div>
+                  <!--<div class="form-group form-group-sm">
+                    <%= f.input :password_confirmation, class: 'form-control', label: 'Confirm Password' %>
+                  </div>-->
 
                   <%= f.submit 'Register Now', class: 'btn btn-primary' %>
 
@@ -103,21 +131,21 @@
           <div class="panel-body">
             <div class="text-container">
               <h3><strong>Filter The Noise</strong></h3>
-              <p class="lead">
-                Hear only the best ideas to impact your organization
+              <p class="large-text">
+                Hear only the best ideas to impact your organization.
               </p>
             </div>
 
             <div class="box">
               <h3><strong>One place for all Solicitors</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 It's easy.  Send all meeting requests to us.  Sales Reps will pay if they have done their homework.
               </p>
             </div>
 
             <div class="box">
               <h3><strong>Get paid for your time</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 Your company is now paid when you meet with Sales Reps.
               </p>
             </div>
@@ -139,21 +167,21 @@
           <div class="panel-body">
             <div class="text-container">
               <h3><strong>Stop Cold Calling</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 Get to the right person, immediately.  More Meetings, more money.
               </p>
             </div>
 
             <div class="box">
               <h3><strong>Quality and Predictable Attention</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 You paid for it.  Get a guaranteed meeting start time and the expected amount of time.
               </p>
             </div>
 
             <div class="box">
               <h3><strong>Money Signals Seriousness</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 You've done your homework.  Separate yourself from the pack.
               </p>
             </div>
@@ -175,14 +203,14 @@
           <div class="panel-body">
             <div class="text-container">
               <h3><strong>Grow Faster</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 Have your best sales rep in the company meet with 3x more decision makers.
               </p>
             </div>
 
             <div class="box">
               <h3><strong>Lower your Meeting Acquisition Cost</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 Why pay sales people to cold call and email prospects when you can buy a meeting with the prospect at a lower cost?
               </p>
 
@@ -190,7 +218,7 @@
 
             <div class="box">
               <h3><strong>Cut Overhead</strong></h3>
-              <p class="lead">
+              <p class="large-text">
                 With access to all decision makers you can cut down on your marketing and sales management costs.
               </p>
             </div>

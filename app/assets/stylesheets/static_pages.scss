@@ -49,10 +49,29 @@
   border-radius: 15px;
 }
 
+.signup-well{
+  background-color: #aeaeae;
+}
+
 .signup-well .media-icon {
   height: 60px;
   cursor: pointer;
   display: inline-block;
+}
+
+.signup-well h2{
+  margin-top: 2px;
+}
+
+.signup-well .btn{
+  margin-left: 40px;
+}
+.signup-well .form-group{
+  margin-bottom: 0px;
+}
+
+.signup-well .form-group-sm .control-label{
+  font-size: 1em;
 }
 
 .step-image {
@@ -114,8 +133,12 @@
   font-size:large;
 }
 
+.large-text{
+  font-size: 1.3em;
+}
+
 .floating-text-container {
-  min-height: 250px;
+  min-height: 200px;
 }
 
 
