@@ -50,6 +50,7 @@ gem 'paperclip'
 gem 'slack-notifier'
 gem 'exception_notification'
 gem 'devise'
+gem 'omniauth-linkedin-oauth2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

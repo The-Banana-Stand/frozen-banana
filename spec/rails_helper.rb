@@ -54,7 +54,10 @@ RSpec.configure do |config|
 
   config.include DeviseSpecHelper, type: :request
   config.include DeviseSpecHelper, type: :feature
+
   config.include PayStripeHelpers, :type => :feature
+
+  config.include OmniAuthHelpers, type: :feature
 
 
 
