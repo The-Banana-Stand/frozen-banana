@@ -35,6 +35,10 @@
   margin-bottom:0;
 }
 
+.jumbotron-padding{
+  padding-top: 40px;
+}
+
 .dm-highlight {
   border-radius: 10px;
   background-color: #1c2324;
@@ -64,14 +68,15 @@
 }
 
 .signup-well .btn{
+  margin-top: 10px;
   margin-left: 40px;
 }
 .signup-well .form-group{
-  margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 
 .signup-well .form-group-sm .control-label{
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 .step-image {
