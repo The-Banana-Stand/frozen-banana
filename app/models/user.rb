@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:linkedin]
 
   has_paper_trail ignore: [:remember_token]
   monetize :price_cents
@@ -80,10 +81,9 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   validates_attachment_size :avatar, :in => 0.megabytes..4.megabytes
 
-  validates :first_name, :last_name, :title, :company_name, :company_address,
-            :city, :state, :zip_code, :phone_number, :role, :dm_min_bottom_line_impact, presence: true
+  validates :first_name, :last_name, :title, :company_name, presence: true
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, uniqueness: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -93,6 +93,25 @@ class User < ApplicationRecord
   #Scopes
   scope :confirmed, -> {where('confirmed_at IS NOT NULL')}
   scope :is_decision_maker, -> {where(role: %w(dm both))}
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.avatar = URI.parse(auth.info.image) if auth.info.image
+      user.username = auth.info.nickname
+      current_position = auth.extra.raw_info.positions.values[1].find{|p| p.isCurrent}
+      user.title = current_position.title
+      user.company_name = current_position.company.name
+      user.role = 'dm'
+
+      # If you are using confirmable and the provider(s) you use validate emails,
+      # uncomment the line below to skip the confirmation emails.
+      user.skip_confirmation!
+    end
+  end
 
 
   def all_meetings
@@ -169,6 +188,41 @@ class User < ApplicationRecord
 
   def total_price
     Money.new( self.price + self.platform_cut_price )
+  end
+
+  def send_confirmation_help_request(phone_number)
+    if Rails.env.production?
+
+      notification = {
+          text: 'A User needs help Confirming Email',
+          username: "Awesom-O",
+          icon_emoji: ":loudspeaker:",
+          fields: [
+              {
+                  title: 'User',
+                  value: "#{self.full_name}"
+              },
+              {
+                  title: 'ID',
+                  value: "#{self.id}"
+              },
+              {
+                  title: 'Email',
+                  value: "#{self.email}"
+              },
+              {
+                  title: 'Company',
+                  value: "#{self.company_name}"
+              },
+              {
+                  title: 'Phone Number',
+                  value: "#{phone_number}"
+              }
+          ]
+      }
+      SLACK.ping notification
+
+    end
   end
 
 

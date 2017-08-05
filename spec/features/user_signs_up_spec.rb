@@ -5,11 +5,8 @@ RSpec.feature 'User signs up for site' do
   context 'user fills out form' do
     scenario 'user signs up successfully' do
       user = FactoryGirl.build_stubbed(:user)
-      visit root_path
+      visit new_user_registration_path
 
-      click_on 'Register Now'
-
-      choose 'Decision Maker'
 
       fill_in 'user[first_name]', with: user.first_name
       fill_in 'user[last_name]', with: user.last_name
@@ -27,8 +24,7 @@ RSpec.feature 'User signs up for site' do
 
       click_on 'Complete Registration'
 
-
-      expect(page).to have_css '.alert-success'
+      expect(page).to have_content 'Confirmation Email'
 
     end
   end

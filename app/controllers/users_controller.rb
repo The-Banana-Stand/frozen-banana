@@ -1,10 +1,24 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authenticate_user!, only: [:new, :create]
+  skip_before_action :authenticate_user!, only: [:verify, :resend_email, :verify_help]
 
 
-  def show
+  def verify
+    @user = User.find(params[:id])
+  end
 
+  def resend_email
+    @user = User.find(params[:id])
+    @user.resend_confirmation_instructions
+    flash[:success] = 'Instructions Resent'
+    redirect_to user_verify_path(@user.id)
+  end
+
+  def verify_help
+    @user = User.find(params[:user][:id])
+    @user.send_confirmation_help_request(params[:user][:phone_number])
+    flash[:info] = 'We will contact you shortly.'
+    redirect_to user_verify_path(@user.id)
   end
 
   def dashboard
