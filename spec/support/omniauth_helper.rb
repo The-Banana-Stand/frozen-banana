@@ -1,33 +1,37 @@
 module OmniAuthHelpers
 
-  def set_omniauth(opts = {})
-    default = {:provider => :linkedin,
-               :uuid     => "1234",
-               :linkedin => {
-                   :email => "foobar@example.com",
-                   :gender => "Male",
-                   :first_name => "foo",
-                   :last_name => "bar"
-               }
-    }
+  def set_omniauth
 
-    credentials = default.merge(opts)
-    provider = credentials[:provider]
-    user_hash = credentials[provider]
+    linkedin_data = {
+        :provider => :linkedin,
+        :uuid     => "1234",
+        info: {
+            :email => "foobar@example.com",
+            :first_name => "foo",
+            :last_name => "bar",
+            nickname: 'foobar123'
+        },
+        extra:{
+            raw_info:{
+                positions: {
+                    values:
+                        [
+                            {
+                                title: 'CEO',
+                                company: {name: 'Some Company LLC'},
+                                isCurrent: true
+                            }
+                        ]
 
-    OmniAuth.config.test_mode = true
 
-    OmniAuth.config.mock_auth[provider] = {
-        'uid' => credentials[:uuid],
-        "extra" => {
-            "user_hash" => {
-                "email" => user_hash[:email],
-                "first_name" => user_hash[:first_name],
-                "last_name" => user_hash[:last_name],
-                "gender" => user_hash[:gender]
+                }
             }
         }
     }
+
+    OmniAuth.config.test_mode = true
+
+    OmniAuth.config.add_mock(:linkedin, linkedin_data)
   end
 
 

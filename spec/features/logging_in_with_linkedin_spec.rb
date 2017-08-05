@@ -10,7 +10,7 @@ RSpec.feature 'logging_in_with_linkedin' do
 
     find('a img').click
 
-    expect(page).to have_content 'foobar@example.com'
+    expect(page).to have_content 'foo bar'
   end
 
 

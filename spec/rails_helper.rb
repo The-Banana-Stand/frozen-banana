@@ -57,7 +57,7 @@ RSpec.configure do |config|
 
   config.include PayStripeHelpers, :type => :feature
 
-  config.include OmniAuthHelpers, type: :feature
+  config.include OmniAuthHelpers
 
 
 
