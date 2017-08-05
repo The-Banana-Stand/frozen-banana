@@ -83,7 +83,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :title, :company_name, presence: true
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, uniqueness: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -188,6 +188,41 @@ class User < ApplicationRecord
 
   def total_price
     Money.new( self.price + self.platform_cut_price )
+  end
+
+  def send_confirmation_help_request(phone_number)
+    if Rails.env.production?
+
+      notification = {
+          text: 'A User needs help Confirming Email',
+          username: "Awesom-O",
+          icon_emoji: ":loudspeaker:",
+          fields: [
+              {
+                  title: 'User',
+                  value: "#{self.full_name}"
+              },
+              {
+                  title: 'ID',
+                  value: "#{self.id}"
+              },
+              {
+                  title: 'Email',
+                  value: "#{self.email}"
+              },
+              {
+                  title: 'Company',
+                  value: "#{self.company_name}"
+              },
+              {
+                  title: 'Phone Number',
+                  value: "#{phone_number}"
+              }
+          ]
+      }
+      SLACK.ping notification
+
+    end
   end
 
 

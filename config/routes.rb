@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   get '/edit_profile' => 'users#edit', as: :edit_profile  #for non-sensitive editing (not email/password)
   patch '/user' => 'users#update', as: :user
+  get '/verify/:id' => 'users#verify', as: :user_verify
+  get '/resend-email/:id' => 'users#resend_email', as: :resend_email
+  get '/verify-help' => 'users#verify_help', as: :verify_help
 
   get '/meetings/new/:id' => 'meetings#new', as: :new_meeting
   post '/meetings' => 'meetings#create'

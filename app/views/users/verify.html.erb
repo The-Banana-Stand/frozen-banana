@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h1 class="text-center">Confirmation Email sent to <%= @user.email %></h1>
+</div>
+
+<p class="lead text-center">
+  Go check your inbox at <%= @user.email %>.  Click the link and Registration is complete.
+</p>
+
+<div class="row">
+  <div class="col-xs-2 col-xs-offset-3">
+    <%= link_to 'Resend Email', resend_email_path(@user.id), class: 'btn btn-primary btn-lg' %>
+  </div>
+
+  <div class="col-xs-3 col-xs-offset-2">
+    <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#requestHelp" aria-expanded="false" aria-controls="collapseExample">
+      Didn't get an Email?
+    </button>
+
+    <div class="collapse" id="requestHelp">
+      <div class="well">
+        <%= simple_form_for @user, url: verify_help_path, method: :get do |f| %>
+            <%= f.hidden_field :id, value: @user.id %>
+            <%= f.input :phone_number %>
+            <%= f.submit 'Get Help', class: 'btn btn-primary btn-sm' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
