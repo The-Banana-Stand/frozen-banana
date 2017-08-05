@@ -16,10 +16,10 @@ RSpec.describe 'user requests' do
   describe 'resend-email' do
     it 'resends confirmation to user' do
       user = create(:user, confirmed_at: nil)
-
+      count = ActionMailer::Base.deliveries.count
       get resend_email_path(user.id)
 
-      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      expect(ActionMailer::Base.deliveries.count).to eq(count + 1)
 
     end
   end

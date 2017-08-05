@@ -24,9 +24,7 @@ RSpec.feature 'User signs up for site' do
 
       click_on 'Complete Registration'
 
-
-      expect(page).to have_css '.alert-success'
-      expect(page).to have_content 'Verify Email'
+      expect(page).to have_content 'Confirmation Email'
 
     end
   end
