@@ -1,0 +1,33 @@
+<div class="well">
+  <h4>As a Decision Maker, what times are you usually available?</h4>
+
+  <div class="form-inline text-center">
+    <%= f.association :general_availabilities do |ga| %>
+
+        <div class="row" id="block-<%= ga.object.block %>">
+
+          <div class="col-sm-3 col-sm-offset-1">
+            <%= ga.input :day, as: :select, collection: [ ['Monday', 1], ['Tuesday', 2], ['Wednesday', 3], ['Thursday', 4],
+                                                          ['Friday', 5], ['Saturday', 6], ['Sunday', 7] ], include_blank: false %>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">Start:</label>
+              <%= ga.time_field :start_time, ampm: true, label: false, class: 'form-control' %>
+            </div>
+          </div>
+
+
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">End:</label>
+              <%= ga.time_field :end_time, ampm: true, class: 'form-control' %>
+            </div>
+          </div>
+
+        </div>
+    <% end %>
+  </div>
+</div>

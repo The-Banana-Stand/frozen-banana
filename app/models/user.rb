@@ -229,7 +229,7 @@ class User < ApplicationRecord
   private
 
   def create_general_availabilities
-    (1..5).each do |num|
+    (1..3).each do |num|
 
       self.general_availabilities.create(block: num, day: num)
 
