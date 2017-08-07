@@ -57,7 +57,7 @@ class UsersController < ApplicationController
           if URI(request.referer).path == edit_profile_path
             redirect_to edit_profile_path
           else
-            redirect_to schedule_time_path
+            redirect_to dashboard_path
           end
         }
 

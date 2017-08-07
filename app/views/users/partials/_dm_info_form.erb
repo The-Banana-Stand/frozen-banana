@@ -1,26 +1,22 @@
-<div class="row">
+<% submit_button = false if local_assigns[:submit_button].nil? %>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        Update what you're currently evaluating.
-        <span class="pull-right"> <%= f.submit 'Save', class: 'btn btn-primary btn' %></span>
-      </h3>
-      <div class="clearfix"></div>
-    </div>
-    <div class="panel-body">
-      <%= f.input :dm_evaluating, placeholder: 'Example: Phone Systems, CRM, Tire Vendor, Uniform Vendor.......',
-                  label: false, input_html: {rows: 7} %>
+<div class="panel panel-default setting-box">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      Update what you're currently evaluating.
+      <span id="evaluating-info-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom"
+        data-content="<small>Let potential vendors know what solutions you are looking to for.</small>"
+      class="glyphicon glyphicon-question-sign mag-icon dashboard-popover"> </span>
+      <span class="pull-right"> <%= f.submit 'Save', class: 'btn btn-primary btn' if submit_button %></span>
+    </h3>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body">
 
-    </div>
+        <%= f.input_field :dm_evaluating, placeholder: 'Example: Phone Systems, CRM, Tire Vendor, Uniform Vendor.......',
+                    label: false, class: 'form-control' %>
   </div>
 
-
-
-
-  <!--<div class="col-xs-2 col-xs-offset-2">-->
-   <!---->
-  <!--</div>-->
-
 </div>
+
 

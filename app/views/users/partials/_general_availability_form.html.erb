@@ -1,8 +1,15 @@
-<div class="panel panel-default">
+<% submit_button = false if local_assigns[:submit_button].nil? %>
+<div class="panel panel-default setting-box">
   <div class="panel-heading">
     <h3 class="panel-title">
       Update General Availability.
-      <span class="pull-right"> <%= f.submit 'Save', class: 'btn btn-primary btn' %></span>
+      <span id="ga-info-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom"
+            data-content="<small>
+            Companies will ask to buy 20, 40, or 60 minutes of your time within the blocks below. Once a meeting is purchased, we will send you a calendar invite. If the time doesn’t work, just give us a few that do and we’ll take care of the rest!
+            </small>"
+            class="glyphicon glyphicon-question-sign mag-icon small dashboard-popover">
+      </span>
+      <span class="pull-right"> <%= f.submit 'Save', class: 'btn btn-primary btn' if submit_button %></span>
     </h3>
     <div class="clearfix"></div>
   </div>

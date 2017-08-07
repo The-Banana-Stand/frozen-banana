@@ -1,13 +1,15 @@
-<div class="page-header col-md-12 text-center">
+<div class="row text-center">
   <h1>Account Setup</h1>
 </div>
 
 
 
-<div class="col-md-6 col-md-offset-4">
-  <%= simple_form_for @user, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
-                      wrapper_mappings: {radio_buttons: :horizontal_radio_and_checkboxes} do |f| %>
+  <%= simple_form_for @user do |f| %>
 
+    <div id="section-1" class="col-sm-6 col-sm-offset-3">
+      <p class="lead">
+        Let potential vendors know what solutions you are looking to for.
+      </p>
       <%- if current_user.role == 'dm' || current_user.role == 'both' %>
           <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
       <% end %>
@@ -16,8 +18,28 @@
           <%= render partial: 'users/partials/sp_info_form', locals: {f: f}  %>
       <% end %>
 
-      <%= f.submit 'Start Scheduling Meetings', class: 'btn btn-primary col-md-offset-2' %>
+      <button class="btn btn-primary" id="next">Next</button>
+    </div>
+
+    <div id="section-2" class="hidden col-sm-6 col-sm-offset-3">
+      <p class="lead">
+        Companies will ask to buy 20, 40, or 60 minutes of your time within the blocks below.
+        Once a meeting is purchased, we will send you a calendar invite.
+        If the time doesn’t work, just give us a few that do and we’ll take care of the rest!
+      </p>
+      <%= render 'users/partials/general_availability_form', f: f %>
+      <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
+    </div>
 
   <% end %>
-</div>
 
+<script>
+
+  $('#next').click(function(e){
+    e.preventDefault();
+    $('#section-1').toggle();
+    $('#section-2').toggleClass('hidden');
+  });
+
+
+</script>

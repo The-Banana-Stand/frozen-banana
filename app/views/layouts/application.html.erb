@@ -45,8 +45,10 @@
       <div class="collapse navbar-collapse" id="navcol-1">
         <%- if user_signed_in? %>
             <ul class="nav navbar-nav">
-              <li><%= link_to 'Schedule Time', schedule_time_path %></li>
               <li><%= link_to 'My Dashboard', dashboard_path %></li>
+              <% if current_user.sp? %>
+              <li><%= link_to 'Meeting Marketplace', schedule_time_path %></li>
+              <% end %>
               <li><%= link_to 'Invite', new_invite_path %></li>
             </ul>
         <% end %>

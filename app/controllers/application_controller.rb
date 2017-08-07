@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.sign_in_count == 1
-      dashboard_path(tutorial: true)
+      account_setup_path
     else
       dashboard_path
     end

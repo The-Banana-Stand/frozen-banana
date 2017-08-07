@@ -18,7 +18,6 @@ class Meeting < ApplicationRecord
   before_create :set_confirmation_number
   after_create :send_slack_notification
 
-
   def status_enum
     %w(requested scheduled completed change_pending cancelled test)
   end
@@ -60,15 +59,15 @@ class Meeting < ApplicationRecord
   end
 
   def display_desired_day
-    %w(Monday Tuesday Wednesday Thursday Friday Saturday Sunday)[self.desired_day - 1]
+    desired_day ? %w(Monday Tuesday Wednesday Thursday Friday Saturday Sunday)[self.desired_day - 1] : 'Pending'
   end
 
   def show_desired_start_time
-    desired_start_time.strftime('%l:%M%p')
+    desired_start_time ? desired_start_time.strftime('%l:%M%p') : 'Pending'
   end
 
   def show_desired_end_time
-    desired_end_time.strftime('%l:%M%p')
+    desired_end_time ? desired_end_time.strftime('%l:%M%p') : 'Pending'
   end
 
   def set_display_attributes(id)

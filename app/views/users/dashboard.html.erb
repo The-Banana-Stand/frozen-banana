@@ -1,121 +1,144 @@
 <div class="row">
-  <div class="">
-    <h1>My Dashboard</h1>
-  </div>
+  <h1>My Dashboard</h1>
 </div>
 
-<a type="button" data-toggle="collapse" data-target="#info-fields-row"
-        aria-expanded="true" aria-controls="collapseExample">
-  <span class="glyphicon glyphicon-chevron-down clickable large-text"></span>
-</a>
+<% if @user.dm? %>
+  <a data-toggle="collapse" data-target="#info-fields-row"
+          aria-expanded="true" aria-controls="collapseExample" class="clickable large-text">
+    Meeting Settings
+    <span class="glyphicon glyphicon-chevron-down"></span>
+  </a>
 
-<div class="row collapse in" id="info-fields-row">
-  <div class="col-sm-6">
-    <%= simple_form_for @user, remote: true do |f| %>
-    <%= render 'users/partials/dm_info_form', f: f %>
-    <% end %>
+  <div class="row collapse in" id="info-fields-row">
+    <div class="col-sm-6">
+      <%= simple_form_for @user, remote: true do |f| %>
+      <%= render 'users/partials/dm_info_form', f: f, submit_button: true %>
+      <% end %>
+    </div>
+
+    <div class="col-sm-6">
+      <%= simple_form_for @user, remote: true do |f| %>
+          <%= render 'users/partials/general_availability_form', f: f, submit_button: true %>
+      <% end %>
+    </div>
   </div>
+<% end %>
 
-  <div class="col-sm-6">
-    <%= simple_form_for @user, remote: true do |f| %>
-        <%= render 'users/partials/general_availability_form', f: f %>
-    <% end %>
-  </div>
-</div>
+<script>
+  $('.setting-box').matchHeight({byRow: false});
+</script>
 
-<div class="page-header">
-  <h1>My Meetings</h1>
-</div>
+<div class="row">
 
-<div class="row" id="meetings-row">
-  <table class="table" style="border-collapse:collapse;">
+  <div class="panel panel-default">
 
-    <thead>
-    <tr><th>&nbsp;</th>
-      <th id="status-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-title="Status Key"
-          data-content="<small><strong>Requested:</strong> Both parties have not yet agreed. Waiting for schedule confirmation.  <br/> </br>
+    <div class="panel-heading">
+      <h2>My Meetings</h2>
+    </div>
+
+    <div class="panel-body">
+
+      <div class="row" id="meetings-row">
+        <table class="table" style="border-collapse:collapse;">
+
+          <thead>
+          <tr><th>&nbsp;</th>
+            <th id="status-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-title="Status Key"
+                data-content="<small><strong>Requested:</strong> Both parties have not yet agreed. Waiting for schedule confirmation.  <br/> </br>
         <strong>Scheduled:</strong> Both parties have agreed to meet and accepted calendar invites. <br/> </br>
         <strong>Completed:</strong> Meeting has taken place. <br> <br>
         <strong>Cancelled:</strong>  Meeting has been canceled. <br> <br>
         <strong>Change Pending:</strong> One party has submitted a change request.
-        </small>">
-        Meeting Status <span class="glyphicon glyphicon-question-sign mag-icon small"></span>
-      </th>
-      <th>Your Role</th>
-      <th>Meeting With</th>
-      <th>Company</th>
-      <th>Date</th>
-      <th>From</th>
-      <th>To</th>
-      <th>Change/Cancel</th>
-    </tr>
-    </thead>
+        </small>" class="dashboard-popover">
+              Meeting Status <span class="glyphicon glyphicon-question-sign mag-icon small"></span>
+            </th>
+            <th>Your Role</th>
+            <th>Meeting With</th>
+            <th>Company</th>
+            <th>Date</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Change/Cancel</th>
+          </tr>
+          </thead>
 
-    <tbody>
+          <tbody>
 
-    <%- @meetings.each do |meeting| %>
-        <%- meeting.set_display_attributes(@user.id) %>
+          <% if @meetings.empty? %>
+          <%= render 'meetings/partials/welcome_meeting', user: @user %>
+          <% end %>
 
-        <tr data-toggle="collapse" data-target="#meeting<%= meeting.id %>" class="accordion-toggle" role="button">
-          <td> <i class="glyphicon glyphicon-chevron-right"></i></td>
-          <td class="<%= meeting.row_shade %>"><%= meeting.status.capitalize.gsub(/_/, ' ') %></td>
-          <td><%= meeting.role %></td>
-          <td><%= meeting.second_party.full_name %></td>
-          <td><%= meeting.second_party.company_name %></td>
-          <td><%= meeting.show_date %></td>
-          <td><%= meeting.show_start_time %></td>
-          <td><%= meeting.show_end_time %></td>
-          <td><%= link_to 'Change', new_change_request_path(id: meeting.id) unless %w(completed cancelled).include?(meeting.status) %></td>
-        </tr>
+          <%- @meetings.each do |meeting| %>
+              <%- meeting.set_display_attributes(@user.id) %>
 
-        <tr>
-          <td colspan="12" class="hiddenRow">
-            <div class="accordian-body collapse col-md-12" id="meeting<%= meeting.id %>">
-              <div class="row match-my-cols">
+              <tr data-toggle="collapse" data-target="#meeting<%= meeting.id %>" class="accordion-toggle" role="button">
+                <td> <a style="text-decoration: none" class="glyphicon glyphicon-chevron-right"></a></td>
+                <td class="<%= meeting.row_shade %>"><%= meeting.status.capitalize.gsub(/_/, ' ') %></td>
+                <td><%= meeting.role %></td>
+                <td><%= meeting.second_party.full_name %></td>
+                <td><%= meeting.second_party.company_name %></td>
+                <td><%= meeting.show_date %></td>
+                <td><%= meeting.show_start_time %></td>
+                <td><%= meeting.show_end_time %></td>
+                <td><%= link_to 'Change', new_change_request_path(id: meeting.id) unless %w(completed cancelled).include?(meeting.status) %></td>
+              </tr>
 
-                <div class="col-md-6 well">
-                  <h3>Meeting Details:</h3>
-                  <p><strong>Meeting Confirmation #:</strong> <%= meeting.confirmation_number %></p>
-                  <p><strong>Price/Hr:</strong> <%= humanized_money_with_symbol meeting.price%></p>
+              <tr>
+                <td colspan="12" class="hiddenRow">
+                  <div class="accordian-body collapse col-md-12" id="meeting<%= meeting.id %>">
+                    <div class="row match-my-cols">
 
-                  <%- if meeting.date.nil? %>
-                      <p><strong>Requested Time:</strong>
-                        <%= meeting.display_desired_day + ', between ' + meeting.show_desired_start_time + ' and ' + meeting.show_desired_end_time %>
-                      </p>
-                  <% end %>
+                      <div class="col-md-6 well">
+                        <h3>Meeting Details:</h3>
+                        <p><strong>Meeting Confirmation #:</strong> <%= meeting.confirmation_number %></p>
+                        <p><strong>Price/Hr:</strong> <%= humanized_money_with_symbol meeting.price%></p>
 
-                  <p><strong class="text-large">Type:</strong> <%= meeting.meeting_type.capitalize %></p>
-                  <p><strong>Location:</strong> <%= meeting.address || 'No Address Set' %></p>
-                  <hr>
-                  <p><strong>Instructions:</strong> <br>
-                    <%= meeting.instructions || 'No Instructions' %></p>
-                </div>
+                        <%- if meeting.date.nil? %>
+                            <p><strong>Requested Time:</strong>
+                              <%= meeting.display_desired_day + ', between ' + meeting.show_desired_start_time + ' and ' + meeting.show_desired_end_time %>
+                            </p>
+                        <% end %>
 
-                <div class="col-md-6 well">
-                  <h3>Decision Maker:</h3>
-                  <p><strong>Decision Maker interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
+                        <p><strong class="text-large">Type:</strong> <%= meeting.meeting_type.capitalize %></p>
+                        <p><strong>Location:</strong> <%= meeting.address || 'No Address Set' %></p>
+                        <hr>
+                        <p><strong>Instructions:</strong> <br>
+                          <%= meeting.instructions || 'No Instructions' %></p>
+                      </div>
 
-                  <h3>Sales Person:</h3>
-                  <p><strong>Sales Person products/services:</strong> <%= meeting.sp.sp_product_service || 'No Information' %></p>
-                </div>
+                      <div class="col-md-6 well">
+                        <h3>Decision Maker:</h3>
+                        <p><strong>Decision Maker interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
+
+                        <h3>Sales Person:</h3>
+                        <p><strong>Sales Person products/services:</strong> <%= meeting.sp.sp_product_service || 'No Information' %></p>
+                      </div>
 
 
-              </div>
+                    </div>
 
 
-            </div>
-          </td>
-        </tr>
+                  </div>
+                </td>
+              </tr>
 
-    <% end %>
+          <% end %>
 
-    </tbody>
-  </table>
+          </tbody>
+        </table>
+
+      </div>
+
+
+    </div>
+  </div>
 
 </div>
+
+
 <!-- meetings row end-->
 
 
 <script>
-  $('#status-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
+
 </script>

@@ -145,6 +145,14 @@ class User < ApplicationRecord
     self.role == 'both'
   end
 
+  def dm?
+    self.role == 'dm' || multi_role?
+  end
+
+  def sp?
+    self.role == 'sp' || multi_role?
+  end
+
   def process_payment_info(stripe_token)
     stripe_token = set_stripe_token(stripe_token)
     if self.customer_token.present?
@@ -235,6 +243,8 @@ class User < ApplicationRecord
 
     end
   end
+
+
 
   def send_slack_notification
     if Rails.env.production?
