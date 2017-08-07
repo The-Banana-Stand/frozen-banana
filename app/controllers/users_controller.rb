@@ -50,18 +50,29 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html {
+          flash[:success] = 'Information Saved'
+          if URI(request.referer).path == edit_profile_path
+            redirect_to edit_profile_path
+          else
+            redirect_to schedule_time_path
+          end
+        }
 
-    if @user.update(user_params)
-      flash[:success] = 'Information Saved'
-      if URI(request.referer).path == edit_profile_path
-        redirect_to edit_profile_path
+        format.js {flash.now[:success] = 'Information Saved'}
+
       else
-        redirect_to schedule_time_path
+        format.html {render :edit}
+        format.js
       end
 
-    else
-      render :edit
     end
+
+
+
+
   end
 
 

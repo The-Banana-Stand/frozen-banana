@@ -1,33 +1,52 @@
-<div class="well">
-  <h4>As a Decision Maker, what times are you usually available?</h4>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      Update General Availability.
+      <span class="pull-right"> <%= f.submit 'Save', class: 'btn btn-primary btn' %></span>
+    </h3>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body">
 
-  <div class="form-inline text-center">
-    <%= f.association :general_availabilities do |ga| %>
-
-        <div class="row" id="block-<%= ga.object.block %>">
-
-          <div class="col-sm-3 col-sm-offset-1">
-            <%= ga.input :day, as: :select, collection: [ ['Monday', 1], ['Tuesday', 2], ['Wednesday', 3], ['Thursday', 4],
-                                                          ['Friday', 5], ['Saturday', 6], ['Sunday', 7] ], include_blank: false %>
-          </div>
-
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label class="control-label">Start:</label>
-              <%= ga.time_field :start_time, ampm: true, label: false, class: 'form-control' %>
-            </div>
-          </div>
-
-
-
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label class="control-label">End:</label>
-              <%= ga.time_field :end_time, ampm: true, class: 'form-control' %>
-            </div>
-          </div>
-
+    <div class="form-inline text-center">
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-1">
+          <strong>Day</strong>
         </div>
-    <% end %>
+        <div class="col-xs-3">
+          <strong>Start</strong>
+        </div>
+        <div class="col-xs-3">
+          <strong>End</strong>
+        </div>
+      </div>
+      <%= f.association :general_availabilities do |ga| %>
+
+          <div class="row" id="block-<%= ga.object.block %>">
+
+            <div class="col-sm-3 col-sm-offset-1">
+              <%= ga.input :day, as: :select, collection: [ ['Monday', 1], ['Tuesday', 2], ['Wednesday', 3],
+                                                            ['Thursday', 4], ['Friday', 5], ['Saturday', 6],
+                                                            ['Sunday', 7] ], include_blank: false, label: false, class: 'margin-bottom' %>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <%= ga.time_field :start_time, ampm: true, label: false, class: 'form-control margin-bottom' %>
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <%= ga.time_field :end_time, ampm: true, class: 'form-control  margin-bottom' %>
+              </div>
+            </div>
+
+          </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

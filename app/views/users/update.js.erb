@@ -1,0 +1,5 @@
+$("#flash-container").html("<%= escape_javascript render 'layouts/messages' %>");
+
+setTimeout(function() {
+  $('#flash').slideUp();
+}, 5000);

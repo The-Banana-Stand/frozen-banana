@@ -6,23 +6,18 @@
 
 <a type="button" data-toggle="collapse" data-target="#info-fields-row"
         aria-expanded="true" aria-controls="collapseExample">
-  <span class="glyphicon glyphicon-chevron-down"></span>
+  <span class="glyphicon glyphicon-chevron-down clickable large-text"></span>
 </a>
-<div class="collapse" id="collapseExample">
-  <div class="well">
-    ...
-  </div>
-</div>
 
 <div class="row collapse in" id="info-fields-row">
   <div class="col-sm-6">
-    <%= simple_form_for @user do |f| %>
+    <%= simple_form_for @user, remote: true do |f| %>
     <%= render 'users/partials/dm_info_form', f: f %>
     <% end %>
   </div>
 
   <div class="col-sm-6">
-    <%= simple_form_for @user do |f| %>
+    <%= simple_form_for @user, remote: true do |f| %>
         <%= render 'users/partials/general_availability_form', f: f %>
     <% end %>
   </div>

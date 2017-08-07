@@ -1,13 +1,26 @@
 <div class="row">
-  <div class="col-xs-8">
-    <h4>Update what you're currently evaluating.</h4>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Update what you're currently evaluating.
+        <span class="pull-right"> <%= f.submit 'Save', class: 'btn btn-primary btn' %></span>
+      </h3>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+      <%= f.input :dm_evaluating, placeholder: 'Example: Phone Systems, CRM, Tire Vendor, Uniform Vendor.......',
+                  label: false, input_html: {rows: 7} %>
+
+    </div>
   </div>
 
-  <div class="col-xs-2 col-xs-offset-2">
-    <%= f.submit 'Post', class: 'btn btn-primary btn' %>
-  </div>
+
+
+
+  <!--<div class="col-xs-2 col-xs-offset-2">-->
+   <!---->
+  <!--</div>-->
 
 </div>
 
-<%= f.input :dm_evaluating, placeholder: 'Example: Phone Systems, CRM, Tire Vendor, Uniform Vendor.......',
-            label: false %>

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/schedule_time' => 'users#schedule_time'
 
   get '/edit_profile' => 'users#edit', as: :edit_profile  #for non-sensitive editing (not email/password)
-  patch '/user' => 'users#update', as: :user
+  # patch '/user' => 'users#update', as: :user
   get '/verify/:id' => 'users#verify', as: :user_verify
   get '/resend-email/:id' => 'users#resend_email', as: :resend_email
   get '/verify-help' => 'users#verify_help', as: :verify_help
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get '/meetings/confirm_meeting/:id' => 'meetings#confirm_meeting', as: :confirm_meeting
 
+  resources :users, only: [:update]
   resources :change_requests,     only: [:new, :create]
   resources :invites,             only: [:new, :create]
 

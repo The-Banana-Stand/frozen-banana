@@ -79,7 +79,10 @@
 
   <div class="<%= request.url == root_url || request.url == root_url(no_redirect: true) ? 'container-fluid' : 'container' %>">
 
-    <%= render('layouts/messages.html.erb') %>
+    <div id="flash-container">
+      <%= render('layouts/messages.html.erb') %>
+    </div>
+
 
       <%= yield %>
 
