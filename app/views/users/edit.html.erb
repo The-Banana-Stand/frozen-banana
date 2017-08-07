@@ -18,7 +18,6 @@
         <div id="dm_sp_info" class="tab-pane fade in active">
           <div class="col-md-offset-2">
             <%- if @user.role == 'dm' || @user.role == 'both' %>
-                <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
             <% end %>
 
             <%- if @user.role == 'sp' || @user.role == 'both' %>
