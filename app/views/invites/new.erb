@@ -11,7 +11,12 @@
 
       <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
-          <%= f.input :attachment, class: 'form-control', as: :file, label: 'Upload Contact List'%>
+          <input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+          <div class="fileUpload btn btn-primary">
+            <span>Choose File</span>
+            <%= f.input_field :attachment, id: 'uploadBtn', class: 'upload', as: :file, label: false%>
+          </div>
+
         </div>
       </div>
 
@@ -20,7 +25,8 @@
       <%= f.hidden_field :last_name, value: 'file' %>
       <%= f.hidden_field :company_name, value: 'file' %>
 
-      <%= f.submit 'Upload File', class: 'btn btn-primary' %>
+        <%= f.submit 'Upload File', class: 'btn btn-primary' %>
+
 
   <% end %>
 
@@ -58,3 +64,9 @@
   <% end %>
 
 </div>
+
+<script>
+  document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.value;
+  };
+</script>
