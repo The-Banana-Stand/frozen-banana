@@ -15,7 +15,7 @@
 
     <%= f.error_notification %>
 
-    <%= f.hidden_field :desire_block_id, value: @desired_block.id %>
+    <%= f.hidden_field :desired_block_id, value: @desired_block.id %>
     <%= f.hidden_field :dm_id, value: @desired_block.user.id %>
     <%= f.hidden_field :sp_id, value: current_user.id %>
     <%= f.hidden_field :price_cents, value: @desired_block.user.price_cents %>
@@ -33,7 +33,7 @@
 
     <div class="well col-sm-6">
       <p>
-        Once payment information is received, the decision maker will confirm calendar availability.
+        Once payment information is received, the Decision Maker will confirm calendar availability.
       </p>
       <p>
         You will receive an email from MeetingSlice with the exact dates and times the Decision Maker is available for you to choose from.
@@ -50,21 +50,23 @@
         </label>
       </article>
 
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-              data-description="Credit Card Info"
-              data-amount="<%= @desired_block.user.total_price.fractional %>"
-              data-locale="auto"
-              data-label="Submit Payment Information"
-              data-panel-label="Use this Card"
-              data-zip-code="true">
+      <%= f.submit 'Schedule Meeting', class: 'btn btn-primary' %>
 
-      </script>
+      <!--<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
+              <!--data-key="<%= Rails.configuration.stripe[:publishable_key] %>"-->
+              <!--data-description="Credit Card Info"-->
+              <!--data-amount="<%= @desired_block.user.total_price.fractional %>"-->
+              <!--data-locale="auto"-->
+              <!--data-label="Submit Payment Information"-->
+              <!--data-panel-label="Use this Card"-->
+              <!--data-zip-code="true">-->
+
+      <!--</script>-->
       <div class="row">
         <div class="col-sm-offset-1">
-          <p>
-            <span class="small">For beta, use Credit Card #: 4242 4242 4242 4242</span>
-          </p>
+          <!--<p>-->
+            <!--<span class="small">For beta, use Credit Card #: 4242 4242 4242 4242</span>-->
+          <!--</p>-->
           <!-- Button trigger modal -->
           <a type="button" class="clickable" data-toggle="modal" data-target="#myModal">
             Review Terms of Service

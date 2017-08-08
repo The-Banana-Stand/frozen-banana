@@ -12,7 +12,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(meeting_params)
 
     if @meeting.save
-    current_user.process_payment_info(params[:stripeToken])
+    # current_user.process_payment_info(params[:stripeToken])
     redirect_to confirm_meeting_path(@meeting.id)
     else
       @desired_block = GeneralAvailability.includes(:user).find(params[:meeting][:desired_block_id])
