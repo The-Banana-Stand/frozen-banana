@@ -16,7 +16,7 @@
             <span>Choose File</span>
             <%= f.input_field :attachment, id: 'uploadBtn', class: 'upload', as: :file, label: false%>
           </div>
-
+          <span><%= f.error :attachment %></span>
         </div>
       </div>
 
