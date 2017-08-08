@@ -66,7 +66,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {host: 'https://meetingslice.com'}
   # SMTP settings for Amazon SES
   config.action_mailer.smtp_settings = {
-      :address        => 'smtp.office365.com',
+      :address        => 'smtp.gmail.com',
       :port           => '587',
       :authentication => :login,
       :user_name      => ENV['SMTP_USERNAME'],
