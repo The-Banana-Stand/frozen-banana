@@ -7,11 +7,11 @@ class GeneralAvailability < ApplicationRecord
   end
 
   def show_start_time
-    start_time.strftime('%l:%M%p')
+    start_time ? start_time.strftime('%l:%M%p') : ''
   end
 
   def show_end_time
-    end_time.strftime('%l:%M%p')
+    end_time ? end_time.strftime('%l:%M%p') : ''
   end
 
 end

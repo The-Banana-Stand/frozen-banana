@@ -52,6 +52,7 @@ gem 'exception_notification'
 gem 'devise'
 gem 'omniauth-oauth2', '1.3.1'
 gem 'omniauth-linkedin-oauth2'
+gem 'jquery-timepicker-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

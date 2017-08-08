@@ -5,7 +5,9 @@
       Update General Availability.
       <span id="ga-info-popover" data-toggle="popover" data-trigger="hover" data-placement="bottom"
             data-content="<small>
-            Companies will ask to buy 20, 40, or 60 minutes of your time within the blocks below. Once a meeting is purchased, we will send you a calendar invite. If the time doesn’t work, just give us a few that do and we’ll take care of the rest!
+            Companies will ask to buy 20, 40, or 60 minutes of your time within the blocks below.
+             Once a meeting is purchased, we will send you a calendar invite. If the time doesn’t work,
+              just give us a few that do and we’ll take care of the rest!
             </small>"
             class="glyphicon glyphicon-question-sign mag-icon small dashboard-popover">
       </span>
@@ -39,7 +41,8 @@
 
             <div class="col-sm-3">
               <div class="form-group">
-                <%= ga.time_field :start_time, ampm: true, label: false, class: 'form-control margin-bottom' %>
+                <%= ga.input :start_time, as: :string, input_html: {class: 'form-control time-picker', value: ga.object.show_start_time},
+                             label: false %>
               </div>
             </div>
 
@@ -47,7 +50,8 @@
 
             <div class="col-sm-3">
               <div class="form-group">
-                <%= ga.time_field :end_time, ampm: true, class: 'form-control  margin-bottom' %>
+                <%= ga.input :end_time, as: :string, input_html: {class: 'form-control time-picker', value: ga.object.show_end_time},
+                             label: false %>
               </div>
             </div>
 
@@ -57,3 +61,11 @@
 
   </div>
 </div>
+
+<script>
+  $('.time-picker').timepicker({
+    'minTime': '5:00am',
+    'maxTime': '9:00pm',
+    forceRoundTime: true
+  });
+</script>
