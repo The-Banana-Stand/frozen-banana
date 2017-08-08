@@ -8,7 +8,7 @@
 
     <div id="section-1" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
       <p class="lead">
-        Let potential vendors know what solutions you are looking to for.
+        Let vendors know what solutions you are looking for.
       </p>
       <%- if current_user.role == 'dm' || current_user.role == 'both' %>
           <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
@@ -23,7 +23,6 @@
 
     <div id="section-2" class="hidden col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
       <p class="lead">
-        Companies will ask to buy 20, 40, or 60 minutes of your time within the blocks below.
         Once a meeting is purchased, we will send you a calendar invite.
         If the time doesn’t work, just give us a few that do and we’ll take care of the rest!
       </p>
@@ -39,6 +38,7 @@
     e.preventDefault();
     $('#section-1').toggle();
     $('#section-2').toggleClass('hidden');
+    window.scrollTo(0, 0);
   });
 
 

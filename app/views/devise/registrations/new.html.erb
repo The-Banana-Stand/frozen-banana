@@ -11,22 +11,16 @@
 
         <%= f.error_notification %>
         <%= f.hidden_field :role, value: 'dm' %>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.input :email, required: true, autofocus: true, placeholder: 'Email Address' %>
-          </div>
+        <div class="col-sm-12">
+          <%= f.input :email, required: true, autofocus: true, placeholder: 'Email Address' %>
         </div>
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.input :password, required: true, placeholder: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-          </div>
+        <div class="col-sm-12">
+          <%= f.input :password, required: true, placeholder: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
         </div>
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <%= f.input :password_confirmation, required: true, placeholder: 'Must match password' %>
-          </div>
+        <div class="col-sm-12">
+          <%= f.input :password_confirmation, required: true, placeholder: 'Must match password' %>
         </div>
 
         <%= render partial: 'users/partials/general_form', locals: {f: f} %>

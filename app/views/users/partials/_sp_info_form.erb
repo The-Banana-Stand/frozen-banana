@@ -92,11 +92,3 @@
   <%= f.input :sp_close_percentage, label: false,
               collection: User.sp_close_percentages.keys, include_blank: false %>
 </div>
-
-<div class="form-group col-md-offset-2">
-  <h3>Do other salespeople in your company have similar closing percentages?</h3>
-  <%= f.input :sp_organization_close_percentage, label: false,
-              collection: User.sp_organization_close_percentages.keys, include_blank: false %>
-</div>
-
-

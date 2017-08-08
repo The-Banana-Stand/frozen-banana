@@ -77,13 +77,13 @@ class User < ApplicationRecord
   after_create :send_slack_notification, :create_general_availabilities
 
   # Validations
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
-  validates_attachment_size :avatar, :in => 0.megabytes..4.megabytes
+  # has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
+  # validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  # validates_attachment_size :avatar, :in => 0.megabytes..4.megabytes
 
-  validates :first_name, :last_name, :title, :company_name, presence: true
+  validates_presence_of :first_name, :last_name, :title, :company_name
 
-  validates :username, uniqueness: true
+  validates_uniqueness_of :username, allow_nil: true, allow_blank: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -100,7 +100,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
-      user.avatar = URI.parse(auth.info.image) if auth.info.image
+      # user.avatar = URI.parse(auth.info.image) if auth.info.image
       user.username = auth.info.nickname
       current_position = auth.extra.raw_info.positions.values[1].find{|p| p.isCurrent}
       user.title = current_position.title

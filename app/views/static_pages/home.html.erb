@@ -53,33 +53,33 @@
             </span>
             <h4>OR</h4>
             <hr/>
-            <div class="col-xs-11">
+            <div class="col-xs-10 col-xs-offset-1">
               <%= simple_form_for @user, url: user_registration_path, html: {class: 'form-horizontal'},
                                   wrapper: :horizontal_form do |f| %>
 
                   <%= f.hidden_field :role, value: 'dm' %>
 
                   <div class="form-group form-group-sm">
-                    <%= f.input :email, class: 'form-control' %>
+                    <%= f.input_field :email, class: 'form-control', label: false, placeholder: 'Email' %>
                   </div>
                   <div class="form-group form-group-sm">
-                    <%= f.input :first_name, class: 'form-control' %>
+                    <%= f.input_field :first_name, class: 'form-control', label: false, placeholder: 'First Name' %>
                   </div>
                   <div class="form-group form-group-sm">
-                    <%= f.input :last_name, class: 'form-control' %>
+                    <%= f.input_field :last_name, class: 'form-control', label: false, placeholder: 'Last Name' %>
                   </div>
                   <div class="form-group form-group-sm">
-                    <%= f.input :title, class: 'form-control' %>
+                    <%= f.input_field :title, class: 'form-control', label: false, placeholder: 'Job Title' %>
                   </div>
                   <div class="form-group form-group-sm">
-                    <%= f.input :company_name, class: 'form-control', label: 'Company' %>
+                    <%= f.input_field :company_name, class: 'form-control', label: false, placeholder: 'Company' %>
                   </div>
                   <div class="form-group form-group-sm">
-                    <%= f.input :password, class: 'form-control' %>
+                    <%= f.input_field :password, class: 'form-control', label: false, placeholder: 'Password' %>
                   </div>
 
 
-                  <%= f.submit 'Register Now', class: 'btn btn-primary' %>
+                  <%= f.submit 'Register Now', class: 'btn btn-primary center-block' %>
 
               <% end %>
             </div>
