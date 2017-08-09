@@ -17,6 +17,10 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def about_us
+
+  end
+
   def error
     raise 'Here, have an error.'
   end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get '/terms-of-service' => 'static_pages#terms_of_service', as: :terms_of_service
   get '/privacy-policy' => 'static_pages#privacy_policy', as: :privacy_policy
+  get '/about-us' => 'static_pages#about_us', as: :about_us
 
   get '/help' => 'static_pages#help', as: :help
 
