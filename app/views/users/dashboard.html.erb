@@ -1,38 +1,47 @@
 <div class="row">
   <h1>
     My Dashboard
-    <span class="pull-right">
-      <%= link_to 'Update AR Info', edit_profile_path(anchor: 'ar_info'), class: 'btn btn-primary' %>
-    </span>
   </h1>
 
 </div>
 
 <% if @user.dm? %>
-  <a data-toggle="collapse" data-target="#info-fields-row"
-          aria-expanded="true" aria-controls="collapseExample" class="clickable large-text">
-    Meeting Settings
-    <span class="glyphicon glyphicon-chevron-down"></span>
-  </a>
 
-  <div class="row collapse in" id="info-fields-row">
-    <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0">
-      <%= simple_form_for @user, remote: true do |f| %>
-      <%= render 'users/partials/dm_info_form', f: f, submit_button: true %>
-      <% end %>
+    <div class="row margin-bottom">
+      <a data-toggle="collapse" data-target="#info-fields-row"
+         aria-expanded="true" aria-controls="collapseExample" class="clickable large-text">
+        Meeting Settings
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </a>
     </div>
 
-    <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0">
-      <%= simple_form_for @user, remote: true do |f| %>
-          <%= render 'users/partials/general_availability_form', f: f, submit_button: true %>
-      <% end %>
+    <div class="row collapse in" id="info-fields-row">
+      <div class="col-xs-12 margin-bottom">
+        <a type="button" class="modal-link-red clickable" data-toggle="modal" data-target="#price-info-modal">
+          How we price your time.
+        </a>
+
+
+        <span class="pull-right">
+          <%= link_to 'Update AR Info', edit_profile_path(anchor: 'ar_info'), class: 'btn btn-primary' %>
+        </span>
+      </div>
+
+      <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0">
+        <%= simple_form_for @user, remote: true do |f| %>
+        <%= render 'users/partials/dm_info_form', f: f, submit_button: true %>
+        <% end %>
+      </div>
+
+      <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0">
+        <%= simple_form_for @user, remote: true do |f| %>
+            <%= render 'users/partials/general_availability_form', f: f, submit_button: true %>
+        <% end %>
+      </div>
     </div>
-  </div>
 <% end %>
 
-<script>
-  $('.setting-box').matchHeight({byRow: false});
-</script>
+
 
 <div class="row">
 
@@ -144,7 +153,4 @@
 
 <!-- meetings row end-->
 
-
-<script>
-
-</script>
+<%= render 'users/partials/price_info_modal' %>

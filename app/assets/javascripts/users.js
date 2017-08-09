@@ -19,6 +19,6 @@ $(document).on('turbolinks:load', function() {
 
     $('.dashboard-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
 
-
+    $('.setting-box').matchHeight({byRow: false});
 
 });
