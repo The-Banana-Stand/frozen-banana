@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
   describe User, '#create_availabilities' do
     it 'creates associated records on creation' do
       user = FactoryGirl.create(:user)
-      expect(user.general_availabilities.last.block).to eq(5)
+      expect(user.general_availabilities.count).to eq(3)
     end
 
   end

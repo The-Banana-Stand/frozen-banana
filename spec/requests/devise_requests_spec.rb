@@ -17,7 +17,7 @@ RSpec.describe 'devise requests', type: :request do
 
       post user_session_path, params: {user: {email: user.email, password: user.password} }
 
-      expect(response).to redirect_to root_url
+      expect(response).to redirect_to dashboard_url
     end
   end
 
