@@ -34,14 +34,15 @@ Rails.application.configure do
 
 
   # SMTP settings for Amazon SES
-  # config.action_mailer.smtp_settings = {
-  #     :address        => 'smtp.office365.com',
-  #     :port           => '587',
-  #     :authentication => :login,
-  #     :user_name      => ENV['SMTP_USERNAME'],
-  #     :password       => ENV['SMTP_PASSWORD'],
-  #     :enable_starttls_auto => true
-  # }
+  config.action_mailer.smtp_settings = {
+      :address        => 'smtp.sendgrid.net',
+      :port           => '587',
+      :authentication => :login,
+      :user_name      => ENV['SENDGRID_USERNAME'],
+      :password       => ENV['SENDGRID_PASSWORD'],
+      :domain         => 'meetingslice.com',
+      :enable_starttls_auto => true
+  }
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
