@@ -1,4 +1,4 @@
-<h1>Welcome to MeetingSlice</h1>
+<h1 class="red">Welcome to MeetingSlice</h1>
 
 <p>Welcome <%= @email %>!</p>
 

@@ -53,6 +53,11 @@ gem 'devise'
 gem 'omniauth-oauth2', '1.3.1'
 gem 'omniauth-linkedin-oauth2'
 gem 'jquery-timepicker-rails'
+gem 'inky-rb', require: 'inky'
+# Stylesheet inlining for email
+gem 'roadie', '~> 3.2'
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

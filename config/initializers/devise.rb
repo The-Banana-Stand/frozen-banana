@@ -13,9 +13,10 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'to_not_reply@meetingslice.com'
+  Devise::Mailer.layout 'mailer'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'MyMailer'
+  config.mailer = 'CustomDeviseMailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
