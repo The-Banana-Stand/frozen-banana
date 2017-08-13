@@ -1,26 +1,64 @@
 @import "foundation-emails";
 
-body{
-  padding: 0;
-  background: #f7f7f7;
-  text-align: center;
+// These are the styles to make some of the templates look extra nice.
+// Feel free to remove these styles for production!
+
+// Body Styles
+body,
+html,
+.body {
+  background: #f3f3f3 !important;
 }
 
+.container.header {
+  background: #f3f3f3;
+}
 
-.email-table{
-  width: 538px;
+.body-drip {
+  border-top: 8px solid #663399;
+}
+
+// Full Width Headers
+.header {
+  background: #262626;
+  h4{
+    color: #e9e9e9;
+  }
+}
+
+.header .columns {
+  padding-bottom: 0;
+}
+
+.header p {
+  color: #fff;
+  padding-top: 15px;
+}
+
+.header .wrapper-inner {
   padding: 20px;
-  background: #fff;
-  margin: 40px auto;
-  text-align: left;
-  font-family: 'Helvetica Neue';
-
 }
 
-h1{
-  font-size: 20px;
+.header .container {
+  background: transparent;
 }
-p{
-  margin-top: 0;
-  font-size: 15px;
+
+// Social Media
+table.button.facebook table td {
+  background: #3B5998 !important;
+  border-color: #3B5998;
+}
+
+table.button.twitter table td {
+  background: #1daced !important;
+  border-color: #1daced;
+}
+
+table.button.google table td {
+  background: #DB4A39 !important;
+  border-color: #DB4A39;
+}
+
+.wrapper.secondary {
+  background: #f3f3f3;
 }

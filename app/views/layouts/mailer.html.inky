@@ -12,10 +12,32 @@
       <tr>
         <td class="center" align="center" valign="top">
           <center>
-            <%= yield %>
+            <container>
+
+              <row class="header">
+                <columns>
+
+                  <spacer size="16"></spacer>
+
+                  <h4 class="text-center">MeetingSlice</h4>
+                </columns>
+              </row>
+
+              <%= yield %>
+
+            </container>
+
           </center>
         </td>
       </tr>
     </table>
+
+    <!-- prevent Gmail on iOS font size manipulation -->
+    <div style="display:none; white-space:nowrap; font:15px courier; line-height:0;">
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    </div>
+
   </body>
 </html>
