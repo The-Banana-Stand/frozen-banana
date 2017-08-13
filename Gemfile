@@ -55,7 +55,7 @@ gem 'omniauth-linkedin-oauth2'
 gem 'jquery-timepicker-rails'
 gem 'inky-rb', require: 'inky'
 # Stylesheet inlining for email
-gem 'roadie', '~> 3.2'
+gem 'roadie-rails'
 
 
 # Use Capistrano for deployment
