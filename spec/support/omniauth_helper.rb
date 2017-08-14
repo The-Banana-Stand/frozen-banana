@@ -14,6 +14,7 @@ module OmniAuthHelpers
         extra:{
             raw_info:{
                 positions: {
+                    _total: 1,
                     values:
                         [
                             {
