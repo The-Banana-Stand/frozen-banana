@@ -25,6 +25,14 @@
 
               <%= yield %>
 
+              <row>
+                <columns>
+                  <p class="text-center footer">
+                    MeetingSlice LLC. 1209 Levenworth St. Omaha, NE 68102 USA
+                  </p>
+                </columns>
+              </row>
+
             </container>
 
           </center>
