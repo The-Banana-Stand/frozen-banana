@@ -10,7 +10,7 @@ RSpec.feature 'logging_in_with_linkedin' do
 
     find('#linkedin-login').click
 
-    expect(page).to have_content 'foo bar'
+    expect(page).to have_content 'Successfully authenticated from Linkedin account.'
   end
 
 
