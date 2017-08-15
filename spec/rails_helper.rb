@@ -1,4 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter '/vendor/'
+end
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -8,11 +13,8 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'database_cleaner'
 require 'capybara/rspec'
-require 'simplecov'
 require 'rack_session_access/capybara'
-SimpleCov.start 'rails' do
-  add_filter '/vendor/'
-end
+
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

@@ -24,4 +24,15 @@ RSpec.describe 'user requests' do
     end
   end
 
+  describe 'verify_help' do
+    it 'redirects to verify' do
+      user = create(:user)
+      get verify_help_path, params: {user: {id: user.id}}
+
+      expect(response).to redirect_to user_verify_path(user.id)
+      follow_redirect!
+      expect(response.body).to include('We will contact you shortly.')
+    end
+  end
+
 end

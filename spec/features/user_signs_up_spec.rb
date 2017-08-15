@@ -10,7 +10,6 @@ RSpec.feature 'User signs up for site' do
 
       fill_in 'user[first_name]', with: user.first_name
       fill_in 'user[last_name]', with: user.last_name
-      fill_in 'user[username]', with: user.username
       fill_in 'user[title]', with: user.title
       fill_in 'user[company_name]', with: user.company_name
       fill_in 'user[company_address]', with: user.company_address

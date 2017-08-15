@@ -5,7 +5,7 @@ require 'stripe_mock'
 RSpec.feature 'sp creates a meeting' do
 
   let(:stripe_helper) { StripeMock.create_test_helper }
-  let(:sp) {create(:user)}
+  let(:sp) {create(:user, role: 'sp')}
   let(:dm) {create(:user_with_active_blocks)}
   after { StripeMock.stop }
 
