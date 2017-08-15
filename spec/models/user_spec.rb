@@ -1,4 +1,5 @@
-require 'rails_helper'
+require 'spec_helper'
+require 'support/omniauth_helper'
 
 RSpec.describe User, type: :model do
 
@@ -20,14 +21,14 @@ RSpec.describe User, type: :model do
 
   end
 
-  # describe User, '.from_omniauth' do
-  #   it 'creates a user record from omniauth object' do
-  #     set_omniauth
-  #
-  #     user = User.from_omniauth(OmniAuth.config.mock_auth[:linkedin])
-  #
-  #     expect(user.persisted?).to eq(true)
-  #   end
-  # end
+  describe User, '.from_omniauth' do
+    it 'creates a user record from omniauth object' do
+      set_omniauth
+
+      user = User.from_omniauth(OmniAuth.config.mock_auth[:linkedin])
+
+      expect(user.persisted?).to eq(true)
+    end
+  end
 
 end

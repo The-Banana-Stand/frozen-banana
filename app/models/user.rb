@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  include UserEnumerables
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -13,29 +15,7 @@ class User < ApplicationRecord
                         :sp_medium_revenue_examples, :sp_large_revenue_examples
 
 
-  BOTTOM_LINE_ENUM_VALUES = {
-      '$500': 0,
-      '$1,000': 1,
-      '$3,000': 2,
-      '$5,000': 3,
-      '$10,000': 4,
-      '$15,000': 5,
-      '$30,000': 6,
-      '$50,000': 7,
-      '$75,000': 8,
-      '$100k': 9,
-      '$150k': 10,
-      '$200k': 11,
-      '$250k': 12,
-      '$300k': 13,
-      '$400k': 14,
-      '$500k': 15,
-      '$750k': 16,
-      '$1 mil': 17,
-      '$2 mil': 18,
-      '$3 mil': 19,
-      'greater than $3 mil': 20
-  }
+
 
   enum dm_min_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
   enum sp_small_revenue: BOTTOM_LINE_ENUM_VALUES, _prefix: true
@@ -45,17 +25,7 @@ class User < ApplicationRecord
       '1 month': 0, '2 months': 1, '3 months': 2, '4 months': 3, '5 months': 4, '6 months': 5, '7 months': 6,
       '8 months': 7, '9 months': 8, '10 months': 9, '11 months': 10, '12 months': 11
   }
-  CLOSE_PERCENTAGE_ENUM_VALUES = {
-      '10%': 0,
-      '20%': 1,
-      '30%': 2,
-      '40%': 3,
-      '50%': 4,
-      '60%': 5,
-      '70%': 6,
-      '80%': 7,
-      '90%': 8
-  }
+
   enum sp_close_percentage: CLOSE_PERCENTAGE_ENUM_VALUES, _prefix: true
   enum sp_organization_close_percentage: CLOSE_PERCENTAGE_ENUM_VALUES, _prefix: true
 
@@ -199,38 +169,7 @@ class User < ApplicationRecord
   end
 
   def send_confirmation_help_request(phone_number)
-    if Rails.env.production?
-
-      notification = {
-          text: 'A User needs help Confirming Email',
-          username: "Awesom-O",
-          icon_emoji: ":loudspeaker:",
-          fields: [
-              {
-                  title: 'User',
-                  value: "#{self.full_name}"
-              },
-              {
-                  title: 'ID',
-                  value: "#{self.id}"
-              },
-              {
-                  title: 'Email',
-                  value: "#{self.email}"
-              },
-              {
-                  title: 'Company',
-                  value: "#{self.company_name}"
-              },
-              {
-                  title: 'Phone Number',
-                  value: "#{phone_number}"
-              }
-          ]
-      }
-      SLACK.ping notification
-
-    end
+    SlackWrapper.confirmation_help_request(self, phone_number)
   end
 
 
@@ -244,41 +183,8 @@ class User < ApplicationRecord
     end
   end
 
-
-
   def send_slack_notification
-    if Rails.env.production?
-
-      notification = {
-          text: 'New User',
-          username: "Awesom-O",
-          icon_emoji: ":loudspeaker:",
-          fields: [
-              {
-                  title: 'New User',
-                  value: "#{self.full_name}"
-              },
-              {
-                  title: 'ID',
-                  value: "#{self.id}"
-              },
-              {
-                  title: 'Email',
-                  value: "#{self.email}"
-              },
-              {
-                  title: 'Company',
-                  value: "#{self.company_name}"
-              },
-              {
-                  title: 'Phone Number',
-                  value: "#{self.phone_number}"
-              }
-          ]
-      }
-      SLACK.ping notification
-
-    end
+   SlackWrapper.new_user_notification(self)
   end
 
 end

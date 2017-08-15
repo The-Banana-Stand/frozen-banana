@@ -141,46 +141,7 @@ class Meeting < ApplicationRecord
   private
 
   def send_slack_notification
-    if Rails.env.production?
-
-
-      notification = {
-          text: 'New Meeting',
-          username: "Awesom-O",
-          icon_emoji: ":loudspeaker:",
-          fields: [
-              {
-                  title: 'New Meeting',
-                  value: "ID: #{self.id}, CONFIRMATION: #{self.confirmation_number}"
-              },
-              {
-                  title: 'Decision Maker',
-                  value: "#{self.dm.full_name} (#{self.dm_id}) - #{self.dm.email} - #{self.dm.phone_number} - #{self.dm.company_name}"
-              },
-              {
-                  title: 'Decision Maker Address',
-                  value: "#{self.dm.full_address}"
-              },
-              {
-                  title: 'Salesperson',
-                  value: "#{self.sp.full_name} (#{self.sp_id}) - #{self.sp.email} - #{self.sp.phone_number} - #{self.sp.company_name}"
-              },
-              {
-                  title: 'Desired Time',
-                  value: "#{self.display_desired_day}, between #{self.show_desired_start_time} to #{self.show_desired_end_time}"
-              },
-              {
-                  title: 'Price/Hr',
-                  value: "#{self.price.format} (total: #{self.total_price.format}"
-              },
-              {
-                  title: 'Comments from Salesperson',
-                  value: "#{self.sp_requested_comments}"
-              }
-          ]
-      }
-      SLACK.ping notification
-    end
+    SlackWrapper.new_meeting_notification(self)
   end
 
   def set_confirmation_number
