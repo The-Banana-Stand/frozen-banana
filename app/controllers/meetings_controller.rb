@@ -11,17 +11,20 @@ class MeetingsController < ApplicationController
   def create
     @meeting = Meeting.new(meeting_params)
 
-    if @meeting.save
+    #currently no way for meeting save to error, leaving in for future use
+    #if
+    @meeting.save
     # current_user.process_payment_info(params[:stripeToken])
     redirect_to confirm_meeting_path(@meeting.id)
-    else
-      @desired_block = GeneralAvailability.includes(:user).find(params[:meeting][:desired_block_id])
-      render :new
-    end
+    # else
+    #   @desired_block = GeneralAvailability.includes(:user).find(params[:meeting][:desired_block_id])
+    #   render :new
+    # end
 
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    render :new
+  #   not using stripe
+  # rescue Stripe::CardError => e
+  #   flash[:error] = e.message
+  #   render :new
   end
 
 

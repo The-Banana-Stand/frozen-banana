@@ -21,4 +21,12 @@ $(document).on('turbolinks:load', function() {
 
     $('.setting-box').matchHeight({byRow: false});
 
+
+    $('.time-picker').timepicker({
+        'minTime': '5:00am',
+        'maxTime': '9:00pm',
+        forceRoundTime: true,
+        timeFormat: 'h:i A'
+    });
+
 });

@@ -106,7 +106,6 @@ class Meeting < ApplicationRecord
   end
 
   def capture_payment
-    puts 'HELLO FROM CAPTURE PAYMENT!'
     return if self.payment_status == 'succeeded'
     customer = self.sp.stripe_customer
 

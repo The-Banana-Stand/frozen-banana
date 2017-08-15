@@ -38,4 +38,19 @@ RSpec.feature 'User signs up for site' do
     end
   end
 
+  context 'after confirming email' do
+    scenario 'user goes to account setup', js: true do
+      user = create(:new_user)
+      sign_in user
+      visit account_setup_path
+
+      click_on 'Next'
+
+      click_on 'Finish Setup'
+
+      expect(page).to have_content('My Dashboard')
+
+    end
+  end
+
 end

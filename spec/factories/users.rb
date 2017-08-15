@@ -20,6 +20,9 @@ FactoryGirl.define do
       sign_in_count 0
     end
 
+    factory :admin do
+      admin true
+    end
     # user_with_posts will create post data after the user has been created
     factory :user_with_active_blocks do
 

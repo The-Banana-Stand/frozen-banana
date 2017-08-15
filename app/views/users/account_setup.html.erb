@@ -21,7 +21,7 @@
       <button class="btn btn-primary" id="next">Next</button>
     </div>
 
-    <div id="section-2" class="hidden col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+    <div id="section-2" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
       <p class="lead">
         Once a meeting is purchased, we will send you a calendar invite.
         If the time doesn’t work, just give us a few that do and we’ll take care of the rest!
@@ -34,11 +34,13 @@
 
 <script>
 
+  $('#section-2').toggle();
+
+
   $('#next').click(function(e){
     e.preventDefault();
     $('#section-1').toggle();
-    $('#section-2').toggleClass('hidden');
-    window.scrollTo(0, 0);
+    $('#section-2').toggle();
   });
 
 

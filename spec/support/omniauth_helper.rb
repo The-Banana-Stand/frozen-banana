@@ -1,12 +1,12 @@
 module OmniAuthHelpers
 
-  def set_omniauth
+  def set_omniauth(opts={})
 
     linkedin_data = {
         :provider => :linkedin,
         :uuid     => "1234",
         info: {
-            :email => "foobar@example.com",
+            :email => opts.fetch(:email, 'foobar@example.com'),
             :first_name => "foo",
             :last_name => "bar",
             nickname: 'foobar123'

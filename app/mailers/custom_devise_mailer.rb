@@ -7,10 +7,10 @@ class CustomDeviseMailer < Devise::Mailer
   default from: 'do_not_reply@meetingslice.com'
 
 
-  def playground_email(user)
-    @resource = user
-    @token = 'faketoken'
-    mail to: @resource.email, subject: 'Testing'
-  end
+  # def playground_email(user)
+  #   @resource = user
+  #   @token = 'faketoken'
+  #   mail to: @resource.email, subject: 'Testing'
+  # end
 
 end

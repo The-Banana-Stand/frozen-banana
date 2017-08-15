@@ -15,6 +15,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
+    flash[:danger] = 'Linkedin sign in failed.'
     redirect_to root_path
   end
 end
