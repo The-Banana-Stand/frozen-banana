@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
   include UserEnumerables
-
+  include StripeWrapper
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -13,9 +13,6 @@ class User < ApplicationRecord
   auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service,
                         :company_name, :company_address, :ar_comments, :sp_small_revenue_examples,
                         :sp_medium_revenue_examples, :sp_large_revenue_examples
-
-
-
 
   enum dm_min_bottom_line_impact: BOTTOM_LINE_ENUM_VALUES, _prefix: true
   enum sp_small_revenue: BOTTOM_LINE_ENUM_VALUES, _prefix: true
@@ -121,38 +118,6 @@ class User < ApplicationRecord
 
   def sp?
     self.role == 'sp' || multi_role?
-  end
-
-  def process_payment_info(stripe_token)
-    stripe_token = set_stripe_token(stripe_token)
-    if self.customer_token.present?
-      customer = Stripe::Customer.retrieve(self.customer_token)
-      if customer.deleted?
-        create_stripe_customer(stripe_token)
-      else
-        customer.source = stripe_token
-        customer.save
-      end
-    else
-      create_stripe_customer(stripe_token)
-    end
-  end
-
-  def set_stripe_token(token)
-    Rails.env.test? ? StripeMock.create_test_helper.generate_card_token : token
-  end
-
-  def create_stripe_customer(stripe_token)
-    customer = Stripe::Customer.create(
-        :email => self.email,
-        :source  => stripe_token,
-        :description => "#{self.full_name} ID: #{self.id}"
-    )
-    self.update_attribute(:customer_token, customer.id)
-  end
-
-  def stripe_customer
-    Stripe::Customer.retrieve(self.customer_token)
   end
 
   def plat_validation_status_enum
