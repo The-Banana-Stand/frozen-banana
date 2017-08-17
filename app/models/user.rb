@@ -96,7 +96,7 @@ class User < ApplicationRecord
   end
 
   def full_address
-    self.company_address +  ' ' + self.city + ', ' + self.state + ' ' + self.zip_code
+    (self.company_address || '') +  ' ' + (self.city || '') + ', ' + (self.state || '') + ' ' + (self.zip_code || '')
   end
 
   ransacker :full_name do |parent|

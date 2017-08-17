@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require 'support/omniauth_helper'
 
 RSpec.describe User, type: :model do
@@ -28,6 +28,13 @@ RSpec.describe User, type: :model do
       user = User.from_omniauth(OmniAuth.config.mock_auth[:linkedin])
 
       expect(user.persisted?).to eq(true)
+    end
+  end
+
+  describe User, '#full_address' do
+    it 'returns a formatted address' do
+      user = create(:user)
+      expect(user.full_address).to eq('123 Alphabet Lane')
     end
   end
 
