@@ -6,7 +6,7 @@ FactoryGirl.define do
     company_name 'Google'
     company_address '123 Alphabet Lane'
     phone_number '4021234567'
-    role 'both'
+    role 'dm'
     username {first_name}
     email {Faker::Internet.unique.email}
     password 'foobar'
