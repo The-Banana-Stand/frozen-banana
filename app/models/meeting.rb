@@ -12,7 +12,7 @@ class Meeting < ApplicationRecord
 
   monetize :price_cents, :platform_fee_cents
 
-  # validates :topic, :sp_lead_qualification, presence: true, length: 0..255
+  validates :topic, presence: true, length: 0..255
 
   before_save :set_sort_priority
   before_create :set_confirmation_number

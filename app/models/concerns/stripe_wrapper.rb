@@ -2,6 +2,9 @@ module StripeWrapper
 
 
   def process_payment_info(stripe_token)
+    if Rails.env.test?
+      stripe_token = StripeMock.generate_card_token
+    end
     customer = fetch_stripe_customer
     customer.source = stripe_token
     customer.save

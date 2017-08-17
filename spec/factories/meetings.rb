@@ -8,6 +8,7 @@ FactoryGirl.define do
     platform_fee_cents { (10000 * 0.1621).round(0) }
     desired_start_time {Time.zone.now}
     desired_end_time {desired_start_time + 1.hour}
+    topic 'this is the topic of the meeting'
 
 
   end

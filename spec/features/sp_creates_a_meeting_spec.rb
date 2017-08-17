@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'stripe_mock'
 
 
-RSpec.feature 'sp creates a meeting' do
+RSpec.feature 'sp creates a meeting', js: true do
 
   let(:stripe_helper) { StripeMock.create_test_helper }
   let(:sp) {create(:user, role: 'sp')}
@@ -28,9 +28,11 @@ RSpec.feature 'sp creates a meeting' do
 
     find("a[href='#{new_meeting_path(dm.active_blocks.first)}']").click
 
-    click_on 'Schedule Meeting'
+    fill_in 'meeting[topic]', with: 'this is the topic'
 
-    # pay_stripe
+    click_on 'Submit Payment Information'
+
+    pay_stripe
 
     expect(page).to have_content 'Confirmation'
 
