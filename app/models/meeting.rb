@@ -19,7 +19,7 @@ class Meeting < ApplicationRecord
   after_create :send_slack_notification
 
   def status_enum
-    %w(requested scheduled completed change_pending cancelled test)
+    %w(requested scheduled completed change_pending cancelled declined test)
   end
 
   def payment_status_enum
@@ -93,7 +93,8 @@ class Meeting < ApplicationRecord
 
   def row_shade
     {
-        'scheduled' => 'custom-success'
+        'scheduled' => 'custom-success',
+        'declined' => 'custom-danger'
     }[status]
   end
 
