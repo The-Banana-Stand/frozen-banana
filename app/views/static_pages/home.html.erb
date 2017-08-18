@@ -47,7 +47,6 @@
               <%= simple_form_for @user, url: user_registration_path, html: {class: 'form-horizontal'},
                                   wrapper: :horizontal_form do |f| %>
 
-                  <%= f.hidden_field :role, value: 'dm' %>
 
                   <div class="form-group form-group-sm">
                     <%= f.input_field :email, class: 'form-control', label: false, placeholder: 'Email' %>

@@ -3,13 +3,43 @@ require 'rails_helper'
 RSpec.describe 'user requests' do
 
   describe 'account_setup' do
-    it 'returns http status 200' do
-      sign_in create(:user)
 
-      get account_setup_path
+    context 'when user is new' do
+      it 'returns http status 200' do
+        sign_in create(:new_user)
 
-      expect(response.status).to eq(200)
+        get account_setup_path
 
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context 'when user does not have role' do
+      it 'returns http status 200' do
+        sign_in create(:user, role: nil)
+
+        get account_setup_path
+
+        expect(response.status).to eq(200)
+      end
+
+      it 'redirects all traffic to account_setup' do
+        sign_in create(:user, role: nil)
+
+        get root_path
+
+        expect(response).to redirect_to account_setup_url
+      end
+    end
+
+    context 'when user has a role' do
+      it 'redirects to dashboard' do
+        sign_in create(:user)
+
+        get account_setup_path
+
+        expect(response).to redirect_to(dashboard_url)
+      end
     end
   end
 

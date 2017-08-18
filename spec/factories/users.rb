@@ -15,6 +15,7 @@ FactoryGirl.define do
 
     factory :new_user do
       sign_in_count 0
+      role nil
     end
 
     factory :admin do

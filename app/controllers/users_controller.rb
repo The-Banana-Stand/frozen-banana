@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:verify, :resend_email, :verify_help]
+  skip_before_action :account_setup_redirect, only: :account_setup
 
 
   def verify
@@ -42,6 +43,10 @@ class UsersController < ApplicationController
 
   def account_setup
     @user = current_user
+    if @user.role
+      flash[:warning] = 'Your account is already set up.'
+      redirect_to :dashboard
+    end
   end
 
   def edit

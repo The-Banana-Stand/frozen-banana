@@ -72,7 +72,6 @@ class User < ApplicationRecord
       current_position = auth.extra.raw_info.positions.values[1].find{|p| p.isCurrent}
       user.title = current_position.title
       user.company_name = current_position.company.name
-      user.role = 'dm'
 
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.

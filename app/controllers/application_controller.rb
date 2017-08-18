@@ -1,16 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_paper_trail_whodunnit, :authenticate_user!
+  before_action :set_paper_trail_whodunnit, :authenticate_user!, :account_setup_redirect
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 
   def after_sign_in_path_for(resource)
-    if resource.sign_in_count == 1
+    if resource.sign_in_count == 1 || resource.role.nil?
       account_setup_path
     else
       dashboard_path
+    end
+  end
+
+  def account_setup_redirect
+    if user_signed_in? && current_user.role.nil?
+      redirect_to account_setup_path
     end
   end
 
