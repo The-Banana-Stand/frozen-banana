@@ -2,40 +2,82 @@
   <h1>Account Setup</h1>
 </div>
 
+<div id="role-select-container">
+  <p class="lead text-center">
+    Choose your role
+  </p>
 
+  <div class="row">
+    <div class="col-xs-2 col-xs-offset-3">
+      <button class="btn btn-primary btn-block" id="dm-select">Decision Maker</button>
+    </div>
 
+    <div class="col-xs-2 col-xs-offset-2">
+      <button class="btn btn-primary btn-block" id="sp-select">Sales Rep.</button>
+    </div>
+  </div>
+</div>
+
+<div id="sp-form-container" class="hidden">
   <%= simple_form_for @user do |f| %>
 
-    <div id="section-1" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
-      <p class="lead">
-        Let vendors know what solutions you are looking for.
-      </p>
-      <%- if current_user.role == 'dm' || current_user.role == 'both' %>
-          <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
-      <% end %>
+      <%= f.hidden_field :role, value: 'sp' %>
 
-      <%- if current_user.role == 'sp' || current_user.role == 'both' %>
-          <%= render partial: 'users/partials/sp_info_form', locals: {f: f}  %>
-      <% end %>
+      <%= render partial: 'users/partials/sp_info_form', locals: {f: f}  %>
 
-      <button class="btn btn-primary" id="next">Next</button>
-    </div>
-
-    <div id="section-2" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
-      <p class="lead">
-        Once a meeting is purchased, we will send you a calendar invite.
-        If the time doesn’t work, just give us a few that do and we’ll take care of the rest!
-      </p>
-      <%= render 'users/partials/general_availability_form', f: f %>
       <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
-    </div>
 
   <% end %>
+</div>
+
+<div id="dm-form-container" class="hidden">
+  <%= simple_form_for @user do |f| %>
+      <%= f.hidden_field :role, value: 'dm' %>
+      <div id="section-1" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+        <p class="lead">
+          Let vendors know what solutions you are looking for.
+        </p>
+
+        <div class="form-group">
+          <%= render partial: 'users/partials/dm_info_form', locals: {f: f} %>
+        </div>
+
+
+        <button class="btn btn-primary" id="next">Next</button>
+      </div>
+
+      <div id="section-2" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+        <p class="lead">
+          Once a meeting is purchased, we will send you a calendar invite.
+          If the time doesn’t work, just give us a few that do and we’ll take care of the rest!
+        </p>
+
+        <div class="form-group">
+          <%= render 'users/partials/general_availability_form', f: f %>
+        </div>
+
+        <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
+      </div>
+
+  <% end %>
+</div>
 
 <script>
 
-  $('#section-2').toggle();
 
+  $('#dm-select').click(function(e){
+    e.preventDefault();
+    $('#role-select-container').toggle();
+    $('#section-2').toggle();
+    $('#dm-form-container').toggleClass('hidden');
+    $(window).trigger('resize');
+  });
+
+  $('#sp-select').click(function(e){
+    e.preventDefault();
+    $('#role-select-container').toggle();
+    $('#sp-form-container').toggleClass('hidden');
+  });
 
   $('#next').click(function(e){
     e.preventDefault();

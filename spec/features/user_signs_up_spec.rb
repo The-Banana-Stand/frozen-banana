@@ -44,6 +44,8 @@ RSpec.feature 'User signs up for site' do
       sign_in user
       visit account_setup_path
 
+      click_on 'Decision Maker'
+
       click_on 'Next'
 
       click_on 'Finish Setup'

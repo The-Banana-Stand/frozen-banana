@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:verify, :resend_email, :verify_help]
-  skip_before_action :account_setup_redirect, only: :account_setup
+  skip_before_action :account_setup_redirect, only: [:account_setup, :update]
 
 
   def verify
