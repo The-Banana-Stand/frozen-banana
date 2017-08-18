@@ -70,6 +70,12 @@
 
                   <%= f.submit 'Register Now', class: 'btn btn-primary center-block' %>
 
+                  <small>
+                    By registering, you agree to our
+                    <%= link_to('terms of service', terms_of_service_path, target: '_blank') %> and
+                    <%= link_to('privacy policy', privacy_policy_path, target: '_blank') %>.
+                  </small>
+
               <% end %>
             </div>
             <div class="clearfix"></div>

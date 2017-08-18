@@ -28,5 +28,29 @@ $(document).on('turbolinks:load', function() {
         forceRoundTime: true,
         timeFormat: 'h:i A'
     });
+    
+    //account_setup logic
+
+    $('#dm-select').click(function(e){
+        e.preventDefault();
+        $('#role-select-container').toggle();
+        $('#section-2').toggle();
+        $('#dm-form-container').toggleClass('hidden');
+        $(window).trigger('resize');
+    });
+
+    $('#sp-select').click(function(e){
+        e.preventDefault();
+        $('#role-select-container').toggle();
+        $('#sp-form-container').toggleClass('hidden');
+    });
+
+    $('#next').click(function(e){
+        e.preventDefault();
+        $('#section-1').toggle();
+        $('#section-2').toggle();
+    });
+
+    //end account setup logic
 
 });

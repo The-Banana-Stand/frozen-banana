@@ -120,12 +120,12 @@
 
                       <div class="col-md-6 well">
                         <h3>Decision Maker:</h3>
-                        <p><strong>Decision Maker interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
+                        <p><strong>Interested in:</strong> <%= meeting.dm.dm_evaluating || 'No Information' %></p>
 
                         <h3>Sales Person:</h3>
-                        <p><strong>Sales Person products/services:</strong> <%= meeting.sp.sp_product_service || 'No Information' %></p>
+                        <p><strong>Products/services:</strong> <%= meeting.sp.sp_product_service || 'No Information' %></p>
                         <p>
-                          <strong>Sales Person meeting purpose:</strong>
+                          <strong>Meeting purpose:</strong>
                           <%= meeting.topic %>
                         </p>
                       </div>
