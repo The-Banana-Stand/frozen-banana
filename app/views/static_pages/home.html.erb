@@ -100,30 +100,27 @@
   <div class="row-container">
     <div class="row step-container">
       <h1 class="steps-heading"><strong>How It Works</strong></h1>
-      <div class="col-md-2 col-md-offset-1">
-        <%= image_tag('splash_page/search.png', class: 'step-image') %>
-        <h3> <strong>Step 1:</strong></h3>
-        <p>Search for Decision Makers</p>
+
+      <div class="col-xs-3 col-xs-offset-3">
+        <div class="row">
+          <%= image_tag('splash_page/search.png', class: 'step-image') %>
+          <%= image_tag('splash_page/book_now.png', class: 'step-image') %>
+        </div>
+        <div class="row">
+          <p class="lead">Search and book meetings with business decision makers</p>
+        </div>
+
       </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/book_now.png', class: 'step-image') %>
-        <h3> <strong>Step 2:</strong></h3>
-        <p>Purchase an hour-long meeting</p>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/dollar-sign.png', class: 'step-image') %>
-        <h3><span class="glyphicon glyphicon-arrow-right"></span></h3>
-        <p>Meeting price is paid to the business</p>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/meet.png', class: 'step-image') %>
-        <h3> <strong>Step 3:</strong></h3>
-        <p>Introduce your product to a fully attentive audience</p>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag('splash_page/rate.png', class: 'step-image') %>
-        <h3> <strong>Step 4:</strong></h3>
-        <p>Rate the quality of the meeting</p>
+      <div class="col-xs-3">
+        <div class="row">
+          <%= image_tag('splash_page/meet.png', class: 'step-image') %>
+          <%= image_tag('splash_page/rate.png', class: 'step-image') %>
+        </div>
+        <div class="row">
+          <p class="lead">
+            Meet and rate for attention quality
+          </p>
+        </div>
       </div>
     </div>
     <!--step-container-->

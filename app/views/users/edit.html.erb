@@ -8,10 +8,12 @@
 
       <ul class="nav nav-tabs">
         <% if @user.sp? %>
-        <li role="presentation" class="active"><a data-toggle="tab" href="#dm_sp_info">Evaluation/Sales Info</a></li>
+        <li role="presentation" class="active"><a data-toggle="tab" href="#dm_sp_info">Sales Info</a></li>
         <% end %>
         <li role="presentation" class="<%= @user.sp? ? '' : 'active' %>"><a data-toggle="tab" href="#general">General</a></li>
+        <% if @user.dm? %>
         <li role="presentation"><a data-toggle="tab" href="#ar_info">Accounts Receivable</a></li>
+        <% end %>
       </ul>
 
 
@@ -33,11 +35,13 @@
 
         </div>
 
+
+        <% if @user.dm? %>
         <div id="ar_info" class="tab-pane fade">
           <hr/>
           <%= render partial: 'users/partials/ar_form', locals: {f: f} %>
           <%= f.submit 'Save Changes', class: 'btn btn-primary col-md-4 col-md-offset-4' %>
-
+        <% end %>
         </div>
 
   <% end %>

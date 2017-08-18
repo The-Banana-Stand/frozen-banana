@@ -9,11 +9,11 @@
 
   <div class="row">
     <div class="col-xs-2 col-xs-offset-3">
-      <button class="btn btn-primary btn-block" id="dm-select">Decision Maker</button>
+      <button class="btn btn-primary btn-block role-button" id="dm-select">Decision Maker</button>
     </div>
 
     <div class="col-xs-2 col-xs-offset-2">
-      <button class="btn btn-primary btn-block" id="sp-select">Sales Rep.</button>
+      <button class="btn btn-primary btn-block role-button" id="sp-select">Sales Rep.</button>
     </div>
   </div>
 </div>
@@ -23,9 +23,11 @@
 
       <%= f.hidden_field :role, value: 'sp' %>
 
-      <%= render partial: 'users/partials/sp_info_form', locals: {f: f}  %>
+      <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+        <%= render partial: 'users/partials/sp_info_form', locals: {f: f}  %>
 
-      <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
+        <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
+      </div>
 
   <% end %>
 </div>

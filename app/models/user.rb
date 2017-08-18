@@ -137,6 +137,10 @@ class User < ApplicationRecord
     SlackWrapper.confirmation_help_request(self, phone_number)
   end
 
+  def show_role
+    role == 'dm' ? 'Decision Maker' : 'Sales Rep'
+  end
+
 
   private
 

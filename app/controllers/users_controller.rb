@@ -43,10 +43,10 @@ class UsersController < ApplicationController
 
   def account_setup
     @user = current_user
-    if @user.role
-      flash[:warning] = 'Your account is already set up.'
-      redirect_to :dashboard
-    end
+    # if @user.role
+    #   flash[:warning] = 'Your account is already set up.'
+    #   redirect_to :dashboard
+    # end
   end
 
   def edit

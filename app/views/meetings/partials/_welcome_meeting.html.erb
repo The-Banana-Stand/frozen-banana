@@ -1,8 +1,8 @@
 <tr data-toggle="collapse" data-target="#meeting_1" class="accordion-toggle" role="button">
   <td> <a style="text-decoration: none" class="glyphicon glyphicon-chevron-right"></a></td>
   <td>Example</td>
-  <td>Decision Maker</td>
-  <td>Kyle Fowler</td>
+  <td><%= current_user.show_role %></td>
+  <td>John Doe</td>
   <td>MeetingSlice</td>
   <td>Date of Meeting</td>
   <td>Start Time</td>
@@ -34,12 +34,12 @@
 
         <div class="col-md-6 well">
           <h3>Decision Maker:</h3>
-          <p><strong>Decision Maker interested in:</strong> This is what the Decision Maker is currently evaluating.</p>
+          <p><strong>Interested in:</strong> This is what the Decision Maker is currently evaluating.</p>
 
           <h3>Sales Person:</h3>
-          <p><strong>Sales Person products/services:</strong> This is a description of the Sales Rep's product/service.</p>
+          <p><strong>Products/services:</strong> This is a description of the Sales Rep's product/service.</p>
           <p>
-            <strong>Sales Person meeting purpose:</strong>
+            <strong>Meeting topic:</strong>
             This is the topic of the meeting.
           </p>
         </div>
