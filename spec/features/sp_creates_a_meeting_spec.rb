@@ -32,7 +32,7 @@ RSpec.feature 'sp creates a meeting', js: true do
 
     click_on 'Submit Payment Information'
 
-    pay_stripe
+    pay_stripe(sp.email)
 
     expect(page).to have_content 'Confirmation'
 

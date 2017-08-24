@@ -56,6 +56,7 @@ gem 'jquery-timepicker-rails'
 gem 'inky-rb', require: 'inky'
 # Stylesheet inlining for email
 gem 'roadie-rails'
+gem 'smtpapi'
 
 
 # Use Capistrano for deployment

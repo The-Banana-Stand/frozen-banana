@@ -13,6 +13,7 @@ RSpec.feature 'user sends an invite' do
       fill_in 'First Name', with: 'John'
       fill_in 'Last Name', with: 'Doe'
       fill_in 'Company Name', with: 'Doe LLC'
+      fill_in 'Email', with: 'johndoe@example.com'
 
       click_on 'Send Invite'
 
