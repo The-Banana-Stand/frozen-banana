@@ -24,6 +24,7 @@
       <%= f.hidden_field :first_name, value: 'file' %>
       <%= f.hidden_field :last_name, value: 'file' %>
       <%= f.hidden_field :company_name, value: 'file' %>
+      <%= f.hidden_field :email, value: 'file' %>
 
         <%= f.submit 'Upload File', class: 'btn btn-primary' %>
 
@@ -36,27 +37,26 @@
   <%= simple_form_for @invite, html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
                       wrapper_mappings: { file: :horizontal_file_input} do |f| %>
 
-        <div class="col-sm-12">
-          <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: '*First Name' %>
-        </div>
+      <div class="col-sm-12">
+        <%= f.input :email, class: 'form-control', placeholder: 'Email Address', label: '*Email' %>
+      </div>
 
-        <div class="col-sm-12">
-          <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name', label: '*Last Name' %>
-        </div>
+      <div class="col-sm-12">
+        <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: '*First Name' %>
+      </div>
 
-        <div class="col-sm-12">
-          <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name', label: '*Company Name' %>
-        </div>
+      <div class="col-sm-12">
+        <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name', label: '*Last Name' %>
+      </div>
+
+      <div class="col-sm-12">
+        <%= f.input :company_name, class: 'form-control', placeholder: 'Company Name', label: 'Company Name' %>
+      </div>
 
 
-        <div class="col-sm-12">
-          <%= f.input :title, class: 'form-control', placeholder: 'Job Title' %>
-        </div>
-
-
-        <div class="col-sm-12">
-          <%= f.input :email, class: 'form-control', placeholder: 'Email Address' %>
-        </div>
+      <div class="col-sm-12">
+        <%= f.input :title, class: 'form-control', placeholder: 'Job Title' %>
+      </div>
 
 
       <%= f.submit 'Send Invite', class: 'btn btn-primary col-md-4 col-md-offset-4' %>

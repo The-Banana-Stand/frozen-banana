@@ -1,0 +1,19 @@
+<container class="body-border">
+  <row>
+    <columns>
+
+      <spacer size="32"></spacer>
+
+      <h4 class="text-center">Hello, <%= @invite.first_name %></h4>
+      <p class="text-center">
+        <%= @invite.user.full_name %> thinks you should sign up for MeetingSlice.
+      </p>
+      <center>
+        <button class="large" href=<%= root_url %>>Check us Out!</button>
+      </center>
+
+    </columns>
+  </row>
+
+  <spacer size="16"></spacer>
+</container>

@@ -6,6 +6,10 @@ class Invite < ApplicationRecord
 
   belongs_to :user
 
-  validates :first_name, :last_name, :company_name, presence: true
+  validates_presence_of :first_name, :last_name, :email
+
+  def name
+    first_name + ' ' + last_name
+  end
 
 end

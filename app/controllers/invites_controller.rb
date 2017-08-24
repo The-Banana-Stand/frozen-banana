@@ -8,6 +8,7 @@ class InvitesController < ApplicationController
     @invite = current_user.invites.build(invite_params)
 
     if @invite.save
+      InvitesMailer.invite_email(@invite).deliver_now unless @invite.email == 'file'
       flash[:success] = 'Invite Sent'
       redirect_to new_invite_path
     else
