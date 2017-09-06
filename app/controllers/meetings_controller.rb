@@ -3,8 +3,9 @@ class MeetingsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @desired_block = GeneralAvailability.includes(:user).find(params[:id])
-    @meeting = Meeting.new(dm_id: @desired_block.user_id)
+    @decision_maker = User.find(params[:id])
+    # @desired_block = GeneralAvailability.includes(:user).find(params[:id])
+    @meeting = Meeting.new(dm_id: params[:id])
   end
 
 
@@ -16,7 +17,8 @@ class MeetingsController < ApplicationController
       current_user.process_payment_info(params[:stripeToken])
       redirect_to confirm_meeting_path(@meeting.id)
     else
-      @desired_block = GeneralAvailability.includes(:user).find(params[:meeting][:desired_block_id])
+      @decision_maker = User.find(params[:meeting][:dm_id])
+      # @desired_block = GeneralAvailability.includes(:user).find(params[:meeting][:desired_block_id])
       render :new
     end
 

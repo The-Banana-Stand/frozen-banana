@@ -46,7 +46,7 @@ RSpec.feature 'User signs up for site' do
 
       click_on 'Decision Maker'
 
-      click_on 'Next'
+      # click_on 'Next'
 
       click_on 'Finish Setup'
 

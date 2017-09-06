@@ -2,18 +2,14 @@
 
   <thead>
   <tr><th>&nbsp;</th>
-    <th><%= sort_link(@query, :full_name, 'Name', {}, {remote: true, method: :get} ) %></th>
-    <th><%= sort_link(@query, :title, {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :company_name, 'Company', {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :title, {}, {remote: true, method: :get} ) %></th>
+    <th><%= sort_link(@query, :full_name, 'Name', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :city, 'City', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :state, 'State', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :zip_code, 'Zip Code', {}, {remote: true, method: :get} ) %></th>
-    <th>
-      <a id="attention-score-popover" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Attention Score"
-           data-content="A rating of the Decision Maker's attentiveness">
-        Attention Score <span class="glyphicon glyphicon-question-sign mag-icon"></span>
-      </a>
-    </th>
+    <th><%= sort_link(@query, :price_cents, 'Price', {}, {remote: true, method: :get} ) %></th>
+    <th>&nbsp;</th>
   </tr>
   </thead>
 
@@ -21,23 +17,16 @@
 
   <%- @decision_makers.each do |dm| %>
 
-  <tr data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button">
-    <td><i class="glyphicon glyphicon-chevron-right"></i></td>
-    <td><%= dm.full_name %></td>
-    <td><%= dm.title %></td>
-    <td><%= dm.company_name %></td>
-    <td><%= dm.city %></td>
-    <td><%= dm.state%></td>
-    <td><%= dm.zip_code%></td>
-    <td>
-      <span class="glyphicon glyphicon-star"></span>
-      <span class="glyphicon glyphicon-star"></span>
-      <span class="glyphicon glyphicon-star"></span>
-      <span class="glyphicon glyphicon-star"></span>
-      <span class="glyphicon glyphicon-star"></span>
-
-
-    </td>
+  <tr>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><i class="glyphicon glyphicon-chevron-right"></i></td>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.company_name %></td>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.title %></td>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.full_name %></td>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.city %></td>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.state%></td>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.zip_code%></td>
+    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= humanized_money_with_symbol dm.price %></td>
+    <td><%= link_to 'Buy 30 Minutes', new_meeting_path(dm.id), class: 'btn btn-success' %></td>
   </tr>
 
   <tr>
@@ -60,42 +49,42 @@
           </div>
         </div>
 
-        <%- if dm.active_blocks.empty? %>
-              <h3>Decision Maker has No Times Available</h3>
+        <!--<%- if dm.active_blocks.empty? %>-->
+              <!--<h3>Decision Maker has No Times Available</h3>-->
 
 
 
-        <% else %>
-          <div class="col-md-5">
-            <table class="table">
-              <thead>
-              <tr>
-                <th>Day of Week</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Price/Hr</th>
-              </tr>
-              </thead>
+        <!--<% else %>-->
+          <!--<div class="col-md-5">-->
+            <!--<table class="table">-->
+              <!--<thead>-->
+              <!--<tr>-->
+                <!--<th>Day of Week</th>-->
+                <!--<th>From</th>-->
+                <!--<th>To</th>-->
+                <!--<th>Price/Hr</th>-->
+              <!--</tr>-->
+              <!--</thead>-->
 
-              <tbody>
-              <%- dm.active_blocks.each do |ga| %>
-                  <tr>
+              <!--<tbody>-->
+              <!--<%- dm.active_blocks.each do |ga| %>-->
+                  <!--<tr>-->
 
-                    <td><%= ga.display_day %></td>
-                    <td><%= ga.show_start_time %></td>
-                    <td><%= ga.show_end_time %></td>
-                    <td><%= humanized_money_with_symbol dm.price %></td>
-                    <td>
-                      <%= link_to 'Buy 1 Hour', new_meeting_path(ga.id), class: 'btn btn-success' %>
-                    </td>
+                    <!--<td><%= ga.display_day %></td>-->
+                    <!--<td><%= ga.show_start_time %></td>-->
+                    <!--<td><%= ga.show_end_time %></td>-->
+                    <!--<td><%= humanized_money_with_symbol dm.price %></td>-->
+                    <!--<td>-->
+                      <!--<%= link_to 'Buy 1 Hour', new_meeting_path(ga.id), class: 'btn btn-success' %>-->
+                    <!--</td>-->
 
-                  </tr>
-              <% end %>
-              </tbody>
+                  <!--</tr>-->
+              <!--<% end %>-->
+              <!--</tbody>-->
 
-            </table>
+            <!--</table>-->
 
-            <% end %>
+            <!--<% end %>-->
 
 
         </div>

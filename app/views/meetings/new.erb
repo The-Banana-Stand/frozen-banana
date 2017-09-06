@@ -1,8 +1,7 @@
 <h1>Confirm Meeting Request</h1>
 
 <h3>
-  1 Hour between <%= @desired_block.show_start_time + ' and ' + @desired_block.show_end_time + ' on ' + @desired_block.display_day %> <br>
-  With: <%= @desired_block.user.full_name %> <br>
+  30 minutes with <%= @decision_maker.full_name %> <br>
 </h3>
 
 
@@ -14,14 +13,11 @@
 
     <%= f.error_notification %>
 
-    <%= f.hidden_field :desired_block_id, value: @desired_block.id %>
-    <%= f.hidden_field :dm_id, value: @desired_block.user.id %>
+    <%= f.hidden_field :dm_id, value: @decision_maker.id %>
     <%= f.hidden_field :sp_id, value: current_user.id %>
-    <%= f.hidden_field :price_cents, value: @desired_block.user.price_cents %>
-    <%= f.hidden_field :platform_fee_cents, value: @desired_block.user.platform_cut_price.fractional %>
-    <%= f.hidden_field :desired_day, value: @desired_block.day %>
-    <%= f.hidden_field :desired_start_time, value: @desired_block.start_time %>
-    <%= f.hidden_field :desired_end_time, value: @desired_block.end_time %>
+    <%= f.hidden_field :price_cents, value: @decision_maker.price_cents %>
+    <%= f.hidden_field :platform_fee_cents, value: @decision_maker.platform_cut_price.fractional %>
+
 
     <h5>*What is the product you are pitching in this meeting?</h5>
     <div class="row">
@@ -51,7 +47,7 @@
 
       <article>
         <label class="amount">
-          <span>Paid to Decision Maker's Organization: <%= humanized_money_with_symbol(@desired_block.user.price) %></span> <br>
+          <span>Paid to Decision Maker's Organization: <%= humanized_money_with_symbol(@decision_maker.price) %></span> <br>
           <span>Platform Fee: 16.21%</span>
         </label>
       </article>
@@ -60,7 +56,7 @@
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
               data-description="Credit Card Info"
-              data-amount="<%= @desired_block.user.total_price.fractional %>"
+              data-amount="<%= @decision_maker.total_price.fractional %>"
               data-locale="auto"
               data-label="Submit Payment Information"
               data-panel-label="Use this Card"
