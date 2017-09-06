@@ -108,6 +108,7 @@ class Meeting < ApplicationRecord
 
   def capture_payment
     return if self.payment_status == 'succeeded'
+    byebug
     customer = self.sp.stripe_customer
 
     charge = Stripe::Charge.create(

@@ -20,6 +20,11 @@ module RailsAdmin
           'icon-barcode'
         end
 
+        register_instance_option :pjax? do
+          false
+        end
+
+
         register_instance_option :controller do
           Proc.new do
             # Note: This is dummy code. The thing to note is that we aren't
