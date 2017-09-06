@@ -62,7 +62,11 @@ class UsersController < ApplicationController
           if URI(request.referer).path == edit_profile_path
             redirect_to edit_profile_path
           else
-            redirect_to dashboard_path
+            if @user.sp?
+              redirect_to schedule_time_path
+            else
+              redirect_to dashboard_path
+            end
           end
         }
 
