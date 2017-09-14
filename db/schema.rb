@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824151028) do
+ActiveRecord::Schema.define(version: 20170914221024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 20170824151028) do
     t.integer "attachment_file_size"
     t.datetime "attachment_updated_at"
     t.index ["user_id"], name: "index_invites_on_user_id"
+  end
+
+  create_table "meeting_queues", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "last_scheduled_at"
+    t.integer "meeting_frequency", default: 0, null: false
+    t.integer "minimum_bid_cents", default: 1000
+    t.string "minimum_bid_currency", default: "USD", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_meeting_queues_on_user_id"
   end
 
   create_table "meetings", force: :cascade do |t|

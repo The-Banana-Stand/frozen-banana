@@ -21,6 +21,13 @@ RSpec.describe User, type: :model do
 
   end
 
+  describe User, '#_create_queue' do
+    it 'creates queue for user on creation' do
+      user = create(:user)
+      expect(user.meeting_queue).to be_a(MeetingQueue)
+    end
+  end
+
   describe User, '.from_omniauth' do
     it 'creates a user record from omniauth object' do
       set_omniauth

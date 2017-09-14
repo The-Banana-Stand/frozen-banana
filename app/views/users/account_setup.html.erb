@@ -45,21 +45,21 @@
         </div>
 
 
-        <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
 
-        <!--<button class="btn btn-primary" id="next">Next</button>-->
+
+        <button class="btn btn-primary" id="next">Next</button>
       </div>
 
-      <!--<div id="section-2" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">-->
-        <!--<p class="lead">-->
-          <!--Once a meeting is purchased, we will send you a calendar invite.-->
-          <!--If the time doesn’t work, just give us a few that do and we’ll take care of the rest!-->
-        <!--</p>-->
+      <div id="section-2" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+        <p class="lead">
+         How much time will you allocate to hearing innovative product pitches?
+        </p>
 
-        <!--<div class="form-group">-->
-          <!--<%= render 'users/partials/general_availability_form', f: f %>-->
-        <!--</div>-->
+        <div class="form-group">
+          <%= render 'users/partials/meeting_frequency_form', f: f %>
+        </div>
 
+        <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
       </div>
 
   <% end %>

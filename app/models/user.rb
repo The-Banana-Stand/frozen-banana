@@ -38,10 +38,12 @@ class User < ApplicationRecord
   has_many :invites
   has_many :payer_transactions, foreign_key: :payer_id, class_name: 'StripeTransaction'
   has_many :payee_transactions, foreign_key: :payee_id, class_name: 'StripeTransaction'
+  has_one :meeting_queue, dependent: :destroy
 
   # Callbacks
   before_save {self.email = email.downcase if email}
   after_create :send_slack_notification, :create_general_availabilities
+  after_create :create_meeting_queue, :create_general_availabilities, if: :dm?
 
   # Validations
   # has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
@@ -151,6 +153,8 @@ class User < ApplicationRecord
 
     end
   end
+
+
 
   def send_slack_notification
    SlackWrapper.new_user_notification(self)
