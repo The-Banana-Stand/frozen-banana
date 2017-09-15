@@ -43,10 +43,10 @@ class UsersController < ApplicationController
 
   def account_setup
     @user = current_user
-    # if @user.role
-    #   flash[:warning] = 'Your account is already set up.'
-    #   redirect_to :dashboard
-    # end
+    if @user.role
+      flash[:warning] = 'Your account is already set up.'
+      redirect_to :dashboard
+    end
   end
 
   def edit
@@ -94,9 +94,9 @@ class UsersController < ApplicationController
                                  :ar_email, :ar_account_number, :dm_min_bottom_line_impact, :sp_small_revenue,
                                  :sp_medium_revenue, :sp_large_revenue, :sp_small_revenue_examples,
                                  :sp_medium_revenue_examples, :sp_large_revenue_examples, :sp_sales_cycle,
-                                 :sp_close_percentage, :sp_organization_close_percentage,
+                                 :sp_close_percentage, :sp_organization_close_percentage, :price, :price_cents,
                                  general_availabilities_attributes: [:id, :day, :start_time, :end_time],
-                                 queue_attributes: [:id, :meeting_frequency]
+                                 meeting_queue_attributes: [:id, :meeting_frequency]
     )
   end
 
