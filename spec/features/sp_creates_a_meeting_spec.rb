@@ -24,11 +24,11 @@ RSpec.feature 'sp creates a meeting', js: true do
 
     click_on 'Search'
 
-    # find('table tbody tr.accordion-toggle').click
+    find('table tbody tr.accordion-toggle').click
     #
     # find("a[href='#{new_meeting_path(dm.active_blocks.first)}']").click
 
-    click_on 'Buy 30 Minutes'
+    click_on 'Buy Now'
 
     fill_in 'meeting[topic]', with: 'this is the topic'
 

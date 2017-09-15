@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :payee_transactions, foreign_key: :payee_id, class_name: 'StripeTransaction'
   has_one :meeting_queue, dependent: :destroy
   accepts_nested_attributes_for :meeting_queue
+  has_many :bids, through: :meeting_queue
 
   # Callbacks
   before_save {self.email = email.downcase if email}

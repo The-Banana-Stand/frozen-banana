@@ -8,8 +8,7 @@
     <th><%= sort_link(@query, :city, 'City', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :state, 'State', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :zip_code, 'Zip Code', {}, {remote: true, method: :get} ) %></th>
-    <th>Price</th>
-    <th>&nbsp;</th>
+
   </tr>
   </thead>
 
@@ -17,16 +16,14 @@
 
   <%- @decision_makers.each do |dm| %>
 
-  <tr>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><i class="glyphicon glyphicon-chevron-right"></i></td>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.company_name %></td>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.title %></td>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.full_name %></td>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.city %></td>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.state%></td>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= dm.zip_code%></td>
-    <td data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button"><%= humanized_money_with_symbol dm.price %></td>
-    <td><%= link_to 'Buy 30 Minutes', new_meeting_path(dm.id), class: 'btn btn-success' %></td>
+  <tr data-toggle="collapse" data-target="#dm<%= dm.id %>" class="accordion-toggle" role="button">
+    <td><i class="glyphicon glyphicon-chevron-right"></i></td>
+    <td><%= dm.company_name %></td>
+    <td><%= dm.title %></td>
+    <td><%= dm.full_name %></td>
+    <td><%= dm.city %></td>
+    <td><%= dm.state%></td>
+    <td><%= dm.zip_code%></td>
   </tr>
 
   <tr>
@@ -40,8 +37,6 @@
 
                 Evaluating <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
               </span>
-
-
             </h4>
             <p>
               <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
@@ -49,46 +44,86 @@
           </div>
         </div>
 
-        <!--<%- if dm.active_blocks.empty? %>-->
-              <!--<h3>Decision Maker has No Times Available</h3>-->
+        <div class="row">
+          <div class="col-xs-4">
 
+            <div class="panel panel-default text-center">
+              <div class="panel-heading">
+                <h3 class="panel-title">Meet Now</h3>
+              </div>
+              <div class="panel-body">
+                <%= link_to 'Buy Now', new_meeting_path(dm.id), class: 'btn btn-success' %>
+              </div>
+            </div>
 
+          </div>
 
-        <!--<% else %>-->
-          <!--<div class="col-md-5">-->
-            <!--<table class="table">-->
-              <!--<thead>-->
-              <!--<tr>-->
-                <!--<th>Day of Week</th>-->
-                <!--<th>From</th>-->
-                <!--<th>To</th>-->
-                <!--<th>Price/Hr</th>-->
-              <!--</tr>-->
-              <!--</thead>-->
+          <div class="col-xs-8">
 
-              <!--<tbody>-->
-              <!--<%- dm.active_blocks.each do |ga| %>-->
-                  <!--<tr>-->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title text-center">Get in Line</h3>
+              </div>
+              <div class="panel-body">
+                <%= simple_form_for Bid.find_or_initialize_by(user_id: @user.id, meeting_queue_id: dm.meeting_queue.id), remote: true do |f| %>
+                    <%= f.hidden_field :meeting_queue_id, value: dm.meeting_queue.id %>
+                    <%= f.hidden_field :user_id, value: @user.id %>
+                    <div class="row">
+                      <div class="col-xs-4">
+                        <label for="bid_price">Amount:</label>
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-addon">$</span>
+                          <%= f.input :price, as: :float, label: false, class: 'form-control',
+                                      required: true, input_html: {min: dm.meeting_queue.minimum_bid} %>
+                        </div>
 
-                    <!--<td><%= ga.display_day %></td>-->
-                    <!--<td><%= ga.show_start_time %></td>-->
-                    <!--<td><%= ga.show_end_time %></td>-->
-                    <!--<td><%= humanized_money_with_symbol dm.price %></td>-->
-                    <!--<td>-->
-                      <!--<%= link_to 'Buy 1 Hour', new_meeting_path(ga.id), class: 'btn btn-success' %>-->
-                    <!--</td>-->
+                      </div>
+                      <div class="col-xs-3">
+                        Min: $<%= dm.meeting_queue.minimum_bid %>
+                      </div>
 
-                  <!--</tr>-->
-              <!--<% end %>-->
-              <!--</tbody>-->
+                      <div class="col-xs-3 col-xs-offset-1">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <strong>Block Close:</strong> <br>
+                            11/21/1991
+                          </div>
+                        </div>
 
-            <!--</table>-->
+                      </div>
+                    </div>
 
-            <!--<% end %>-->
+                    <div class="row">
+                      <div class="col-xs-5">
+                        <div id="submit-container-<%= dm.meeting_queue.id %>">
+                          <%- if f.object.persisted? && f.object.can_rebid %>
+                              <%= f.submit 'Update Bid', class: 'btn btn-success' %>
+                          <%- elsif f.object.persisted? && !f.object.can_rebid %>
+                              <%= f.submit 'Already Bid', class: 'btn btn-success', disabled: true %>
+                          <%- else %>
+                              <%= f.submit 'Request Place Holder', class: 'btn btn-success' %>
+                          <% end %>
+                        </div>
 
+                      </div>
 
+                      <div class="col-xs-3 col-xs-offset-3">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <strong>Time Allocated:</strong> <br>
+                            <%= dm.meeting_queue.meeting_frequency %>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                <% end %>
+              </div>
+            </div>
+
+          </div>
         </div>
-
       </div>
     </td>
   </tr>
@@ -100,6 +135,5 @@
 
 <script>
   $('#attention-score-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
-
   $('.evaluation-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });
 </script>

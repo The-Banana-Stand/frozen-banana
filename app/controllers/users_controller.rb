@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
     # If no search params, default to empty search
     # if params[:q] && params[:q].reject { |k, v| v.blank? }.present?
-      @query = User.includes(:active_blocks).confirmed.is_decision_maker.ransack(params[:q])
+      @query = User.includes(:meeting_queue).confirmed.is_decision_maker.ransack(params[:q])
       @decision_makers = @query.result
     # else
     #   @query = User.ransack

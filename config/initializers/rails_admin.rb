@@ -48,7 +48,7 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'ChangeRequest', 'PaperTrail::Version' # PaperTrail >= 3.0.0
   config.audit_with :paper_trail, 'Feedback', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
-  PAPER_TRAIL_AUDIT_MODEL = ['User', 'Meeting', 'Invite', 'GeneralAvailability', 'ChangeRequest', 'Feedback']
+  PAPER_TRAIL_AUDIT_MODEL = ['User', 'Meeting', 'Invite', 'GeneralAvailability', 'ChangeRequest']
   config.actions do
     history_index do
       only PAPER_TRAIL_AUDIT_MODEL
@@ -100,6 +100,7 @@ RailsAdmin.config do |config|
       field :admin
       field :created_at
       field :confirmed_at
+      field :bids
     end
 
     list do

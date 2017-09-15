@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :users, only: [:update]
   resources :change_requests,     only: [:new, :create]
   resources :invites,             only: [:new, :create]
+  resources :bids
 
   get '/error' => 'static_pages#error'
 
