@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915154713) do
+ActiveRecord::Schema.define(version: 20170916204610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170915154713) do
     t.string "minimum_bid_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "block_close_date"
     t.index ["user_id"], name: "index_meeting_queues_on_user_id"
   end
 
@@ -170,7 +171,7 @@ ActiveRecord::Schema.define(version: 20170915154713) do
     t.datetime "updated_at", null: false
     t.datetime "activated_at"
     t.boolean "wildcard", default: true
-    t.integer "price_cents", default: 10426, null: false
+    t.integer "price_cents", default: 10000, null: false
     t.string "price_currency", default: "USD", null: false
     t.string "customer_token"
     t.text "admin_comments"

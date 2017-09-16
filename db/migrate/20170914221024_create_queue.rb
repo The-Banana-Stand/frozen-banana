@@ -8,13 +8,9 @@ class CreateQueue < ActiveRecord::Migration[5.1]
       t.string :minimum_bid_currency, default: "USD", null: false
       t.timestamps
     end
-
-    User.all.each do |user|
-      user.create_meeting_queue(last_scheduled_at: Time.now)
-    end
   end
 
   def down
-    drop_table :queues
+    drop_table :meeting_queues
   end
 end

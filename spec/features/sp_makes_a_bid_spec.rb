@@ -51,7 +51,7 @@ RSpec.feature 'sp makes a bid', js: true do
 
     context 'and rebidding is not yet allowed' do
       scenario 'sp cannot update their bid' do
-        create(:bid, meeting_queue_id: dm.meeting_queue.id, user_id: sp.id, can_rebid: true)
+        create(:bid, meeting_queue_id: dm.meeting_queue.id, user_id: sp.id, can_rebid: false)
 
         visit schedule_time_path
 
@@ -61,10 +61,8 @@ RSpec.feature 'sp makes a bid', js: true do
 
         find('table tbody tr.accordion-toggle').click
 
+        expect(page).to have_button('Already Bid', disabled: true)
 
-
-        expect(page).to have_content 'Already Bid'
-        
       end
     end
   end

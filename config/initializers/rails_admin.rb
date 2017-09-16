@@ -47,8 +47,10 @@ RailsAdmin.config do |config|
   config.audit_with :paper_trail, 'GeneralAvailability', 'PaperTrail::Version' # PaperTrail >= 3.0.0
   config.audit_with :paper_trail, 'ChangeRequest', 'PaperTrail::Version' # PaperTrail >= 3.0.0
   config.audit_with :paper_trail, 'Feedback', 'PaperTrail::Version' # PaperTrail >= 3.0.0
+  config.audit_with :paper_trail, 'MeetingQueue', 'PaperTrail::Version' # PaperTrail >= 3.0.0
+  config.audit_with :paper_trail, 'Bid', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
-  PAPER_TRAIL_AUDIT_MODEL = ['User', 'Meeting', 'Invite', 'GeneralAvailability', 'ChangeRequest']
+  PAPER_TRAIL_AUDIT_MODEL = ['User', 'Meeting', 'Invite', 'GeneralAvailability', 'ChangeRequest', 'MeetingQueue', 'Bid']
   config.actions do
     history_index do
       only PAPER_TRAIL_AUDIT_MODEL

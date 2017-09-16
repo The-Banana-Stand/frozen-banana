@@ -44,8 +44,8 @@ class User < ApplicationRecord
 
   # Callbacks
   before_save {self.email = email.downcase if email}
-  after_create :send_slack_notification, :create_general_availabilities
-  after_create :create_meeting_queue, :create_general_availabilities, if: :dm?
+  after_create :send_slack_notification
+  after_create :populate_meeting_queue, :create_general_availabilities, if: :dm?
 
   # Validations
   # has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
@@ -154,6 +154,10 @@ class User < ApplicationRecord
       self.general_availabilities.create(block: num, day: num)
 
     end
+  end
+
+  def populate_meeting_queue
+    self.create_meeting_queue(block_close_date: Time.zone.now.end_of_week.beginning_of_day + 20.hours, last_scheduled_at: Time.now)
   end
 
 
