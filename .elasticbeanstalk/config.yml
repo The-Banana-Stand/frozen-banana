@@ -9,7 +9,7 @@ branch-defaults:
   splash-2:
     environment: frozen-banana-production
   staging:
-    environment: frozen-banana-staging
+    environment: frozen-banana-staging-1
 global:
   application_name: frozen-banana
   branch: null
