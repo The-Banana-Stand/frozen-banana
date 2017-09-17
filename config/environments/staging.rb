@@ -62,7 +62,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "frozen-banana_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = {host: 'https://meetingslice.com'}
   # SMTP settings for Amazon SES
   config.action_mailer.smtp_settings = {
