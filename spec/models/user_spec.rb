@@ -45,4 +45,16 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe User, '#destroy_meeting_queue' do
+    it 'destroys meeting queue if sp' do
+      user = create(:new_user)
+
+      expect(user.meeting_queue).to_not be_nil
+
+      user.update(role: 'sp')
+
+      expect(user.meeting_queue.persisted?).to be_falsey
+    end
+  end
+
 end

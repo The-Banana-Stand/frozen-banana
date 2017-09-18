@@ -44,8 +44,9 @@ class User < ApplicationRecord
 
   # Callbacks
   before_save {self.email = email.downcase if email}
-  after_create :send_slack_notification
-  after_create :populate_meeting_queue, :create_general_availabilities, if: :dm?
+  after_create :send_slack_notification, :populate_meeting_queue
+  after_create :create_general_availabilities, if: :dm?
+  after_update :destroy_meeting_queue, if: :sp?
 
   # Validations
   # has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
@@ -157,10 +158,12 @@ class User < ApplicationRecord
   end
 
   def populate_meeting_queue
-    self.create_meeting_queue(block_close_date: Time.zone.now.end_of_week.beginning_of_day + 20.hours, last_scheduled_at: Time.now)
+    self.create_meeting_queue
   end
 
-
+  def destroy_meeting_queue
+    self.meeting_queue.destroy if self.meeting_queue
+  end
 
   def send_slack_notification
    SlackWrapper.new_user_notification(self)

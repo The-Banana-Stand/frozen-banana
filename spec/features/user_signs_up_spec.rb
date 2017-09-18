@@ -54,6 +54,8 @@ RSpec.feature 'User signs up for site' do
 
       expect(page).to have_content('My Dashboard')
 
+      expect(user.meeting_queue).to_not be_nil
+
     end
   end
 
