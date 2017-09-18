@@ -53,4 +53,9 @@ $(document).on('turbolinks:load', function() {
 
     //end account setup logic
 
+    $('.box').matchHeight({byRow: false});
+
+    $('.box-by-row').matchHeight({byRow: true});
+
+
 });
