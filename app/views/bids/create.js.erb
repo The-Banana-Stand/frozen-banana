@@ -1,1 +1,2 @@
-$("#submit-container-<%= @bid.meeting_queue.id %>").html('<%= escape_javascript(button_tag 'Bid Placed', disabled: true, class: 'btn btn-success btn-lg') %>');
+$("#meeting-queue-container-<%= @bid.meeting_queue.id %>").html(
+    '<%= escape_javascript(render 'users/partials/meeting_queue', dm: @bid.meeting_queue.user, user: current_user) %>');

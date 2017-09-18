@@ -19,9 +19,9 @@ RSpec.feature 'sp makes a bid', js: true do
 
     fill_in 'bid_price', with: '100'
 
-    click_on 'Request Place Holder'
+    click_on 'Join Queue'
 
-    expect(page).to have_content 'Bid Placed'
+    expect(page).to have_button('In Queue', disabled: true)
 
     expect(Bid.count).to eq(1)
 
@@ -44,7 +44,7 @@ RSpec.feature 'sp makes a bid', js: true do
 
         click_on 'Update Bid'
 
-        expect(page).to have_content 'Bid Updated'
+        expect(page).to have_button('In Queue', disabled: true)
 
       end
     end
@@ -61,7 +61,7 @@ RSpec.feature 'sp makes a bid', js: true do
 
         find('table tbody tr.accordion-toggle').click
 
-        expect(page).to have_button('Already Bid', disabled: true)
+        expect(page).to have_button('In Queue', disabled: true)
 
       end
     end

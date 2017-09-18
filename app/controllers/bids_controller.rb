@@ -28,6 +28,18 @@ class BidsController < ApplicationController
     end
   end
 
+  def destroy
+    @bid = Bid.find(params[:id])
+
+    @bid.update(status: :cancelled)
+
+    respond_to do |format|
+      format.js {
+
+      }
+    end
+  end
+
   private
 
   def bid_params

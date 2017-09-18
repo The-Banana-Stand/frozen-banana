@@ -28,7 +28,7 @@ RSpec.feature 'sp creates a meeting', js: true do
     #
     # find("a[href='#{new_meeting_path(dm.active_blocks.first)}']").click
 
-    click_on 'Buy Now'
+    click_on "$#{dm.price}"
 
     fill_in 'meeting[topic]', with: 'this is the topic'
 
