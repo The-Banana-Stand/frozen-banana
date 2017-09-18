@@ -50,14 +50,43 @@
         <button class="btn btn-primary" id="next">Next</button>
       </div>
 
-      <div id="section-2" class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+      <div id="section-2" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 text-center">
         <p class="lead">
          How much time will you allocate to hearing innovative product pitches?
         </p>
 
-        <div class="form-group">
-          <%= render 'users/partials/meeting_control_form', f: f %>
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-4">
+            <div class="form-group">
+              <%= f.association :meeting_queue do |qf| %>
+                  <%= qf.input :meeting_frequency, as: :select, collection: MeetingQueue.meeting_frequencies.keys, include_blank: false, label: false, class: 'form-control' %>
+              <% end %>
+            </div>
+          </div>
         </div>
+
+        <hr/>
+
+        <p class="lead">
+          Everyone who can buy your time on MeetingSlice is a b2b company and has
+          qualified you as a potential customer.  If a Sales Rep is willing to pay a very high price
+          for your attention, it's a signal they have really done their homework and can solve one of your problems.
+        </p>
+
+        <p class="lead">At what price are you willing to take every meeting immediately?</p>
+
+
+          <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <%= f.input :price, as: :integer, label: false, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
         <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
       </div>

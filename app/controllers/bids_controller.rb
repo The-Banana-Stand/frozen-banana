@@ -15,6 +15,7 @@ class BidsController < ApplicationController
     @bid = Bid.find(params[:id])
 
     if @bid.can_rebid
+      @bid.can_rebid = false
       @bid.update_attributes!(bid_params)
       respond_to do |format|
         format.js {
