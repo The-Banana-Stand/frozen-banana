@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    if resource.sign_in_count == 1 || resource.role.nil?
+    if resource.sign_in_count == 1 || resource.role.empty?
       account_setup_path
     else
       dashboard_path
