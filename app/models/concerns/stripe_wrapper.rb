@@ -24,7 +24,7 @@ module StripeWrapper
   end
 
   def fetch_stripe_customer
-    if self.customer_token
+    if self.customer_token && !self.customer_token.empty?
       customer = self.stripe_customer
       customer.deleted? ? create_stripe_customer : customer
     else
