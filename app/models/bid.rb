@@ -15,4 +15,17 @@ class Bid < ApplicationRecord
       'No Bid'
     end
   end
+
+  def wait_time
+    if self.cancelled?
+      return 'Bid Cancelled'
+    elsif !self.persisted? || !self.active?
+      return 'No Bid'
+    end
+
+    time_available_unit = MeetingQueue.meeting_frequencies[self.meeting_queue.meeting_frequency]
+
+
+
+  end
 end
