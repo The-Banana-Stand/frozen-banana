@@ -18,6 +18,8 @@ class Meeting < ApplicationRecord
   before_create :set_confirmation_number
   after_create :send_slack_notification
 
+  scope :active, -> {where(status: %w(requested scheduled))}
+
   def status_enum
     %w(requested scheduled completed change_pending cancelled declined test)
   end

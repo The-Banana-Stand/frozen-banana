@@ -102,6 +102,8 @@ GEM
     css_parser (1.5.0)
       addressable
     dante (0.2.0)
+    data-confirm-modal (1.4.0)
+      railties (>= 3.0)
     database_cleaner (1.6.1)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -403,6 +405,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   chromedriver-helper
+  data-confirm-modal
   database_cleaner
   devise
   exception_notification

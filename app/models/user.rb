@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   include UserEnumerables
   include StripeWrapper
+  PLATFORM_FEE = 0.182
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -131,7 +132,7 @@ class User < ApplicationRecord
 
 
   def platform_cut_price
-    Money.new( (self.price_cents * 0.1621).round(0) )
+    Money.new( (self.price_cents * PLATFORM_FEE).round(0) )
   end
 
   def total_price

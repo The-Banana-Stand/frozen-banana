@@ -48,7 +48,7 @@
       <article>
         <label class="amount">
           <span>Paid to Decision Maker's Organization: <%= humanized_money_with_symbol(@decision_maker.price) %></span> <br>
-          <span>Platform Fee: 16.21%</span>
+          <span>Platform Fee: <%= number_to_percentage User::PLATFORM_FEE * 100, strip_insignificant_zeros: true %></span>
         </label>
       </article>
 
