@@ -1,14 +1,15 @@
 <table class="table" style="border-collapse:collapse;">
 
   <thead>
-  <tr><th>&nbsp;</th>
+  <tr>
+    <th>&nbsp;</th>
     <th><%= sort_link(@query, :company_name, 'Company', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :title, {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :full_name, 'Name', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :city, 'City', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :state, 'State', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :zip_code, 'Zip Code', {}, {remote: true, method: :get} ) %></th>
-
+    <th>&nbsp;</th>
   </tr>
   </thead>
 
@@ -24,25 +25,12 @@
     <td><%= dm.city %></td>
     <td><%= dm.state%></td>
     <td><%= dm.zip_code%></td>
+    <td><%= button_tag 'Buy 30 Minutes', class: 'btn btn-success' %></td>
   </tr>
 
   <tr>
     <td colspan="12" class="hiddenRow">
       <div class="accordian-body collapse" id="dm<%= dm.id %>">
-        <div class="row well">
-          <div class="col-md-4">
-            <h4>
-              <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
-                    data-content="It's okay if your product or service doesn’t match what the decision maker is currently evaluating.">
-
-                Evaluating <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
-              </span>
-            </h4>
-            <p>
-              <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
-            </p>
-          </div>
-        </div>
 
         <div class="row match-my-cols">
           <div class="col-xs-4">
@@ -70,6 +58,21 @@
             <%= render 'users/partials/meeting_queue', dm: dm, user: @user %>
           </div>
         </div>
+
+        <div class="row well">
+          <div class="col-md-4">
+            <h4>
+              <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
+                    data-content="It's okay if your product or service doesn’t match what the decision maker is currently evaluating.">
+
+                Evaluating <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
+              </span>
+            </h4>
+            <p>
+              <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
+            </p>
+          </div>
+        </div>
       </div>
     </td>
   </tr>
@@ -88,25 +91,28 @@
         <h4 class="modal-title" id="myModalLabel">Meeting Queue</h4>
       </div>
       <div class="modal-body">
-        <p>Business Decision Makers have a limited amount of time allocated to hearing about innovative products and services.</p>
+        <p>Business Decision Makers block out time to hear pitches for innovative products.</p>
 
-        <p>(Name) will allow MeetingSlice to put meetings on his calendar (hours per week).</p>
+       <p> Sales Reps get in the Meeting Queue for the Decision Maker’s time by bidding. Sales Reps with the highest probability
+        of closing, are willing to pay the most for the decision makers immediate attention.</p>
 
-          <p>Here are the rules:<br/>
-          1.    The higher your bid, the further up in the Queue you move.<br/>
-          2.    You can only bid once every (weeks). No changes.<br/>
-          3.    If you don’t get selected, your bid rolls over to the next available meeting block.<br/>
-          4.    You can change your bid once every (weeks).<br/>
-          5.    After you bid, we will tell you where your rank and when you can expect to get a meeting.</p>
+        <p>Here are the rules:</p>
 
-          <p>If you have already qualified this decision maker and have an innovative product, you should be willing to bid
-          more for (name) time that someone that is using a ‘spray and pray’ approach.</p>
+        <p>1.    The higher your bid, the further up in the Queue you move.<br>
+        2.    You can only bid once per block of time available. No changes.<br>
+        3.    If you don’t get selected, your bid rolls over to the next available block of time.<br>
+        4.    You can change your bid once after each Meeting Selection Time.<br>
+        5.    After you bid, you will see your rank and an estimate of when you will get a meeting.</p>
 
-          <p>Why bid high for meetings?<br/>
-          Rather than call (name) fourteen times and hope you get 2 minutes to pitch your idea, do everything you can
-          to improve your probability of closing the account then decide how much the meeting is worth.  (Name) is
-          willing to trade certainty that you will get a meeting with (him) for 30 minutes, if you will do the work upfront
-          to qualify him and come totally prepared to solve his unique problem. The money is a signal!</p>
+        <p>If you have already qualified this decision maker and have an innovative product, you should be willing to bid
+        more for time that someone that is using a ‘spray and pray’ approach.</p>
+
+        <p>Why bid high for meetings?<br>
+        Rather than call the Decision Maker fourteen times and hope you get 2 minutes to pitch your idea, do everything
+        you can to improve your probability of closing the account then decide how much the meeting is worth.
+        The Decision Maker is willing to give certainty that you will get a 30-minute meeting, if you will do the work
+        upfront to qualify him and come totally prepared to solve his business problems.
+        By putting more skin in the game, you signal to the Decision Maker you have done your homework.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -124,25 +130,12 @@
         <h4 class="modal-title" id="myModalLabel">Meet Now</h4>
       </div>
       <div class="modal-body">
-        <p>Business Decision Makers have a limited amount of time allocated to hearing about innovative products and services.</p>
+        <p>Some products are such a good fit for the Decision Maker, Sales Organizations or Sales Reps want to skip to the
+        front of the line. They know they have a very high probability of closing and want to signal this to the Decision Maker with money.</p>
 
-        <p>(Name) will allow MeetingSlice to put meetings on his calendar (hours per week).</p>
+        <p>We asked the Decision Maker at what price is the signal of “money for your time” so loud that you would always take a meeting.</p>
 
-        <p>Here are the rules:<br/>
-          1.    The higher your bid, the further up in the Queue you move.<br/>
-          2.    You can only bid once every (weeks). No changes.<br/>
-          3.    If you don’t get selected, your bid rolls over to the next available meeting block.<br/>
-          4.    You can change your bid once every (weeks).<br/>
-          5.    After you bid, we will tell you where your rank and when you can expect to get a meeting.</p>
-
-        <p>If you have already qualified this decision maker and have an innovative product, you should be willing to bid
-          more for (name) time that someone that is using a ‘spray and pray’ approach.</p>
-
-        <p>Why bid high for meetings?<br/>
-          Rather than call (name) fourteen times and hope you get 2 minutes to pitch your idea, do everything you can
-          to improve your probability of closing the account then decide how much the meeting is worth.  (Name) is
-          willing to trade certainty that you will get a meeting with (him) for 30 minutes, if you will do the work upfront
-          to qualify him and come totally prepared to solve his unique problem. The money is a signal!</p>
+        <p>If you do not want to get in line with Meeting Queue, use MeetNow.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
