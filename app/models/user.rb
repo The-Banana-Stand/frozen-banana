@@ -48,7 +48,7 @@ class User < ApplicationRecord
   before_save {self.email = email.downcase if email}
   after_create :send_slack_notification, :populate_meeting_queue
   after_create :create_general_availabilities, if: :dm?
-  after_update :destroy_meeting_queue, if: :sp?
+  # after_update :destroy_meeting_queue, if: :sp?
 
   # Validations
   # has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: ":style/missing.png"
