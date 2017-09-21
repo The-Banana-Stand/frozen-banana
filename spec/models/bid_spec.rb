@@ -24,7 +24,7 @@ RSpec.describe Bid, type: :model do
       b3 = create(:bid, price_cents: 3000, meeting_queue: queue)
       b4 = create(:bid, price_cents: 4000, meeting_queue: queue)
       b5 = create(:bid, price_cents: 5000, meeting_queue: queue)
-      byebug
+
       expect(b1.wait_time).to eq('On Meeting Selection Date')
       expect(b2.wait_time).to eq('On Meeting Selection Date')
       expect(b3.wait_time).to eq('4 weeks from meeting selection')

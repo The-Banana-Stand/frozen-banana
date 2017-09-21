@@ -57,6 +57,7 @@ gem 'inky-rb', require: 'inky'
 # Stylesheet inlining for email
 gem 'roadie-rails'
 gem 'smtpapi'
+gem 'data-confirm-modal'
 
 
 # Use Capistrano for deployment

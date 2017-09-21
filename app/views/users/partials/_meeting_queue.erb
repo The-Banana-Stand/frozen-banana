@@ -60,12 +60,13 @@
                   <%- elsif  f.object.persisted? && f.object.can_rebid  %>
                       <%= f.submit 'Update Bid', class: 'btn btn-success btn-lg' %>
                       <%= link_to 'Cancel Bid', bid_path(f.object.id), class: 'btn-link btn-xs', remote: true,
-                                  method: :delete, data: { confirm: 'Are you sure?  Once you cancel a bid you cannot
-                                   rejoin this Decision Maker\'s queue until the next meeting selection block' } %>
+                                  method: :delete, data: { confirm: "Once you cancel a bid you cannot
+                                   rejoin this Decision Maker's queue until the next meeting selection date." } %>
                   <%- elsif f.object.persisted? && !f.object.can_rebid %>
                       <%= f.submit 'In Queue', class: 'btn btn-success btn-lg margin-top', disabled: true %>
                       <%= link_to 'Cancel Bid', bid_path(f.object.id), class: 'btn-link btn-xs', remote: true,
-                                  method: :delete, data: { confirm: 'Are you sure?  Once you cancel a bid you cannot rejoin this Decision Maker\'s queue until the next meeting selection block' } %>
+                                  method: :delete, data: { confirm: "Once you cancel a bid you cannot
+                                   rejoin this Decision Maker's queue until the next meeting selection date." } %>
                   <%- else %>
                       <%= f.submit 'Join Queue', class: 'btn btn-success btn-lg' %>
                   <% end %>

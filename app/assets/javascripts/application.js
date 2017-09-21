@@ -16,6 +16,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require jquery.timepicker.js
+//= require data-confirm-modal
 //= require_tree .
 
 

@@ -9,6 +9,7 @@
     <th><%= sort_link(@query, :city, 'City', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :state, 'State', {}, {remote: true, method: :get} ) %></th>
     <th><%= sort_link(@query, :zip_code, 'Zip Code', {}, {remote: true, method: :get} ) %></th>
+    <th>Status</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
@@ -25,6 +26,15 @@
     <td><%= dm.city %></td>
     <td><%= dm.state%></td>
     <td><%= dm.zip_code%></td>
+    <td>
+      <%- if Meeting.active.where(dm_id: dm.id, sp_id: @user.id).exists? %>
+          Meeting Scheduled/Requested
+      <%- elsif Bid.active.where(meeting_queue_id: dm.meeting_queue.id, user_id: @user.id).exists? %>
+          In Queue
+      <%- else %>
+          N/A
+      <% end %>
+    </td>
     <td><%= button_tag 'Buy 30 Minutes', class: 'btn btn-success' %></td>
   </tr>
 
