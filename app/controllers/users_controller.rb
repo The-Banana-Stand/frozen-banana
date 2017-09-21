@@ -92,7 +92,7 @@ class UsersController < ApplicationController
                                  :company_name, :company_address, :city, :state, :zip_code, :role, :dm_evaluating, :avatar,
                                  :sp_product_service, :phone_number, :ar_first_name, :ar_last_name, :ar_phone_number,
                                  :ar_email, :ar_account_number, :dm_min_bottom_line_impact, :sp_small_revenue,
-                                 :sp_medium_revenue, :sp_large_revenue, :sp_small_revenue_examples,
+                                 :sp_medium_revenue, :sp_large_revenue, :sp_small_revenue_examples, :payment_option,
                                  :sp_medium_revenue_examples, :sp_large_revenue_examples, :sp_sales_cycle,
                                  :sp_close_percentage, :sp_organization_close_percentage, :price, :price_cents,
                                  general_availabilities_attributes: [:id, :day, :start_time, :end_time],

@@ -26,6 +26,7 @@ class User < ApplicationRecord
 
   enum sp_close_percentage: CLOSE_PERCENTAGE_ENUM_VALUES, _prefix: true
   enum sp_organization_close_percentage: CLOSE_PERCENTAGE_ENUM_VALUES, _prefix: true
+  enum payment_option: {'Hold the funds for Sales Reps in my Company': 0, 'My Companies charity of choice': 1, 'My Company': 2}
 
   # Associations
   has_many :general_availabilities, -> { order day: :asc, start_time: :asc }, inverse_of: :user, dependent: :destroy
