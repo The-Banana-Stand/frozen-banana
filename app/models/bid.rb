@@ -4,6 +4,8 @@ class Bid < ApplicationRecord
   has_paper_trail
   monetize :price_cents
 
+  after_create :send_slack_notification
+
   enum status: {active: 0, won: 1, cancelled: 2}
 
   def place_in_line
@@ -51,4 +53,10 @@ class Bid < ApplicationRecord
     }.with_indifferent_access[self.meeting_queue.meeting_frequency]
   end
 
+
+  private
+
+  def send_slack_notification
+    SlackWrapper.new_bid_notification(self)
+  end
 end
