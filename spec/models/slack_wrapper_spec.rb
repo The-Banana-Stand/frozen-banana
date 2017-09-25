@@ -34,4 +34,12 @@ RSpec.describe SlackWrapper, type: :model do
     end
   end
 
+  describe '.new_bid_notification' do
+    it 'sends a ping to SLACK' do
+      bid = build_stubbed(:bid)
+      expect(subject).to receive(:send_to_slack)
+      subject.new_bid_notification(bid)
+    end
+  end
+
 end

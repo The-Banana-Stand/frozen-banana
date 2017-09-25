@@ -156,6 +156,34 @@ module SlackWrapper
     send_to_slack notification
   end
 
+  def new_bid_notification(obj)
+    dm = obj.meeting_queue.user
+    notification = {
+        text: 'New Bid',
+        username: "Awesom-O",
+        icon_emoji: ":loudspeaker:",
+        fields: [
+            {
+                title: 'New Bid',
+                value: "ID: #{obj.id}"
+            },
+            {
+                title: 'Decision Maker',
+                value: "#{dm.full_name} (#{dm.id}) - #{dm.email} - #{dm.phone_number} - #{dm.company_name}"
+            },
+            {
+                title: 'Salesperson',
+                value: "#{obj.user.full_name} (#{obj.user_id}) - #{obj.user.email} - #{obj.user.phone_number} - #{obj.user.company_name}"
+            },
+            {
+                title: 'Bid amount',
+                value: "#{obj.price.format}"
+            }
+        ]
+    }
+    send_to_slack notification
+  end
+
   private
 
   def send_to_slack(notification)
