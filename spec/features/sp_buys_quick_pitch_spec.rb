@@ -1,0 +1,43 @@
+require 'rails_helper'
+
+RSpec.feature 'sp buys a quick pitch' do
+
+  let(:stripe_helper) { StripeMock.create_test_helper }
+  let(:sp) {create(:user, role: 'sp')}
+  let(:dm) {create(:user_with_active_blocks)}
+  after { StripeMock.stop }
+
+  before(:each) do
+    StripeMock.start
+    sign_in sp
+  end
+
+  scenario 'sp buys a quick pitch with a dm' do
+
+    visit root_path
+
+    click_on 'Meeting Marketplace'
+
+    fill_in 'q[full_name_or_company_name_or_city_or_state_or_zip_code_cont]', with: dm.first_name
+
+    click_on 'Search'
+
+    find('table tbody tr.accordion-toggle').click
+    #
+    # find("a[href='#{new_meeting_path(dm.active_blocks.first)}']").click
+
+    within("#quick-pitch-#{dm.id}") do
+      click_on 'Buy Now'
+    end
+
+    # fill_in 'meeting[topic]', with: 'this is the topic'
+
+    click_on 'Submit Payment Information'
+
+    pay_stripe(sp.email)
+
+    expect(page).to have_content 'Confirmation'
+
+  end
+
+end
