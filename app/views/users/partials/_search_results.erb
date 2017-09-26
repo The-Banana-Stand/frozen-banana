@@ -83,6 +83,10 @@
             </p>
           </div>
         </div>
+
+        <div id="quick-pitch-<%= dm.id %>">
+          <%= link_to 'Buy Now', new_meeting_path(dm.id, meeting_type: 'quick_pitch') %>
+        </div>
       </div>
     </td>
   </tr>

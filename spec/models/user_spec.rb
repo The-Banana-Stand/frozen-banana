@@ -45,5 +45,19 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe User, '#price_for_meeting' do
+    context 'given a meeting object' do
+      it 'returns a price hash with correct amount' do
+        user = create(:user)
+        meeting = instance_double('Meeting', meeting_type: 'quick_pitch')
+        expect(user.price_for_meeting(meeting)[:price]).to eq(Money.new(1700))
+
+        expect(user.price_for_meeting[:price]).to eq(Money.new(10000))
+
+
+      end
+    end
+  end
+
 
 end

@@ -10,7 +10,7 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:linkedin]
 
   has_paper_trail ignore: [:remember_token]
-  monetize :price_cents
+  monetize :price_cents, :quick_pitch_price_cents
   auto_strip_attributes :first_name, :last_name, :dm_evaluating, :sp_product_service,
                         :company_name, :company_address, :ar_comments, :sp_small_revenue_examples,
                         :sp_medium_revenue_examples, :sp_large_revenue_examples
@@ -43,6 +43,7 @@ class User < ApplicationRecord
   has_one :meeting_queue, dependent: :destroy
   accepts_nested_attributes_for :meeting_queue
   has_many :bids, through: :meeting_queue
+
 
   # Callbacks
   before_save {self.email = email.downcase if email}
@@ -88,7 +89,7 @@ class User < ApplicationRecord
 
 
   def all_meetings
-    Meeting.where(dm_id: id).or(Meeting.where(sp_id: id))
+    Meeting.where(dm_id: id).or(Meeting.where(sp_id: id)).where.not(meeting_type: 'quick_pitch')
   end
 
 
@@ -131,14 +132,24 @@ class User < ApplicationRecord
     %w(new validated rejected)
   end
 
-
-  def platform_cut_price
-    Money.new( (self.price_cents * PLATFORM_FEE).round(0) )
+  def price_for_meeting(meeting = nil)
+    price_for_meeting = if meeting && meeting.meeting_type == 'quick_pitch'
+                             self.quick_pitch_price
+                           else
+                             self.price
+                        end
+    {
+        price: price_for_meeting,
+        platform_cut_price: platform_cut_price(price_for_meeting),
+        total_price: Money.new( price_for_meeting + platform_cut_price(price_for_meeting))
+    }
   end
 
-  def total_price
-    Money.new( self.price + self.platform_cut_price )
+
+  def platform_cut_price(meeting_price)
+    Money.new( (meeting_price.fractional * PLATFORM_FEE).round(0) )
   end
+
 
   def send_confirmation_help_request(phone_number)
     SlackWrapper.confirmation_help_request(self, phone_number)

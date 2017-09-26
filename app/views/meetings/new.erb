@@ -1,7 +1,7 @@
-<h1>Confirm Meeting Request</h1>
+<h1>Confirm <%= @meeting.meeting_type == 'quick_pitch' ? 'Call' : 'Meeting Request' %></h1>
 
 <h3>
-  30 minutes with <%= @decision_maker.full_name %> <br>
+  <%= @meeting.meeting_type == 'quick_pitch' ? '5 minutes' : '30 minutes' %> with <%= @decision_maker.full_name %> <br>
 </h3>
 
 
@@ -15,8 +15,9 @@
 
     <%= f.hidden_field :dm_id, value: @decision_maker.id %>
     <%= f.hidden_field :sp_id, value: current_user.id %>
-    <%= f.hidden_field :price_cents, value: @decision_maker.price_cents %>
-    <%= f.hidden_field :platform_fee_cents, value: @decision_maker.platform_cut_price.fractional %>
+    <%= f.hidden_field :price_cents, value: @price[:price].fractional %>
+    <%= f.hidden_field :platform_fee_cents, value: @price[:platform_cut_price].fractional %>
+    <%= f.hidden_field :meeting_type, value: @meeting.meeting_type %>
 
 
     <h5>*What is the product you are pitching in this meeting?</h5>
@@ -47,7 +48,7 @@
 
       <article>
         <label class="amount">
-          <span>Paid to Decision Maker's Organization: <%= humanized_money_with_symbol(@decision_maker.price) %></span> <br>
+          <span>Paid to Decision Maker's Organization: <%= humanized_money_with_symbol(@price[:price]) %></span> <br>
           <span>Platform Fee: <%= number_to_percentage User::PLATFORM_FEE * 100, strip_insignificant_zeros: true %></span>
         </label>
       </article>
@@ -56,7 +57,7 @@
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
               data-description="Credit Card Info"
-              data-amount="<%= @decision_maker.total_price.fractional %>"
+              data-amount="<%= @price[:total_price].fractional %>"
               data-locale="auto"
               data-label="Submit Payment Information"
               data-panel-label="Use this Card"

@@ -1,6 +1,7 @@
 require 'rails_helper'
+require 'stripe_mock'
 
-RSpec.feature 'sp buys a quick pitch' do
+RSpec.feature 'sp buys a quick pitch', js: true do
 
   let(:stripe_helper) { StripeMock.create_test_helper }
   let(:sp) {create(:user, role: 'sp')}
@@ -30,7 +31,9 @@ RSpec.feature 'sp buys a quick pitch' do
       click_on 'Buy Now'
     end
 
-    # fill_in 'meeting[topic]', with: 'this is the topic'
+    expect(page).to have_content '5 minutes'
+
+    fill_in 'meeting[topic]', with: 'this is the topic'
 
     click_on 'Submit Payment Information'
 

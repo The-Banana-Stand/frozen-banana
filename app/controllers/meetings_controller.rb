@@ -5,14 +5,14 @@ class MeetingsController < ApplicationController
   def new
     @decision_maker = User.find(params[:id])
     # @desired_block = GeneralAvailability.includes(:user).find(params[:id])
-    @meeting = Meeting.new(dm_id: params[:id])
+    @meeting = Meeting.new(dm_id: params[:id], meeting_type: params[:meeting_type])
+    @price = @decision_maker.price_for_meeting(@meeting)
   end
 
 
   def create
     @meeting = Meeting.new(meeting_params)
 
-    #currently no way for meeting save to error, leaving in for future use
     if @meeting.save
       current_user.process_payment_info(params[:stripeToken])
       redirect_to confirm_meeting_path(@meeting.id)
@@ -38,7 +38,7 @@ class MeetingsController < ApplicationController
   def meeting_params
     params.require(:meeting).permit(:dm_id, :sp_id, :price_cents, :sp_requested_comments,
                                     :topic, :sp_lead_qualification, :platform_fee_cents,
-                                    :desired_start_time, :desired_end_time, :desired_day)
+                                    :desired_start_time, :desired_end_time, :desired_day, :meeting_type)
   end
 
 
