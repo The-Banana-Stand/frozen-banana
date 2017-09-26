@@ -32,61 +32,92 @@
       <%- elsif Bid.active.where(meeting_queue_id: dm.meeting_queue.id, user_id: @user.id).exists? %>
           In Queue
       <%- else %>
-          N/A
+          Nothing Scheduled
       <% end %>
     </td>
-    <td><%= button_tag 'Buy 30 Minutes', class: 'btn btn-success' %></td>
+    <td><%= button_tag 'Buy Meeting', class: 'btn btn-success' %></td>
   </tr>
 
   <tr>
     <td colspan="12" class="hiddenRow">
       <div class="accordian-body collapse" id="dm<%= dm.id %>">
 
-        <div class="row match-my-cols">
-          <div class="col-xs-4">
-
-            <div class="panel panel-default text-center">
-              <div class="panel-heading">
-                <h3 class="panel-title x-large-text">
-                  <strong>Meet Now</strong>
-                  <a type="button" data-toggle="modal" data-target="#meetNowModal" class="pull-right btn-link btn-xs">
-                    More Info
-                  </a>
-                </h3>
-              </div>
-              <div class="panel-body box">
-                <div class="margin-top-lg">
-                  <span class="large-text"> 30 Minutes</span> <br/>
-                  <%= link_to "$#{dm.price}", new_meeting_path(dm.id), class: 'btn btn-success' %>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-xs-8" id="meeting-queue-container-<%= dm.meeting_queue.id %>">
-            <%= render 'users/partials/meeting_queue', dm: dm, user: @user %>
-          </div>
-        </div>
-
-        <div class="row well">
+        <div class="row well well-sm">
           <div class="col-md-4">
-            <h4>
-              <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
+            <p>
+              <span class="evaluation-popover large-text" data-toggle="popover" data-trigger="hover" data-placement="top"
                     data-content="It's okay if your product or service doesn’t match what the decision maker is currently evaluating.">
 
                 Evaluating <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
               </span>
-            </h4>
-            <p>
               <%= dm.dm_evaluating || "#{dm.full_name} hasn't said what he's looking for in a meeting yet." %>
             </p>
           </div>
         </div>
 
-        <div id="quick-pitch-<%= dm.id %>">
-          <%= link_to 'Buy Now', new_meeting_path(dm.id, meeting_type: 'quick_pitch') %>
+        <div class="row">
+          <div class="col-xs-2">
+            <p class="lead">
+              <strong>Meet Now</strong> <br>
+              <a type="button" data-toggle="modal" data-target="#meetNowModal" class="btn-link btn-xs">
+                What is this?
+              </a>
+            </p>
+          </div>
+
+          <div class="col-xs-1">
+            <p class="lead text-center">
+              <span class="large-text">30</span><br> minutes
+            </p>
+          </div>
+
+          <div class="col-xs-2">
+            <p class="lead text-center">
+              <%= "$#{dm.price}" %>
+            </p>
+          </div>
+
+          <div class="col-xs-2">
+            <%= link_to 'Buy Now', new_meeting_path(dm.id), class: 'btn btn-success' %>
+          </div>
         </div>
+        <!--meet now row-->
+        <hr>
+
+        <div class="row">
+          <div class="col-xs-2">
+            <p class="lead">
+              <strong>Quick Pitch</strong> <br>
+              <a type="button" data-toggle="modal" data-target="#quickPitchModal" class="btn-link btn-xs">
+                What is this?
+              </a>
+            </p>
+          </div>
+
+          <div class="col-xs-1">
+            <p class="lead text-center">
+              <span class="large-text">5</span><br> minutes
+            </p>
+          </div>
+
+          <div class="col-xs-2">
+            <p class="lead text-center">
+              <%= "$#{dm.quick_pitch_price}" %>
+            </p>
+          </div>
+
+          <div class="col-xs-2">
+            <%= link_to 'Buy Now', new_meeting_path(dm.id, meeting_type: 'quick_pitch'), class: 'btn btn-success' %>
+          </div>
+        </div>
+        <!--quick pitch row-->
+        <hr>
+
+        <div class="row" id="meeting-queue-container-<%= dm.meeting_queue.id %>">
+          <%= render 'users/partials/meeting_queue', dm: dm, user: @user %>
+        </div>
+
+
       </div>
     </td>
   </tr>
@@ -150,6 +181,30 @@
         <p>We asked the Decision Maker at what price is the signal of “money for your time” so loud that you would always take a meeting.</p>
 
         <p>If you do not want to get in line with Meeting Queue, use MeetNow.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Pitch Modal -->
+<div class="modal fade" id="quickPitchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Quick Pitch</h4>
+      </div>
+      <div class="modal-body">
+        <p>This is phone call only.</p>
+        
+        <p>Sometimes you only need five minutes to ask a few qualifying questions and pitch your
+        idea telephonically to a decision maker.</p>
+
+        <p>With Quick Pitch, we stack 5 minute calls one after another. The Decision Maker will let
+        you know if they are interested and whether or not to follow up for a longer meeting.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

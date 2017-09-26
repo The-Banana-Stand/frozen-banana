@@ -1,138 +1,91 @@
-<div class="panel panel-default" id="meeting-queue-panel">
-  <div class="panel-heading">
-    <h3 class="panel-title text-center x-large-text">
-      <strong>Meeting Queue</strong>
-      <a type="button" data-toggle="modal" data-target="#meetingQueueModal" class="pull-right btn-link btn-xs">
+<%= simple_form_for Bid.find_or_initialize_by(user_id: user.id, meeting_queue_id: dm.meeting_queue.id), remote: true do |f| %>
+    <%= f.hidden_field :meeting_queue_id, value: dm.meeting_queue.id %>
+    <%= f.hidden_field :user_id, value: user.id %>
+
+    <div class="col-xs-2">
+      <p class="lead">
+        <strong>Meeting Queue</strong><br>
+        <a type="button" data-toggle="modal" data-target="#meetingQueueModal" class="btn-link btn-xs">
+          What is this?
+        </a>
+      </p>
+    </div>
+
+    <div class="col-xs-1">
+      <p class="lead text-center">
+        <span class="large-text">30</span><br> minutes
+      </p>
+    </div>
+
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">$</span>
+          <%- if f.object.cancelled? %>
+              <%= f.input :price, as: :integer, label: false, class: 'form-control',
+                          required: true, disabled: true, input_html: {value: 0} %>
+          <%- elsif f.object.can_rebid || !f.object.persisted? %>
+              <%= f.input :price, as: :integer, label: false, class: 'form-control',
+                          required: true, input_html: {min: dm.meeting_queue.minimum_bid} %>
+          <%- else %>
+              <%= f.input :price, as: :integer, label: false, class: 'form-control',
+                          required: true, disabled: true %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        Min: $<%= dm.meeting_queue.minimum_bid %>
+      </div>
+
+    </div>
+
+    <div class="col-xs-2">
+      <div id="submit-container-<%= dm.meeting_queue.id %>">
+        <%- if f.object.cancelled? %>
+            <%= f.submit 'Bid Cancelled', class: 'btn btn-warning', disabled: true %>
+        <%- elsif  f.object.persisted? && f.object.can_rebid  %>
+            <%= f.submit 'Update Bid', class: 'btn btn-success' %> <br>
+            <%= link_to 'Cancel Bid', bid_path(f.object.id), class: 'btn-link btn-xs', remote: true,
+                        method: :delete, data: { confirm: "Once you cancel a bid you cannot
+                                   rejoin this Decision Maker's queue until the next meeting selection date." } %>
+        <%- elsif f.object.persisted? && !f.object.can_rebid %>
+            <%= f.submit 'In Queue', class: 'btn btn-success', disabled: true %> <br>
+            <%= link_to 'Cancel Bid', bid_path(f.object.id), class: 'btn-link btn-xs', remote: true,
+                        method: :delete, data: { confirm: "Once you cancel a bid you cannot
+                                   rejoin this Decision Maker's queue until the next meeting selection date." } %>
+        <%- else %>
+            <%= f.submit 'Join Queue', class: 'btn btn-success' %>
+        <% end %>
+      </div>
+
+    </div>
+
+    <div class="col-xs-1">
+      <a type="button" data-toggle="modal" data-target="#meetingQueue-<%= dm.meeting_queue.id %>" class="btn-link btn-xs">
         More Info
       </a>
-    </h3>
-  </div>
+    </div>
+    <%- if f.object.persisted? %>
 
-  <div class="panel-body panel-small box">
-    <%= simple_form_for Bid.find_or_initialize_by(user_id: user.id, meeting_queue_id: dm.meeting_queue.id), remote: true do |f| %>
-        <%= f.hidden_field :meeting_queue_id, value: dm.meeting_queue.id %>
-        <%= f.hidden_field :user_id, value: user.id %>
-
-        <div class="row">
-
-          <div class="col-xs-5">
-            <div class="row">
-              <div class="col-xs-6 large-text">
-                <label for="meeting_length">Meeting Time:</label>
-                <div>
-                  <%= select_tag :meeting_length, options_for_select(['30 Minutes']),
-                                 class: 'form-control' %>
-                </div>
-
-              </div>
-
-              <div class="col-xs-6">
-                <label for="bid_price" class="large-text">Amount:</label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-addon">$</span>
-                  <%- if f.object.cancelled? %>
-                  <%= f.input :price, as: :integer, label: false, class: 'form-control',
-                              required: true, disabled: true, input_html: {value: 0} %>
-                  <%- elsif f.object.can_rebid || !f.object.persisted? %>
-                      <%= f.input :price, as: :integer, label: false, class: 'form-control',
-                                  required: true, input_html: {min: dm.meeting_queue.minimum_bid} %>
-                  <%- else %>
-                      <%= f.input :price, as: :integer, label: false, class: 'form-control',
-                                  required: true, disabled: true %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <!--row-->
-
-            <div class="row">
-              <div class="col-xs-6 col-xs-offset-6">
-                Min: $<%= dm.meeting_queue.minimum_bid %>
-              </div>
-            </div>
-            <!--row-->
-
-            <div class="row">
-              <div class="col-xs-12">
-                <div id="submit-container-<%= dm.meeting_queue.id %>" class="text-center submit-container">
-                  <%- if f.object.cancelled? %>
-                      <%= f.submit 'Bid Cancelled', class: 'btn btn-warning btn-lg', disabled: true %>
-                  <%- elsif  f.object.persisted? && f.object.can_rebid  %>
-                      <%= f.submit 'Update Bid', class: 'btn btn-success btn-lg' %>
-                      <%= link_to 'Cancel Bid', bid_path(f.object.id), class: 'btn-link btn-xs', remote: true,
-                                  method: :delete, data: { confirm: "Once you cancel a bid you cannot
-                                   rejoin this Decision Maker's queue until the next meeting selection date." } %>
-                  <%- elsif f.object.persisted? && !f.object.can_rebid %>
-                      <%= f.submit 'In Queue', class: 'btn btn-success btn-lg margin-top', disabled: true %>
-                      <%= link_to 'Cancel Bid', bid_path(f.object.id), class: 'btn-link btn-xs', remote: true,
-                                  method: :delete, data: { confirm: "Once you cancel a bid you cannot
-                                   rejoin this Decision Maker's queue until the next meeting selection date." } %>
-                  <%- else %>
-                      <%= f.submit 'Join Queue', class: 'btn btn-success btn-lg' %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <!--row-->
-          </div>
-          <!--col-xs-4 left-->
-
-          <div class="col-xs-4">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                                <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
-                                      data-content="Whomever has the highest bid(s) at this time gets the available meeting(s) with <%= dm.full_name %>">
-                                  <strong>Meeting Selection</strong> <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
-                                </span>
-                    <br>
-                    <%= dm.meeting_queue.show_block_close_date %>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                                <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
-                                      data-content="<%= dm.full_name %> will allow MeetingSlice to put meetings
-                                       on his calendar <%= dm.meeting_queue.meeting_frequency %>.">
-                                  <strong>Time Available</strong> <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
-                                </span>
-                    <br>
-                    <%= dm.meeting_queue.meeting_frequency %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--col-xs-4 center-->
-
-          <div class="col-xs-3">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="panel panel-default">
-                  <div class="panel-body">
+        <div class="col-xs-2">
+          <div class="panel panel-default">
+            <div class="panel-body">
                     <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
                           data-content="Determined by how much bid for the Decision Makers time. If you want to jump
                            up in the Queue, at your next available chance to bid, bid more. We suggest you
                             always bid your maximum amount.">
                                   <strong>Place in Line</strong> <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
                                 </span>
-                    <br>
-                    <%= f.object.place_in_line %>
-                  </div>
-                </div>
-              </div>
+              <br>
+              <%= f.object.place_in_line %>
             </div>
+          </div>
+        </div>
 
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="panel panel-default">
-                  <div class="panel-body">
+        <div class="col-xs-2">
+          <div class="panel panel-default">
+            <div class="panel-body">
                     <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
                           data-content="Calculated based on the number of hours the decision maker is willing to
                            allocate to evaluating new ideas and your place in the Queue.<br> This is not a guarantee as
@@ -140,19 +93,43 @@
                              in the Queue.  We suggest you always bid your maximum amount.">
                                   <strong>Estimated Wait</strong> <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
                                 </span>
-                    <br>
-                    <%= f.object.wait_time %>
-                  </div>
-                </div>
-              </div>
+              <br>
+              <%= f.object.wait_time %>
             </div>
           </div>
-          <!--col-xs-4 right-->
-
         </div>
-        <!--row-->
 
     <% end %>
+
+<% end %>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="meetingQueue-<%= dm.meeting_queue.id %>">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+                                <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
+                                      data-content="<%= dm.full_name %> will allow MeetingSlice to put meetings
+                                       on his calendar <%= dm.meeting_queue.meeting_frequency %>.">
+                                  <strong>Time Available</strong> <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
+                                </span>
+          <br>
+          <%= dm.meeting_queue.meeting_frequency %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+                                <span class="evaluation-popover" data-toggle="popover" data-trigger="hover" data-placement="top"
+                                      data-content="Whomever has the highest bid(s) at this time gets the available meeting(s) with <%= dm.full_name %>">
+                                  <strong>Meeting Selection</strong> <span class="glyphicon glyphicon-question-sign mag-icon"></span>:
+                                </span>
+          <br>
+          <%= dm.meeting_queue.show_block_close_date %>
+        </div>
+      </div>
+
+    </div>
   </div>
-  <!--panel-body-->
 </div>
