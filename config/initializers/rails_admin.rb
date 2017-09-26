@@ -86,8 +86,8 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :price_cents
-      field :price_currency
+      field :price
+      field :quick_pitch_price
       field :dm_min_bottom_line_impact
       field :sp_small_revenue
       field :sp_medium_revenue
@@ -126,8 +126,8 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :price_cents
-      field :price_currency
+      field :price
+      field :quick_pitch_price
       field :dm_min_bottom_line_impact
       field :customer_token
       field :admin
@@ -157,8 +157,8 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :price_cents
-      field :price_currency
+      field :price
+      field :quick_pitch_price
       field :dm_min_bottom_line_impact
       field :sp_small_revenue
       field :sp_medium_revenue
@@ -195,8 +195,8 @@ RailsAdmin.config do |config|
       field :dm_evaluating
       field :active
       field :role
-      field :price_cents
-      field :price_currency
+      field :price
+      field :quick_pitch_price
       field :dm_min_bottom_line_impact
       field :sp_small_revenue
       field :sp_medium_revenue
