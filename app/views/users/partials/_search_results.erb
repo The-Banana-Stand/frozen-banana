@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="meet-now-container-<%= dm.id %>">
           <div class="col-xs-2">
             <p class="lead">
               <strong>Meet Now</strong> <br>
@@ -87,7 +87,7 @@
           <%= render 'users/partials/meeting_queue', dm: dm, user: @user %>
         </div>
 
-        <div class="row">
+        <div class="row" id="quick-pitch-container-<%= dm.id %>">
           <div class="col-xs-2">
             <p class="lead">
               <strong>Quick Pitch</strong> <br>

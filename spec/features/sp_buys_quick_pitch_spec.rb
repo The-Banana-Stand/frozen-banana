@@ -27,7 +27,7 @@ RSpec.feature 'sp buys a quick pitch', js: true do
     #
     # find("a[href='#{new_meeting_path(dm.active_blocks.first)}']").click
 
-    within("#quick-pitch-#{dm.id}") do
+    within("#quick-pitch-container-#{dm.id}") do
       click_on 'Buy Now'
     end
 
