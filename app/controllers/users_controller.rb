@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
     # If no search params, default to empty search
     # if params[:q] && params[:q].reject { |k, v| v.blank? }.present?
-      @query = User.includes(:meeting_queue).confirmed.is_decision_maker.ransack(params[:q])
+      @query = User.includes(:meeting_queue).confirmed.is_decision_maker.order(:company_name).ransack(params[:q])
       @decision_makers = @query.result
     # else
     #   @query = User.ransack
@@ -43,10 +43,12 @@ class UsersController < ApplicationController
 
   def account_setup
     @user = current_user
-    if @user.role
-      flash[:warning] = 'Your account is already set up.'
-      redirect_to :dashboard
-    end
+    @user.create_meeting_queue
+    @user.create_paid_inbox
+    # if @user.role
+    #   flash[:warning] = 'Your account is already set up.'
+    #   redirect_to :dashboard
+    # end
   end
 
   def edit
@@ -96,7 +98,8 @@ class UsersController < ApplicationController
                                  :sp_medium_revenue_examples, :sp_large_revenue_examples, :sp_sales_cycle,
                                  :sp_close_percentage, :sp_organization_close_percentage, :price, :price_cents,
                                  general_availabilities_attributes: [:id, :day, :start_time, :end_time],
-                                 meeting_queue_attributes: [:id, :meeting_frequency]
+                                 meeting_queue_attributes: [:id, :meeting_frequency],
+                                 paid_inbox_attributes: [:id, :delivery_frequency, :status, :price_option]
     )
   end
 

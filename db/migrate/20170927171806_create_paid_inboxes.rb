@@ -7,7 +7,7 @@ class CreatePaidInboxes < ActiveRecord::Migration[5.1]
       t.integer :delivery_frequency, null: false, default: 0
       t.integer :price_cents, default: 300, null: false
       t.string :price_currency, default: "USD", null: false
-      t.boolean :admin_set_price, default: false
+      t.integer :price_option, null: false, default: 0
 
       t.timestamps
     end

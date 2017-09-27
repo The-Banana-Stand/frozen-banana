@@ -47,7 +47,7 @@
 
 
 
-        <button class="btn btn-primary" id="next">Next</button>
+        <button class="btn btn-primary" id="next-1">Next</button>
       </div>
 
       <div id="section-2" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 text-center">
@@ -100,8 +100,50 @@
           </div>
         </div>
 
+
+        <button class="btn btn-primary" id="next-2">Next</button>
+
+      </div>
+
+      <div id="section-3" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 text-center">
+
+        <p class="lead">
+          You wanna participate in Paid Inbox?
+        </p>
+
+        <%= f.simple_fields_for :paid_inbox do |pif| %>
+
+            <%= pif.input :status, as: :boolean, label: 'Yes', checked_value: :active, unchecked_value: :inactive, class: 'form-control' %>
+
+            <div id="paid-inbox-fields">
+              <p class="lead">
+                How often would you like to receive an email with all Paid Inbox Emails?
+              </p>
+              <%= pif.input :delivery_frequency,as: :select, collection: PaidInbox.delivery_frequencies.keys,
+                            include_blank: false, label: false, class: 'form-control' %>
+
+              <p class="lead">
+                How much would you like to charge to answer a 255 character email?
+              </p>
+
+              <%= pif.input :price_option, as: :select, collection: PaidInbox.price_options.keys,
+                            include_blank: false, label: false, class: 'form-control' %>
+
+            </div>
+
+        <% end %>
+
+
         <%= f.submit 'Finish Setup', class: 'btn btn-primary' %>
       </div>
 
+
   <% end %>
 </div>
+
+<script>
+  $('#user_paid_inbox_attributes_status').change(function() {
+      //Do stuff
+    $('#paid-inbox-fields').toggle();
+  });
+</script>

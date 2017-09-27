@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20170927172656) do
     t.integer "delivery_frequency", default: 0, null: false
     t.integer "price_cents", default: 300, null: false
     t.string "price_currency", default: "USD", null: false
-    t.boolean "admin_set_price", default: false
+    t.integer "price_option", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_paid_inboxes_on_user_id"

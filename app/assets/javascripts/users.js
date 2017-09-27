@@ -35,6 +35,8 @@ $(document).on('turbolinks:load', function() {
         e.preventDefault();
         $('#role-select-container').toggle();
         $('#section-2').toggle();
+        $('#section-3').toggle();
+        $('#paid-inbox-fields').toggle();
         $('#dm-form-container').toggleClass('hidden');
         $(window).trigger('resize');
     });
@@ -45,10 +47,16 @@ $(document).on('turbolinks:load', function() {
         $('#sp-form-container').toggleClass('hidden');
     });
 
-    $('#next').click(function(e){
+    $('#next-1').click(function(e){
         e.preventDefault();
         $('#section-1').toggle();
         $('#section-2').toggle();
+    });
+
+    $('#next-2').click(function(e){
+        e.preventDefault();
+        $('#section-2').toggle();
+        $('#section-3').toggle();
     });
 
     //end account setup logic
