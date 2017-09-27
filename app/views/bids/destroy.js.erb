@@ -1,2 +1,4 @@
 $("#meeting-queue-container-<%= @bid.meeting_queue.id %>").html(
     '<%= escape_javascript(render 'users/partials/meeting_queue', dm: @bid.meeting_queue.user, user: current_user) %>');
+
+$('.evaluation-popover').popover({delay: { "show": 300, "hide": 100 }, container: 'body', html: true });

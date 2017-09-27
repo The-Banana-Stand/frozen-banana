@@ -19,23 +19,27 @@
 
     <div class="col-xs-2">
       <div class="row">
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">$</span>
-          <%- if f.object.cancelled? %>
-              <%= f.input :price, as: :integer, label: false, class: 'form-control',
-                          required: true, disabled: true, input_html: {value: 0} %>
-          <%- elsif f.object.can_rebid || !f.object.persisted? %>
-              <%= f.input :price, as: :integer, label: false, class: 'form-control',
-                          required: true, input_html: {min: dm.meeting_queue.minimum_bid} %>
-          <%- else %>
-              <%= f.input :price, as: :integer, label: false, class: 'form-control',
-                          required: true, disabled: true %>
-          <% end %>
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">$</span>
+            <%- if f.object.cancelled? %>
+                <%= f.input :price, as: :integer, label: false, class: 'form-control',
+                            required: true, disabled: true, input_html: {value: 0} %>
+            <%- elsif f.object.can_rebid || !f.object.persisted? %>
+                <%= f.input :price, as: :integer, label: false, class: 'form-control',
+                            required: true, input_html: {min: dm.meeting_queue.minimum_bid} %>
+            <%- else %>
+                <%= f.input :price, as: :integer, label: false, class: 'form-control',
+                            required: true, disabled: true %>
+            <% end %>
+          </div>
         </div>
       </div>
 
       <div class="row">
-        Min: $<%= dm.meeting_queue.minimum_bid %>
+        <div class="col-xs-10 col-xs-offset-1">
+          Min: $<%= dm.meeting_queue.minimum_bid %>
+        </div>
       </div>
 
     </div>
