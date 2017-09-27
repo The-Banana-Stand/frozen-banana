@@ -44,6 +44,11 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :meeting_queue
   has_many :bids, through: :meeting_queue
 
+  has_one :paid_inbox, dependent: :destroy
+  accepts_nested_attributes_for :paid_inbox
+  has_many :questions, dependent: :destroy
+  has_many :dm_questions, through: :paid_inbox, source: :questions
+
 
   # Callbacks
   before_save {self.email = email.downcase if email}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926141730) do
+ActiveRecord::Schema.define(version: 20170927172656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,34 @@ ActiveRecord::Schema.define(version: 20170926141730) do
     t.integer "desired_day", default: 1
     t.datetime "desired_start_time"
     t.datetime "desired_end_time"
+  end
+
+  create_table "paid_inboxes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "status", default: 0, null: false
+    t.integer "delivery_frequency", default: 0, null: false
+    t.integer "price_cents", default: 300, null: false
+    t.string "price_currency", default: "USD", null: false
+    t.boolean "admin_set_price", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_paid_inboxes_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "paid_inbox_id"
+    t.string "question", default: ""
+    t.string "answer", default: ""
+    t.boolean "confidential", default: false
+    t.integer "price_cents", null: false
+    t.string "price_currency", default: "USD", null: false
+    t.integer "platform_fee_cents", null: false
+    t.string "platform_fee_currency", default: "USD", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paid_inbox_id"], name: "index_questions_on_paid_inbox_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "stripe_transactions", force: :cascade do |t|
