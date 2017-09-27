@@ -82,7 +82,10 @@
           </div>
         </div>
         <!--meet now row-->
-        <hr>
+
+        <div class="row" id="meeting-queue-container-<%= dm.meeting_queue.id %>">
+          <%= render 'users/partials/meeting_queue', dm: dm, user: @user %>
+        </div>
 
         <div class="row">
           <div class="col-xs-2">
@@ -111,11 +114,6 @@
           </div>
         </div>
         <!--quick pitch row-->
-        <hr>
-
-        <div class="row" id="meeting-queue-container-<%= dm.meeting_queue.id %>">
-          <%= render 'users/partials/meeting_queue', dm: dm, user: @user %>
-        </div>
 
 
       </div>
