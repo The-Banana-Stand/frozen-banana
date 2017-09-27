@@ -103,7 +103,10 @@
                       <div class="col-md-6 well">
                         <h3>Meeting Details:</h3>
                         <p><strong>Meeting Confirmation #:</strong> <%= meeting.confirmation_number %></p>
-                        <p><strong>Price/30min:</strong> <%= humanized_money_with_symbol meeting.price%></p>
+                        <p>
+                          <strong>Price/<%= meeting.meeting_type == 'quick_pitch' ? '5min:' : '30min' %></strong>
+                          <%= humanized_money_with_symbol meeting.price%>
+                        </p>
 
                         <!--<%- if meeting.date.nil? %>-->
                             <!--<p><strong>Requested Time:</strong>-->
@@ -111,8 +114,11 @@
                             <!--</p>-->
                         <!--<% end %>-->
 
-                        <p><strong class="text-large">Type:</strong> <%= meeting.meeting_type.capitalize %></p>
-                        <p><strong>Location:</strong> <%= meeting.address || 'No Address Set' %></p>
+                        <p><strong class="text-large">Type:</strong> <%= meeting.meeting_type.capitalize.gsub('_', ' ') %></p>
+                        <p>
+                          <strong>Location:</strong>
+                          <%= meeting.meeting_type == 'quick_pitch' ? 'Phone Call' : meeting.address || 'No Address Set' %>
+                        </p>
                         <hr>
                         <p><strong>Instructions:</strong> <br>
                           <%= meeting.instructions || 'No Instructions' %></p>

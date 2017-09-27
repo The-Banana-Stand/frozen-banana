@@ -5,7 +5,7 @@ class MeetingsController < ApplicationController
   def new
     @decision_maker = User.find(params[:id])
     # @desired_block = GeneralAvailability.includes(:user).find(params[:id])
-    @meeting = Meeting.new(dm_id: params[:id], meeting_type: params[:meeting_type])
+    @meeting = Meeting.new(dm_id: params[:id], meeting_type: (params[:meeting_type] || 'in_person') )
     @price = @decision_maker.price_for_meeting(@meeting)
   end
 

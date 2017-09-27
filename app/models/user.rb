@@ -89,7 +89,7 @@ class User < ApplicationRecord
 
 
   def all_meetings
-    Meeting.where(dm_id: id).or(Meeting.where(sp_id: id)).where.not(meeting_type: 'quick_pitch')
+    Meeting.where(dm_id: id).or(Meeting.where(sp_id: id))
   end
 
 
