@@ -15,7 +15,7 @@ class MeetingQueue < ApplicationRecord
   private
 
   def set_defaults
-    self.block_close_date = Time.zone.now.end_of_week.beginning_of_day + 20.hours
+    self.block_close_date = Time.zone.now.end_of_month.beginning_of_day + 20.hours
     self.last_scheduled_at = Time.now
   end
 
