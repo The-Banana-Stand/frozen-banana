@@ -6,8 +6,11 @@ module StripeWrapper
       stripe_token = StripeMock.generate_card_token
     end
     customer = fetch_stripe_customer
-    customer.source = stripe_token
-    customer.save
+
+    if stripe_token
+      customer.source = stripe_token
+      customer.save
+    end
   end
 
   def create_stripe_customer
@@ -19,9 +22,6 @@ module StripeWrapper
     customer
   end
 
-  def stripe_customer
-    Stripe::Customer.retrieve(self.customer_token)
-  end
 
   def fetch_stripe_customer
     if self.customer_token && !self.customer_token.empty?
@@ -30,6 +30,13 @@ module StripeWrapper
     else
       create_stripe_customer
     end
+  end
+
+
+  protected
+
+  def stripe_customer
+    Stripe::Customer.retrieve(self.customer_token)
   end
 
 end

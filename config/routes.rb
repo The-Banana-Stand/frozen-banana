@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   resources :invites,             only: [:new, :create]
   resources :bids
 
+  get '/update_card' => 'cards#update_card', as: :update_card
+
   get '/error' => 'static_pages#error'
 
 end

@@ -1,0 +1,6 @@
+<%- customer = current_user.fetch_stripe_customer %>
+
+<div id="card-on-file">
+  Using Card: <%= customer.sources.retrieve(customer.default_source).last4 %>
+</div>
+<%= link_to 'Change Card', update_card_path, remote: true %>

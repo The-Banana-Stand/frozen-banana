@@ -22,7 +22,6 @@ class MeetingsController < ApplicationController
       render :new
     end
 
-  #   not using stripe
   rescue Stripe::CardError => e
     flash[:error] = e.message
     render :new

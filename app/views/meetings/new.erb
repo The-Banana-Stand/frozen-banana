@@ -54,23 +54,24 @@
       </article>
 
 
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-              data-description="Credit Card Info"
-              data-amount="<%= @price[:total_price].fractional %>"
-              data-locale="auto"
-              data-label="Submit Payment Information"
-              data-panel-label="Use this Card"
-              data-zip-code="true">
+      <div id="stripe-elements-container">
+        <% if current_user.customer_token && current_user.fetch_stripe_customer.default_source  %>
+            <%= render 'partials/stripe_elements_edit' %>
+        <% else %>
+            <%= render 'partials/stripe_elements_new' %>
+        <% end %>
+      </div>
 
-      </script>
+      <%= f.submit 'Create Meeting', class: 'btn btn-success' %>
+
+
       <div class="row">
         <div class="col-sm-offset-1">
           <!--<p>-->
             <!--<span class="small">For beta, use Credit Card #: 4242 4242 4242 4242</span>-->
           <!--</p>-->
           <!-- Button trigger modal -->
-          <a type="button" class="clickable" data-toggle="modal" data-target="#myModal">Review Terms of Service</a>
+          <a type="button" class="clickable" data-toggle="modal" data-target="#tosModal">Review Terms of Service</a>
         </div>
 
       </div>
