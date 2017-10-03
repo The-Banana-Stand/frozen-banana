@@ -50,6 +50,8 @@ RSpec.feature 'User signs up for site' do
 
       # select('2 per Week', :from => 'user[queue][meeting_frequency]')
 
+      click_on 'Next'
+
       click_on 'Finish Setup'
 
       expect(page).to have_content('My Dashboard')
