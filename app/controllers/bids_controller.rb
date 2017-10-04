@@ -5,9 +5,7 @@ class BidsController < ApplicationController
   def create
     @bid = Bid.create(bid_params)
     respond_to do |format|
-      format.js {
-
-      }
+      format.js
     end
   end
 

@@ -14,7 +14,7 @@ RSpec.describe StripeWrapper, type: :model do
 
       results = user.process_payment_info(stripe_helper.generate_card_token)
 
-      expect(results).to eq(user.stripe_customer)
+      expect(results).to eq(user.fetch_stripe_customer)
 
     end
   end
@@ -45,7 +45,7 @@ RSpec.describe StripeWrapper, type: :model do
 
         user.create_stripe_customer
 
-        user.stripe_customer.delete
+        user.fetch_stripe_customer.delete
 
         expect(user).to receive(:create_stripe_customer)
 

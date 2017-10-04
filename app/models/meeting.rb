@@ -110,7 +110,7 @@ class Meeting < ApplicationRecord
 
   def capture_payment
     return if self.payment_status == 'succeeded'
-    customer = self.sp.stripe_customer
+    customer = self.sp.fetch_stripe_customer
 
     charge = Stripe::Charge.create(
         :customer    => customer.id,

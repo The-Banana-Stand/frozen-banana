@@ -119,6 +119,14 @@
         </div>
         <!--quick pitch row-->
 
+        <%- if dm.paid_inbox.active? %>
+            <hr class="no-margin-top">
+
+            <div class="row" id="paid-inbox-container-<%= dm.paid_inbox.id %>">
+              <%= render 'users/partials/paid_inbox', dm: dm, user: @user %>
+            </div>
+        <% end %>
+
 
       </div>
     </td>

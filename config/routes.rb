@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   resources :change_requests,     only: [:new, :create]
   resources :invites,             only: [:new, :create]
   resources :bids
+  resources :questions
+
 
   get '/update_card' => 'cards#update_card', as: :update_card
 

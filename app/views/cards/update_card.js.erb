@@ -1,2 +1,2 @@
 $("#stripe-elements-container").html(
-    '<%= escape_javascript(render 'partials/stripe_elements_new') %>');
+    '<%= escape_javascript(render 'partials/stripe_elements_new', form_id: @form_id) %>');

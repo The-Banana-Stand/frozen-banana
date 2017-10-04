@@ -1,0 +1,9 @@
+<% if @question.errors.blank? %>
+    $('#question-modal').modal('hide');
+
+    setTimeout(function() {
+      $('#question-modal').remove();
+    }, 700);
+<% else %>
+    $('<%= j render 'questions/form' %>').modal();
+<% end %>

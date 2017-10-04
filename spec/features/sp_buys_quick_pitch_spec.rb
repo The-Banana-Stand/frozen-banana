@@ -35,9 +35,9 @@ RSpec.feature 'sp buys a quick pitch', js: true do
 
     fill_in 'meeting[topic]', with: 'this is the topic'
 
-    click_on 'Submit Payment Information'
+    fill_stripe_elements
 
-    pay_stripe(sp.email)
+    find('input[name="commit"]').click
 
     expect(page).to have_content 'Confirmation'
 

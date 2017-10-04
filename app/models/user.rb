@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   # Callbacks
   before_save {self.email = email.downcase if email}
-  after_create :send_slack_notification, :populate_meeting_queue
+  after_create :send_slack_notification, :populate_meeting_queue, :create_paid_inbox
   after_create :create_general_availabilities, if: :dm?
   # after_update :destroy_meeting_queue, if: :sp?
 
