@@ -57,4 +57,8 @@ module UsersHelper
     ]
   end
 
+  def show_current_card(card)
+    "Current Card: #{card.brand} ending in #{card.last4} -- EXP: #{card.exp_month}/#{card.exp_year}"
+  end
+
 end

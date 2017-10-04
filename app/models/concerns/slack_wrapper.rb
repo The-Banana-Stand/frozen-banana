@@ -184,6 +184,38 @@ module SlackWrapper
     send_to_slack notification
   end
 
+  def new_question_notification(obj)
+    dm = obj.paid_inbox.user
+    notification = {
+        text: 'New Question',
+        username: "Awesom-O",
+        icon_emoji: ":loudspeaker:",
+        fields: [
+            {
+                title: 'New Question',
+                value: "ID: #{obj.id}"
+            },
+            {
+                title: 'To Decision Maker:',
+                value: "#{dm.full_name} (#{dm.id}) - #{dm.email} - #{dm.phone_number} - #{dm.company_name}"
+            },
+            {
+                title: 'From Salesperson:',
+                value: "#{obj.user.full_name} (#{obj.user_id}) - #{obj.user.email} - #{obj.user.phone_number} - #{obj.user.company_name}"
+            },
+            {
+                title: 'Question:',
+                value: "#{obj.question}"
+            },
+            {
+                title: 'Price: ',
+                value: "$#{obj.price} ( + $#{obj.platform_fee} as platform fee)"
+            }
+        ]
+    }
+    send_to_slack notification
+  end
+
   private
 
   def send_to_slack(notification)

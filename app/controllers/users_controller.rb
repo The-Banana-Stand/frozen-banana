@@ -43,8 +43,8 @@ class UsersController < ApplicationController
 
   def account_setup
     @user = current_user
-    @user.create_meeting_queue
-    @user.create_paid_inbox
+    # @user.create_meeting_queue
+    # @user.create_paid_inbox
     # if @user.role
     #   flash[:warning] = 'Your account is already set up.'
     #   redirect_to :dashboard
@@ -57,6 +57,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
+    @user.process_payment_info(params[:stripeToken]) if params[:stripeToken]
     respond_to do |format|
       if @user.update(user_params)
         format.html {

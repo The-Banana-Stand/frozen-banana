@@ -11,8 +11,8 @@
         <li role="presentation" class="active"><a data-toggle="tab" href="#dm_sp_info">Sales Info</a></li>
         <% end %>
         <li role="presentation" class="<%= @user.sp? ? '' : 'active' %>"><a data-toggle="tab" href="#general">General</a></li>
+        <li role="presentation"><a data-toggle="tab" href="#ar_info">Payment</a></li>
         <% if @user.dm? %>
-            <li role="presentation"><a data-toggle="tab" href="#ar_info">Payments</a></li>
             <li role="presentation"><a data-toggle="tab" href="#paid_inbox">Paid Inbox Settings</a></li>
         <% end %>
       </ul>
@@ -37,9 +37,8 @@
         </div>
 
 
-        <% if @user.dm? %>
-            <div id="ar_info" class="tab-pane fade">
-
+        <div id="ar_info" class="tab-pane fade">
+          <% if @user.dm? %>
               <h4 class="page-header">
                 Payment Option
               </h4>
@@ -53,35 +52,75 @@
                 </div>
               </div>
 
+
               <%= render partial: 'users/partials/ar_form', locals: {f: f} %>
-              <%= f.submit 'Save Changes', class: 'btn btn-primary col-md-4 col-md-offset-4' %>
-            </div>
-
-            <div id="paid_inbox" class="tab-pane fade">
-
+          <% else %>
               <h4 class="page-header">
-                Paid Inbox
+                Credit Card Info
               </h4>
+
+              <%- customer = @user.fetch_stripe_customer %>
+              <% card = customer.sources.retrieve(customer.default_source) %>
+              <div class="row">
+                <div class="col-xs-6 col-xs-offset-3">
+                  <div class="form-group text-center">
+                    <div id="stripe-elements-container">
+                      <div class="row">
+                        <%= show_current_card(card) %>
+                      </div>
+                      <div class="row">
+                        <%= render 'partials/stripe_elements_new', form_id: "edit_user_#{@user.id}" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          <% end %>
+          <%= f.submit 'Save Changes', class: 'btn btn-primary col-md-4 col-md-offset-4' %>
+        </div>
+
+        <% if @user.dm? %>
+
+            <div id="paid_inbox" class="tab-pane text-center fade">
 
               <%= f.simple_fields_for :paid_inbox do |pif| %>
 
-                  <%= pif.input :status, as: :boolean, label: 'Yes', checked_value: :active, unchecked_value: :inactive,
-                                class: 'form-control', input_html: {checked: pif.object.active?} %>
+                  <div class="row margin-top-lg">
+                    <p class="lead">
+                      Inbox Status:
+                    </p>
+                    <div class="col-xs-4 col-xs-offset-4">
+                      <div class="form-group">
+                        <%= pif.input_field :status, as: :select, collection: PaidInbox.statuses.keys,
+                                            include_blank: false, label: false, class: 'form-control' %>
+                      </div>
+                    </div>
+                  </div>
 
-                  <div id="paid-inbox-fields">
+                  <div class="row">
                     <p class="lead">
                       How often would you like to receive an email with all Paid Inbox Emails?
                     </p>
-                    <%= pif.input :delivery_frequency,as: :select, collection: PaidInbox.delivery_frequencies.keys,
-                                  include_blank: false, label: false, class: 'form-control' %>
+                    <div class="col-xs-4 col-xs-offset-4">
+                      <div class="form-group">
+                        <%= pif.input_field :delivery_frequency,as: :select, collection: PaidInbox.delivery_frequencies.keys,
+                                            include_blank: false, label: false, class: 'form-control' %>
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="row">
                     <p class="lead">
                       How much would you like to charge to answer a 255 character email?
                     </p>
+                    <div class="col-xs-4 col-xs-offset-4">
+                      <div class="form-group">
+                        <%= pif.input_field :price_option, as: :select, collection: PaidInbox.price_options.keys,
+                                            include_blank: false, label: false, class: 'form-control' %>
+                      </div>
 
-                    <%= pif.input :price_option, as: :select, collection: PaidInbox.price_options.keys,
-                                  include_blank: false, label: false, class: 'form-control' %>
-
+                    </div>
                   </div>
 
               <% end %>

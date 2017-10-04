@@ -12,7 +12,7 @@
 </div>
 
 <script>
-  var stripe = Stripe('pk_test_l523IIODU6kXJHXQhAR2d0JO');
+  var stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
   var elements = stripe.elements();
 
   // Custom styling can be passed to options when creating an Element.
@@ -20,7 +20,8 @@
     base: {
       // Add your base input styles here. For example:
       fontSize: '16px',
-      lineHeight: '24px'
+      lineHeight: '24px',
+      marginBottom: '10px'
     }
   };
 
