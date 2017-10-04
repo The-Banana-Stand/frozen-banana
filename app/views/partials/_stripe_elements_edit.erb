@@ -1,12 +1,13 @@
 <%- customer = current_user.fetch_stripe_customer %>
 <% card = customer.sources.retrieve(customer.default_source) %>
 <%- form_id ||= 'new_meeting' %>
-<div id="card-on-file">
-  <p>
-    <%= show_current_card(card) %>
-  </p>
-</div>
+
+<p>
+  <%= show_current_card(card) %>
+</p>
 
 <p>
   <%= link_to 'Change Card', update_card_path(form_id: form_id), remote: true %>
 </p>
+
+

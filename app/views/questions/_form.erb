@@ -15,13 +15,21 @@
               <%= f.input :question, as: :text, class: 'form-control', label: false, hint: '255 characters maximum.' %>
             </div>
 
-            <div class="form-group">
-              <div id="stripe-elements-container">
-                <% if @user.customer_token && @user.fetch_stripe_customer.default_source  %>
-                    <%= render 'partials/stripe_elements_edit', form_id: 'new_question' %>
-                <% else %>
-                    <%= render 'partials/stripe_elements_new', form_id: 'new_question' %>
-                <% end %>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Payment Info</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <div id="stripe-elements-container">
+                    <% if @user.customer_token && @user.fetch_stripe_customer.default_source  %>
+                        <%= render 'partials/stripe_elements_edit', form_id: 'new_question' %>
+                    <% else %>
+                        <%= render 'partials/stripe_elements_new', form_id: 'new_question' %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
 

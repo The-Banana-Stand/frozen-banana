@@ -1,0 +1,25 @@
+<h4 class="page-header">
+  Credit Card Info
+</h4>
+
+<%= simple_form_for :card, method: :put, url: card_path, html: { id: 'edit_card'} do |f| %>
+<%- customer = @user.fetch_stripe_customer %>
+<% card = customer.sources.retrieve(customer.default_source) %>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="form-group text-center">
+      <div id="stripe-elements-container">
+        <div class="row">
+          <%= show_current_card(card) %>
+        </div>
+        <div class="row">
+          <%= render 'partials/stripe_elements_new', form_id: 'edit_card' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="form-group text-center">
+      <%= f.submit 'Submit', class: 'btn btn-success' %>
+    </div>
+<% end %>

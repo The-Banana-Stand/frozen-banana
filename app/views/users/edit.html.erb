@@ -11,8 +11,8 @@
         <li role="presentation" class="active"><a data-toggle="tab" href="#dm_sp_info">Sales Info</a></li>
         <% end %>
         <li role="presentation" class="<%= @user.sp? ? '' : 'active' %>"><a data-toggle="tab" href="#general">General</a></li>
-        <li role="presentation"><a data-toggle="tab" href="#ar_info">Payment</a></li>
         <% if @user.dm? %>
+            <li role="presentation"><a data-toggle="tab" href="#ar_info">Payment</a></li>
             <li role="presentation"><a data-toggle="tab" href="#paid_inbox">Paid Inbox Settings</a></li>
         <% end %>
       </ul>
@@ -54,27 +54,6 @@
 
 
               <%= render partial: 'users/partials/ar_form', locals: {f: f} %>
-          <% else %>
-              <h4 class="page-header">
-                Credit Card Info
-              </h4>
-
-              <%- customer = @user.fetch_stripe_customer %>
-              <% card = customer.sources.retrieve(customer.default_source) %>
-              <div class="row">
-                <div class="col-xs-6 col-xs-offset-3">
-                  <div class="form-group text-center">
-                    <div id="stripe-elements-container">
-                      <div class="row">
-                        <%= show_current_card(card) %>
-                      </div>
-                      <div class="row">
-                        <%= render 'partials/stripe_elements_new', form_id: "edit_user_#{@user.id}" %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
           <% end %>
           <%= f.submit 'Save Changes', class: 'btn btn-primary col-md-4 col-md-offset-4' %>
@@ -83,6 +62,12 @@
         <% if @user.dm? %>
 
             <div id="paid_inbox" class="tab-pane text-center fade">
+
+              <span class="pull-right">
+                <a type="button" data-toggle="modal" data-target="#paidInboxModal" class="btn-link btn-xs">
+                What is this?
+              </a>
+              </span>
 
               <%= f.simple_fields_for :paid_inbox do |pif| %>
 
@@ -130,6 +115,26 @@
         <% end %>
 
   <% end %>
+  </div>
+</div>
+
+<!--Paid Inbox Modal-->
+
+<div class="modal fade" id="paidInboxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Paid Inbox</h4>
+      </div>
+      <div class="modal-body">
+        Sales Reps will pay your company to reply to a qualifying question. Your answer can only be 255 characters long. <br>
+        We aggregate all questions so you can batch answer them at the frequency you want.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 

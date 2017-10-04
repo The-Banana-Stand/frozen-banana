@@ -1,4 +1,5 @@
 <%- form_id ||= 'new_meeting' %>
+
 <div class="form-row">
   <label for="card-element">
     Credit or debit card
@@ -41,8 +42,8 @@
 
 
   // Create a token or display an error when the form is submitted.
-  var form = document.getElementById('<%= form_id %>');
-  form.addEventListener('submit', function(event) {
+  var form = $('#<%= form_id %>');
+  form.on('submit', function(event) {
     event.preventDefault();
 
     stripe.createToken(card).then(function(result) {
@@ -50,6 +51,7 @@
         // Inform the user if there was an error
         var errorElement = document.getElementById('card-errors');
         errorElement.textContent = result.error.message;
+        form.find('input[name=commit]').prop('disabled', false)
       } else {
         // Send the token to your server
         stripeTokenHandler(result.token);
@@ -64,10 +66,10 @@
     hiddenInput.setAttribute('type', 'hidden');
     hiddenInput.setAttribute('name', 'stripeToken');
     hiddenInput.setAttribute('value', token.id);
-    form.appendChild(hiddenInput);
+    form.append(hiddenInput);
 
     // Submit the form
-    form.submit();
+    form.get(0).submit();
   }
 
 </script>

@@ -53,18 +53,24 @@
         </label>
       </article>
 
-
-      <div id="stripe-elements-container">
-        <% if current_user.customer_token && current_user.fetch_stripe_customer.default_source  %>
-            <%= render 'partials/stripe_elements_edit' %>
-        <% else %>
-            <%= render 'partials/stripe_elements_new' %>
-        <% end %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Payment Info</h3>
+        </div>
+        <div class="panel-body">
+          <div id="stripe-elements-container">
+            <% if current_user.customer_token && current_user.fetch_stripe_customer.default_source  %>
+                <%= render 'partials/stripe_elements_edit' %>
+            <% else %>
+                <%= render 'partials/stripe_elements_new' %>
+            <% end %>
+          </div>
+        </div>
       </div>
 
       <div class="row">
         <div class="col-xs-offset-1">
-          <%= f.submit 'Create Meeting', class: 'btn btn-success' %>
+          <%= f.submit 'Finish', class: 'btn btn-success' %>
         </div>
       </div>
 

@@ -45,10 +45,10 @@ class UsersController < ApplicationController
     @user = current_user
     # @user.create_meeting_queue
     # @user.create_paid_inbox
-    # if @user.role
-    #   flash[:warning] = 'Your account is already set up.'
-    #   redirect_to :dashboard
-    # end
+    if @user.role
+      flash[:warning] = 'Your account is already set up.'
+      redirect_to :dashboard
+    end
   end
 
   def edit
