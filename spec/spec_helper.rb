@@ -15,6 +15,7 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter '/vendor/'
+  add_filter '/app/models/general_availability.rb'
 end
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
